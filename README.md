@@ -35,3 +35,13 @@ Because Flare and Commando have failed to install so many times that i'm not sur
 This is my first powershell project, please open an issue if something doesnt work and i'll accomodate as best I can.
 
 This tool has not been thoroughly tested but should work anywhere you can get WSL2 and WSLg on Windows. **In theory** Windows 10 21H1 or newer should work.
+
+#### TODO
+- Add windows Defender configuration so it doesn't have a fit about the kali system you just wedged between it and the OS
+- Consider tools closer to stuff Mandiant offers in Commando
+- Add more common forensics tools (either in container or native)
+- Consider adding docker/podman
+- Consider including case study and knowledge base tools
+- Consider Windows container tools to isolate malware inspection tools and malware away from the host (is this what boxstarter is for?)
+- Consider adding a hypervisor for those that are familiar with VMs (probably Hyper-V or Virtualbox due to licensing)
+- Find out if we can use FireEye repos and packages (may not be feasible based on licensing if there is any)
