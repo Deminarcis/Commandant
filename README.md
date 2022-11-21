@@ -32,6 +32,6 @@ Because Flare and Commando have failed to install so many times that i'm not sur
 
 #### Notes:
 
-This is my first powershell project, please open an issue if something doeesnt work and i'll accomodate as best I can.
+This is my first powershell project, please open an issue if something doesnt work and i'll accomodate as best I can.
 
 This tool has not been thoroughly tested but should work anywhere you can get WSL2 and WSLg on Windows. **In theory** Windows 10 21H1 or newer should work.
