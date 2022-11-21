@@ -29,4 +29,4 @@ winget install Microsoft.NuGet
 winget install microsoft.powershell
 Install-Package chocolatey
 choco upgrade chocolatey -y
-choco install firefox sysinternals ChocolateyGUI adobereader vlc python 7zip testdisk-photorec git vscode putty filezilla wireshark postman boxstarter ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden foobar2000 -y
+choco install firefox sysinternals ChocolateyGUI adobereader vlc python 7zip testdisk-photorec git vscode putty filezilla wireshark postman boxstarter ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden foobar2000 obsidian -y
