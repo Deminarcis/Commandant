@@ -13,11 +13,12 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 # BEGIN YOUR SCIPT HERE:
 #####
 
-wget -O wsl_kernel.msi https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
-.\wsl_kernel.msi
-wsl --install
+Get-CimInstance -Namespace "Root\cimv2\mdm\dmmap" -ClassName "MDM_EnterpriseModernAppManagement_AppManagement01" | Invoke-CimMethod -MethodName UpdateScanMethod
+Install-Module -Name PSWindowsUpdate -Force
+wsl --install --web-download
+### Break here for reboot
 Write-Output 'The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
-winget install  9PKR34TNCV07 --source msstore
+winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h
 Write-Output 'Provsioning Kali'
 kali
 wsl -s kali-linux
@@ -25,8 +26,8 @@ wsl --unregister Ubuntu
 wsl sudo apt update
 wsl sudo apt full-upgrade
 wsl sudo apt install kali-tools-top10 wireshark-
-winget install Microsoft.NuGet
-winget install microsoft.powershell
+wsl --update --web-download
+winget install microsoft.powershell --accept-package-agreements -h
 Install-Package chocolatey
 choco upgrade chocolatey -y
 choco install firefox sysinternals ChocolateyGUI adobereader vlc python 7zip testdisk-photorec git vscode putty filezilla wireshark postman boxstarter ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden foobar2000 obsidian -y
