@@ -14,24 +14,18 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 #####
 
 Install-Module -Name PSWindowsUpdate -Force -AllowClobber
-Set-ExecutionPolicy –ExecutionPolicy RemoteSigned -force
 Import-Module PSWindowsUpdate
 Set-MpPreference -DisableRealtimeMonitoring $true
 Get-WindowsUpdate
-winget upgrade --all --accept-package-agreements -h --accept-source-agreements
-wsl --install --web-download
+wsl --install -n --web-download
 ### Break here for reboot
 Write-Output 'The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
+winget upgrade --all
 winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
 Write-Output 'Provsioning Kali'
-kali
-wsl -s kali-linux
-wsl --unregister Ubuntu
-wsl sudo apt update
-wsl sudo apt full-upgrade
-wsl sudo apt install kali-tools-top10 wireshark- kaboxer zenmap-kbx
-wsl --update --web-download
 winget install microsoft.powershell --accept-package-agreements -h --accept-source-agreements
 Install-Package chocolatey
-choco upgrade chocolatey -y
-choco install firefox sysinternals ChocolateyGUI adobereader vlc python 7zip testdisk-photorec git vscode putty filezilla wireshark postman boxstarter ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden foobar2000 obsidian -y
+Start-Process powershell -ArgumentList {
+    choco upgrade chocolatey -y
+    choco install firefox sysinternals ChocolateyGUI adobereader vlc python 7zip testdisk-photorec git vscode putty filezilla wireshark postman boxstarter ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden foobar2000 obsidian -y
+} -Verb RunAs
