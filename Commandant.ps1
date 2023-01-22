@@ -12,7 +12,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 #####
 # BEGIN YOUR SCIPT HERE:
 #####
-
+Set-ExecutionPolicy RemoteSigned
 Install-Module -Name PSWindowsUpdate -Force -AllowClobber
 Import-Module PSWindowsUpdate
 Set-MpPreference -DisableRealtimeMonitoring $true
