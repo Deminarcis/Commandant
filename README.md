@@ -30,6 +30,8 @@ Because Flare and Commando have failed to install so many times that i'm not sur
 
 - A MS Account that signs into the MS Store (havin the account sign into apps but not the system works just fine)
 
+- You need to install (App Installer)[https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1?hl=en-au&gl=au&rtc=1] from MSStore before running this script
+
 #### Notes:
 
 This is my first powershell project, please open an issue if something doesnt work and i'll accomodate as best I can.
