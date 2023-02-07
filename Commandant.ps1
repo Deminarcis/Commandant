@@ -12,10 +12,23 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 #####
 # BEGIN YOUR SCIPT HERE:
 #####
+Remove-Variable -Name wingetInstalled 
+wingetInstalled = Get-Command winget
+if ( $wingetInstalled -like '*winget.exe*' )
+{
+    Write-Output "winget is already installed"
+}
+else
+{
+    Write-Output "Please install winget (App Installer) before continuing"
+    exit
+}
 Set-ExecutionPolicy RemoteSigned
 Install-Module -Name PSWindowsUpdate -Force -AllowClobber
 Import-Module PSWindowsUpdate
+# Change this later, it will break windows defender but is necessary to install Kali smoothly
 Set-MpPreference -DisableRealtimeMonitoring $true
+# Get Windows updates
 Get-WindowsUpdate
 wsl --install -n --web-download
 ### Break here for reboot
