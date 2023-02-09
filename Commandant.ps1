@@ -12,8 +12,9 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 #####
 # BEGIN YOUR SCIPT HERE:
 #####
-Remove-Variable -Name wingetInstalled 
-wingetInstalled = Get-Command winget
+
+Remove-Variable -Name wingetInstalled
+wingetInstalled = cmd /c where winget '2>&1'
 if ( $wingetInstalled -like '*winget.exe*' )
 {
     Write-Output "winget is already installed"
