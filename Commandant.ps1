@@ -34,9 +34,12 @@ Get-WindowsUpdate
 wsl --install -n --web-download
 ### Break here for reboot
 Write-Output 'The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
+Write-Output 'Provsioning Kali'
 winget upgrade --all
 winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
-Write-Output 'Provsioning Kali'
+Start-Process powershell -ArgumentList {
+    .\Setup-kali.ps1
+}
 winget install microsoft.powershell --accept-package-agreements -h --accept-source-agreements
 Install-Package chocolatey
 Start-Process powershell -ArgumentList {
