@@ -44,5 +44,6 @@ winget install microsoft.powershell --accept-package-agreements -h --accept-sour
 Install-Package chocolatey
 Start-Process powershell -ArgumentList {
     choco upgrade chocolatey -y
-    choco install firefox sysinternals ChocolateyGUI adobereader vlc python 7zip testdisk-photorec git vscode putty filezilla wireshark postman boxstarter ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden foobar2000 obsidian -y
+    choco install firefox sysinternals ChocolateyGUI adobereader vlc python 7zip testdisk-photorec git vscode putty filezilla wireshark postman boxstarter ffmpeg tor-browser transmission openvpn rufus obs-studio bitwarden foobar2000 obsidian -y
+    choco install virtualbox virtualbox-guest-additions-guest.install
 } -Verb RunAs
