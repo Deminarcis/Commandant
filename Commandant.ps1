@@ -38,7 +38,7 @@ Write-Output 'Provsioning Kali'
 winget upgrade --all
 winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
 Start-Process powershell -ArgumentList {
-    .\Setup-kali.ps1
+    -wsl -d Kali ./Setup-kali.sh
 }
 winget install microsoft.powershell --accept-package-agreements -h --accept-source-agreements
 Install-Package chocolatey
