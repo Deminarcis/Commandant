@@ -12,7 +12,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 #####
 # BEGIN YOUR SCIPT HERE:
 #####
-
+liceseType = Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" | ` Format-List ProductName
 Remove-Variable -Name wingetInstalled
 wingetInstalled = cmd /c where winget '2>&1'
 if ( $wingetInstalled -like '*winget.exe*' )
@@ -47,7 +47,7 @@ Start-Process powershell -ArgumentList {
     choco install firefox sysinternals ChocolateyGUI FoxitReader vlc python 7zip testdisk-photorec git vscode filezilla wireshark postman boxstarter ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden obsidian virtualbox veracrypt synctrayzor powertoys-y 
 } -Verb RunAs
 
-powershelProfile = powershell /c Write-Host $PROFILE
+powershellProfile = powershell /c Write-Host $PROFILE
 
 Write-Host @"
 if ($host.Name -eq 'ConsoleHost')
@@ -94,4 +94,16 @@ function prompt {
       Write-Host "${esc}]0;PS> $([environment]::username)@$([system.environment]::MachineName): $(Get-Location)${bell}" -NoNewLine
       return " "
 }
-"@ > $powershelProfile
+"@ > $powershellProfile
+
+if ( $licenseype -like 'Windwows * Home' )
+{
+    start-process  cmd  -ArgumentList{
+        pushd "%~dp0"
+        dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum >hyper-v.txt
+        for /f %%i in ('findstr /i . hyper-v.txt 2^>nul') do dism /online /norestart /add-package:"%SystemRoot%\servicing\Packages\%%i"
+        del hyper-v.txt
+        Dism /online /enable-feature /featurename:Microsoft-Hyper-V -All /LimitAccess /ALL
+        pause
+    }
+}
