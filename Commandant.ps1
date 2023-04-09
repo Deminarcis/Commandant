@@ -30,31 +30,35 @@ Import-Module PSWindowsUpdate
 # Change this later, it will break windows defender but is necessary to install Kali smoothly
 Set-MpPreference -DisableRealtimeMonitoring $true
 # Get Windows updates
+Write-Output "[+]  Checking for updates"
 Get-WindowsUpdate
-wsl --install -n --web-download
-### Break here for reboot
-Write-Output 'The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
-Write-Output 'Provsioning Kali'
-winget upgrade --all
+Write-Output "[+]  Installing WSL2"
+wsl --install -n
+### Break here for reboot?
+Write-Output '[!!]  The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
+winget upgrade -r
 winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
+Write-Output "[+]  Configuring Kali"
 Start-Process powershell -ArgumentList {
     -wsl -d Kali ./Setup-kali.sh
 }
+Write-Output "[+]  Installing a newer Powershell"
 winget install microsoft.powershell --accept-package-agreements -h --accept-source-agreements
+Write-Output "[+]  Installing Chocolatey"
 Install-Package chocolatey
+Write-Output "[+]  Installing Host Tools"
 Start-Process powershell -ArgumentList {
     choco upgrade chocolatey -y
-    choco install firefox sysinternals ChocolateyGUI FoxitReader vlc python 7zip testdisk-photorec git vscode filezilla wireshark postman boxstarter ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden obsidian virtualbox veracrypt synctrayzor powertoys-y
+    choco install firefox sysinternals ChocolateyGUI FoxitReader vlc python 7zip testdisk-photorec git vscode filezilla wireshark postman boxstarter ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden obsidian veracrypt synctrayzor powertoys-y
 } -Verb RunAs
 
+Write-Output "[+]  Importing Powershell Profile"
 powershellProfile = powershell /c Write-Host $PROFILE
-
 Write-Host @"
 if ($host.Name -eq 'ConsoleHost')
 {
     Import-Module PSReadLine
 }
-
 Import-Module PSWindowsUpdate
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
@@ -95,7 +99,7 @@ function prompt {
       return " "
 }
 "@ > $powershellProfile
-
+write-output "[+]  Enabling Hyper-V"
 if ( $licenseype -like 'Windwows * Home' )
 {
     start-process  cmd  -ArgumentList{
@@ -108,6 +112,5 @@ if ( $licenseype -like 'Windwows * Home' )
     }
 }
 else {
-    write-host "Enabling Hyper-V"
     DISM /Online /Disable-Feature /FeatureName:Microsoft-Hyper-V-all
 }
