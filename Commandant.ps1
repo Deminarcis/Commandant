@@ -44,7 +44,7 @@ winget install microsoft.powershell --accept-package-agreements -h --accept-sour
 Install-Package chocolatey
 Start-Process powershell -ArgumentList {
     choco upgrade chocolatey -y
-    choco install firefox sysinternals ChocolateyGUI FoxitReader vlc python 7zip testdisk-photorec git vscode filezilla wireshark postman boxstarter ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden obsidian virtualbox veracrypt synctrayzor powertoys-y 
+    choco install firefox sysinternals ChocolateyGUI FoxitReader vlc python 7zip testdisk-photorec git vscode filezilla wireshark postman boxstarter ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden obsidian virtualbox veracrypt synctrayzor powertoys-y
 } -Verb RunAs
 
 powershellProfile = powershell /c Write-Host $PROFILE
@@ -60,7 +60,7 @@ Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 function prompt {
-    $Time = (Get-Date).ToString("hh:mm") 
+    $Time = (Get-Date).ToString("hh:mm")
     $host.ui.rawui.WindowTitle = (Get-Location)
     # The following block is surrounded by two delimiters.
     # These delimiters must not be modified. Thanks.
@@ -68,7 +68,7 @@ function prompt {
     $PROMPT_ALTERNATIVE='twoline'
     $NEWLINE_BEFORE_PROMPT='no'
     # STOP KALI CONFIG VARIABLES
-    
+
       $esc = [char]27
       $bell = [char]7
       $bold = "$esc[1m"
@@ -106,4 +106,8 @@ if ( $licenseype -like 'Windwows * Home' )
         Dism /online /enable-feature /featurename:Microsoft-Hyper-V -All /LimitAccess /ALL
         pause
     }
+}
+else {
+    write-host "Enabling Hyper-V"
+    DISM /Online /Disable-Feature /FeatureName:Microsoft-Hyper-V-all
 }
