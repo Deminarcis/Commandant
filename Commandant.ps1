@@ -12,9 +12,8 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 #####
 # BEGIN SCIPT:
 #####
-liceseType = Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" | ` Format-List ProductName
-Remove-Variable -Name wingetInstalled
-wingetInstalled = cmd /c where winget '2>&1'
+$licenseType = Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" | ` Format-List ProductName
+$wingetInstalled = cmd /c where winget '2>&1'
 if ( $wingetInstalled -like '*winget.exe*' )
 {
     Write-Output "winget is already installed"
@@ -53,7 +52,7 @@ Start-Process powershell -ArgumentList {
 } -Verb RunAs
 
 Write-Output "[+]  Importing Powershell Profile"
-powershellProfile = powershell /c Write-Host $PROFILE
+$powershellProfile = powershell /c Write-Host $PROFILE
 Write-Host @"
 if ($host.Name -eq 'ConsoleHost')
 {
@@ -100,16 +99,14 @@ function prompt {
 }
 "@ > $powershellProfile
 write-output "[+]  Enabling Hyper-V"
-if ( $licenseype -like 'Windwows * Home' )
+if ( $licenseType -like 'Windwows * Home' )
 {
-    start-process  cmd  -ArgumentList{
-        pushd "%~dp0"
-        dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum >hyper-v.txt
-        for /f %%i in ('findstr /i . hyper-v.txt 2^>nul') do dism /online /norestart /add-package:"%SystemRoot%\servicing\Packages\%%i"
-        del hyper-v.txt
-        Dism /online /enable-feature /featurename:Microsoft-Hyper-V -All /LimitAccess /ALL
-        pause
-    }
+    cmd /c pushd "%~dp0"
+    cmd /c dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum >hyper-v.txt
+    cmd /c for /f %%i in ('findstr /i . hyper-v.txt 2^>nul') do dism /online /norestart /add-package:"%SystemRoot%\servicing\Packages\%%i"
+    cmd /c del hyper-v.txt
+    cmd /c Dism /online /enable-feature /featurename:Microsoft-Hyper-V -All /LimitAccess /ALL
+    cmd /c pause
 }
 else {
     DISM /Online /Disable-Feature /FeatureName:Microsoft-Hyper-V-all
