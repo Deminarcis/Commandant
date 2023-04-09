@@ -52,8 +52,8 @@ Start-Process powershell -ArgumentList {
 } -Verb RunAs
 
 Write-Output "[+]  Importing Powershell Profile"
-$powershellProfile = powershell /c Write-Host $PROFILE
-Write-Host @"
+$powershellProfile = powershell /c Write-Output $PROFILE
+Write-Output @"
 if ($host.Name -eq 'ConsoleHost')
 {
     Import-Module PSReadLine
