@@ -10,7 +10,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 }
 
 #####
-# BEGIN YOUR SCIPT HERE:
+# BEGIN SCIPT:
 #####
 liceseType = Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" | ` Format-List ProductName
 Remove-Variable -Name wingetInstalled
