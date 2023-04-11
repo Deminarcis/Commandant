@@ -27,7 +27,7 @@ Set-ExecutionPolicy RemoteSigned
 Install-Module -Name PSWindowsUpdate -Force -AllowClobber
 Import-Module PSWindowsUpdate
 # Change this later, it will break windows defender but is necessary to install Kali smoothly
-Set-MpPreference -DisableRealtimeMonitoring $true
+#Set-MpPreference -DisableRealtimeMonitoring $true
 # Get Windows updates
 Write-Output "[+]  Checking for updates"
 Get-WindowsUpdate
@@ -50,10 +50,6 @@ Start-Process powershell -ArgumentList {
     choco upgrade chocolatey -y
     choco install firefox sysinternals ChocolateyGUI FoxitReader vlc python 7zip testdisk-photorec git vscode filezilla wireshark postman boxstarter ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden obsidian veracrypt synctrayzor powertoys-y
 } -Verb RunAs
-
-Write-Output "[+]  Importing Powershell Profile"
-Copy-Item Microsoft.PowerShell_profile.ps1 $PROFILE
-Unblock-File $PROFILE
 Write-Output "[+]  Enabling Hyper-V"
 if ( $licenseType -like 'Windwows * Home' )
 {
