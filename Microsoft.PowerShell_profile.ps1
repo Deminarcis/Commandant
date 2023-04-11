@@ -16,12 +16,12 @@ function prompt {
     $NEWLINE_BEFORE_PROMPT='no'
     # STOP KALI CONFIG VARIABLES
 
-      $esc = [char]27
-      $bell = [char]7
-      $bold = "$esc[1m"
-      $reset = "$esc[0m"
-      If ($NEWLINE_BEFORE_PROMPT -eq 'yes') { Write-Host }
-      If ($PROMPT_ALTERNATIVE -eq 'twoline') {
+    $esc = [char]27
+    $bell = [char]7
+    $bold = "$esc[1m"
+    $reset = "$esc[0m"
+    If ($NEWLINE_BEFORE_PROMPT -eq 'yes') { Write-Host }
+    If ($PROMPT_ALTERNATIVE -eq 'twoline') {
         Write-Host "┌──[" -NoNewLine -ForegroundColor Magenta
         Write-Host "${bold}$([environment]::username)" -NoNewLine -ForegroundColor Red
         Write-Host "] 💀 [" -NoNewLine -ForegroundColor Magenta
@@ -32,12 +32,13 @@ function prompt {
         Write-Host "]" -ForegroundColor Magenta
         Write-Host "└─" -NoNewLine -ForegroundColor Magenta
         Write-Host "${reset}" -NoNewLine -ForegroundColor Magenta
-      } Else {
+    }
+    Else {
         Write-Host "${bold}PS " -NoNewLine -ForegroundColor Magenta
         Write-Host "$([environment]::username)@$([system.environment]::MachineName) " -NoNewLine -ForegroundColor Magenta
         Write-Host "$(Get-Location)>${reset}" -NoNewLine -ForegroundColor Magenta
-      }
-      # Terminal title
-      Write-Host "${esc}]0;PS> $([environment]::username)@$([system.environment]::MachineName): $(Get-Location)${bell}" -NoNewLine
-      return " "
+    }
+    # Terminal title
+    Write-Host "${esc}]0;PS> $([environment]::username)@$([system.environment]::MachineName): $(Get-Location)${bell}" -NoNewLine
+    return " "
 }

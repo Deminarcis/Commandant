@@ -53,6 +53,7 @@ Start-Process powershell -ArgumentList {
 
 Write-Output "[+]  Importing Powershell Profile"
 Copy-Item Microsoft.PowerShell_profile.ps1 $PROFILE
+Unblock-File $PROFILE
 Write-Output "[+]  Enabling Hyper-V"
 if ( $licenseType -like 'Windwows * Home' )
 {
