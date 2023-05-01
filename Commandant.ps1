@@ -23,6 +23,8 @@ else
     Write-Output "Please install winget (App Installer) before continuing"
     exit
 }
+Write-Output "[+]  Installing Chocolatey"
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 Set-ExecutionPolicy RemoteSigned
 Install-Module -Name PSWindowsUpdate -Force -AllowClobber
 Import-Module PSWindowsUpdate
@@ -32,29 +34,29 @@ Import-Module PSWindowsUpdate
 Write-Output "[+]  Checking for updates"
 Get-WindowsUpdate
 Write-Output "[+]  Installing WSL2"
-wsl --install -n
+wsl --install
 ### Break here for reboot?
 Write-Output '[!!]  The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
-winget upgrade -r
+winget upgrade -r --include-unknown
 winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
 Write-Output "[+]  Configuring Kali"
 Start-Process powershell -ArgumentList {
-    -wsl -d Kali ./Setup-kali.sh
+    wsl -d Kali sudo apt update
+    wsl -d Kali sudo apt -y full-upgrade
+    wsl -d Kali sudo apt install -y kali-tools-top10
 }
 Write-Output "[+]  Installing a newer Powershell"
 winget install microsoft.powershell --accept-package-agreements -h --accept-source-agreements
-Write-Output "[+]  Installing Chocolatey"
-Install-Package chocolatey
 Write-Output "[+]  Installing Host Tools"
 Start-Process powershell -ArgumentList {
     choco upgrade chocolatey -y
     choco install firefox sysinternals ChocolateyGUI FoxitReader vlc python 7zip testdisk-photorec git vscode filezilla wireshark postman boxstarter ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden obsidian veracrypt synctrayzor powertoys-y
 } -Verb RunAs
 Write-Output "[+]  Enabling Hyper-V"
-if ( $licenseType -like 'Windwows * Home' )
+if ( $licenseType -like 'Windows * Home' )
 {
     cmd /c pushd "%~dp0"
-    cmd /c dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum >hyper-v.txt
+    cmd /c dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum > hyper-v.txt
     cmd /c for /f %%i in ('findstr /i . hyper-v.txt 2^>nul') do dism /online /norestart /add-package:"%SystemRoot%\servicing\Packages\%%i"
     cmd /c del hyper-v.txt
     cmd /c Dism /online /enable-feature /featurename:Microsoft-Hyper-V -All /LimitAccess /ALL
