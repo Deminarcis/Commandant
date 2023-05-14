@@ -20,7 +20,7 @@ if ( $wingetInstalled -like '*winget.exe*' )
 }
 else
 {
-    Write-Output "Please install winget (App Installer) before continuing"
+    Write-Output "Please install winget (App Installer) from the store before continuing"
     exit
 }
 Write-Output "[+]  Installing Chocolatey"
@@ -39,18 +39,12 @@ wsl --install
 Write-Output '[!!]  The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
 winget upgrade -r --include-unknown
 winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
-Write-Output "[+]  Configuring Kali"
-Start-Process powershell -ArgumentList {
-    wsl -d Kali sudo apt update
-    wsl -d Kali sudo apt -y full-upgrade
-    wsl -d Kali sudo apt install -y kali-tools-top10
-}
 Write-Output "[+]  Installing a newer Powershell"
 winget install microsoft.powershell --accept-package-agreements -h --accept-source-agreements
 Write-Output "[+]  Installing Host Tools"
 Start-Process powershell -ArgumentList {
     choco upgrade chocolatey -y
-    choco install firefox sysinternals ChocolateyGUI FoxitReader vlc python 7zip testdisk-photorec git vscode filezilla wireshark postman boxstarter ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden obsidian veracrypt synctrayzor powertoys-y
+    choco install firefox sysinternals ChocolateyGUI FoxitReader vlc python 7zip testdisk-photorec git vscode filezilla wireshark postman boxstarter ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden obsidian veracrypt synctrayzor powertoys -y
 } -Verb RunAs
 Write-Output "[+]  Enabling Hyper-V"
 if ( $licenseType -like 'Windows * Home' )
@@ -65,3 +59,4 @@ if ( $licenseType -like 'Windows * Home' )
 else {
     DISM /Online /Disable-Feature /FeatureName:Microsoft-Hyper-V-all
 }
+kali run provision.sh
