@@ -44,7 +44,7 @@ winget install microsoft.powershell --accept-package-agreements -h --accept-sour
 Write-Output "[+]  Installing Host Tools"
 Start-Process powershell -ArgumentList {
     choco upgrade chocolatey -y
-    choco install firefox sysinternals ChocolateyGUI FoxitReader vlc python 7zip testdisk-photorec git vscode filezilla wireshark postman boxstarter ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden obsidian veracrypt synctrayzor powertoys -y
+    choco install firefox sysinternals ChocolateyGUI FoxitReader vlc python 7zip testdisk-photorec git vscode filezilla wireshark postman ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden obsidian veracrypt synctrayzor powertoys -y
 } -Verb RunAs
 Write-Output "[+]  Enabling Hyper-V"
 if ( $licenseType -like 'Windows * Home' )
