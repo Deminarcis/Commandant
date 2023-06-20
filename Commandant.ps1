@@ -16,7 +16,7 @@ $licenseType = Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVers
 $wingetInstalled = cmd /c where winget '2>&1'
 if ( $wingetInstalled -like '*winget.exe*' )
 {
-    Write-Output "winget is already installed"
+    Write-Output "[!!] winget is already installed"
 }
 else
 {
@@ -59,4 +59,4 @@ if ( $licenseType -like 'Windows * Home' )
 else {
     DISM /Online /Disable-Feature /FeatureName:Microsoft-Hyper-V-all
 }
-kali run provision.sh
+Write-Output "[!!] Setup complete! Please restart your PC  [!!]"
