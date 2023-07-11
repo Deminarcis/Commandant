@@ -22,15 +22,13 @@ else
     Write-Output "Please install winget (App Installer) from the store before continuing"
     exit
 }
-Write-Output "[+]  Installing Chocolatey"
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-Set-ExecutionPolicy RemoteSigned
+SetExecutionPolicy RemoteSigned
+Write-Output "[+]  Checking for updates"
 Install-Module -Name PSWindowsUpdate -Force -AllowClobber
 Import-Module PSWindowsUpdate
 # Change this later, it will break windows defender but is necessary to install Kali smoothly
 #Set-MpPreference -DisableRealtimeMonitoring $true
 # Get Windows updates
-Write-Output "[+]  Checking for updates"
 Get-WindowsUpdate
 Write-Output "[+]  Installing WSL2"
 wsl --install
@@ -38,20 +36,21 @@ wsl --install
 Write-Output '[!!]  The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
 ### Update everything Winget can find
 winget upgrade -r --include-unknown
+Write-Output "[+]  Installing Host Tools"
+winget install Git.git 7zip 'Visual Studio Code' Powertoys veracrypt
 ### Install Kali
 winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
 ### Install Tumbleweed for QEMU/KVM
 winget install  9MSSK2ZXXN11 -s msstore --accept-package-agreements -h --accept-source-agreements
 Write-Output "[+]  Installing a newer Powershell"
 winget install microsoft.powershell --accept-package-agreements -h --accept-source-agreements
-Write-Output "[+]  Installing Host Tools"
-Start-Process powershell -ArgumentList {
-    choco upgrade chocolatey -y
-    choco install firefox vivaldi sysinternals ChocolateyGUI FoxitReader vlc python 7zip testdisk-photorec git vscode filezilla wireshark postman ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden obsidian veracrypt synctrayzor powertoys -y
-} -Verb RunAs
 Write-Output "[+]  Enabling KVM/QEMU"
 powershell.exe /C 'Copy-Item .\WSL Kernel\bzImage $env:USERPROFILE'
 powershell.exe /C 'Write-Output [wsl2]`nkernel=$env:USERPROFILE\bzImage | % {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII'
 wsl.exe --shutdown
 wsl.exe uname -a
+### INstallation of QEMU goes here
+Write-Output "[!!] Adding WSL paths as Windows Defender exceptions (Increases performance of containers) "
+Add-MpPreference -ExclusionPath “\\wsl$\”
+Add-MpPreference -ExclusionPath “\\wsl.localhost\”
 Write-Output "[!!] Setup complete! Please restart your PC  [!!]"
