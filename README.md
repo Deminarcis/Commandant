@@ -38,6 +38,9 @@ This is my first powershell project, please open an issue if something doesnt wo
 
 This tool will disable real time protection in windows to accomodate Kali.
 
+Thank you to (Hayden Barnes)[https://boxofcables.dev] for the guide on custom WSL kernels, allowing QEMU to be used in a container
+No moification is made to the WSL2 Kernel included that is not described in the guide included.
+
 #### TODO
 - Consider tools closer to stuff Mandiant offers in Commando
 - Add more common forensics tools (either in container or native)

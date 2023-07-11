@@ -37,26 +37,22 @@ Write-Output "[+]  Installing WSL2"
 wsl --install
 ### Break here for reboot?
 Write-Output '[!!]  The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
+### Update everything Winget can find
 winget upgrade -r --include-unknown
+### Install Kali
 winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
+### Install Tumbleweed for QEMU/KVM
+winget install  9MSSK2ZXXN11 -s msstore --accept-package-agreements -h --accept-source-agreements
 Write-Output "[+]  Installing a newer Powershell"
 winget install microsoft.powershell --accept-package-agreements -h --accept-source-agreements
 Write-Output "[+]  Installing Host Tools"
 Start-Process powershell -ArgumentList {
     choco upgrade chocolatey -y
-    choco install firefox sysinternals ChocolateyGUI FoxitReader vlc python 7zip testdisk-photorec git vscode filezilla wireshark postman ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden obsidian veracrypt synctrayzor powertoys -y
+    choco install firefox vivaldi sysinternals ChocolateyGUI FoxitReader vlc python 7zip testdisk-photorec git vscode filezilla wireshark postman ffmpeg tor-browser qbittorrent openvpn rufus obs-studio bitwarden obsidian veracrypt synctrayzor powertoys -y
 } -Verb RunAs
-Write-Output "[+]  Enabling Hyper-V"
-if ( $licenseType -like 'Windows * Home' )
-{
-    cmd /c pushd "%~dp0"
-    cmd /c dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum > hyper-v.txt
-    cmd /c for /f %%i in ('findstr /i . hyper-v.txt 2^>nul') do dism /online /norestart /add-package:"%SystemRoot%\servicing\Packages\%%i"
-    cmd /c del hyper-v.txt
-    cmd /c Dism /online /enable-feature /featurename:Microsoft-Hyper-V -All /LimitAccess /ALL
-    cmd /c pause
-}
-else {
-    DISM /Online /Disable-Feature /FeatureName:Microsoft-Hyper-V-all
-}
+Write-Output "[+]  Enabling KVM/QEMU"
+powershell.exe /C 'Copy-Item .\WSL Kernel\bzImage $env:USERPROFILE'
+powershell.exe /C 'Write-Output [wsl2]`nkernel=$env:USERPROFILE\bzImage | % {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII'
+wsl.exe --shutdown
+wsl.exe uname -a
 Write-Output "[!!] Setup complete! Please restart your PC  [!!]"

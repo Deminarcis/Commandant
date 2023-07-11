@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Build An Accelerated KVM Guest Custom Kernel for WSL 2 - 2022 Edition</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+        :root {
+            --button-bg-color: #ffffff;
+            --button-text-color: var(--color-darkgrey);
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css?v=d774584798" />
+
+    <meta name="description" content="Updated, simpler guide for building a custom Linux kernel for WSL 2 optimized for running nested KVM guests." />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://boxofcables.dev/kvm-optimized-custom-kernel-wsl2-2022/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="https://boxofcables.dev/kvm-optimized-custom-kernel-wsl2-2022/amp/" />
+    
+    <meta property="og:site_name" content="Box of Cables" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Build An Accelerated KVM Guest Custom Kernel for WSL 2 - 2022 Edition" />
+    <meta property="og:description" content="Updated, simpler guide for building a custom Linux kernel for WSL 2 optimized for running nested KVM guests." />
+    <meta property="og:url" content="https://boxofcables.dev/kvm-optimized-custom-kernel-wsl2-2022/" />
+    <meta property="og:image" content="https://boxofcables.dev/content/images/2021/12/Screenshot-2021-12-15-180628-1.png" />
+    <meta property="article:published_time" content="2021-12-15T23:04:03.000Z" />
+    <meta property="article:modified_time" content="2022-01-27T19:41:28.000Z" />
+    <meta property="article:tag" content="Windows Subsystem for Linux" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Build An Accelerated KVM Guest Custom Kernel for WSL 2 - 2022 Edition" />
+    <meta name="twitter:description" content="Updated, simpler guide for building a custom Linux kernel for WSL 2 optimized for running nested KVM guests." />
+    <meta name="twitter:url" content="https://boxofcables.dev/kvm-optimized-custom-kernel-wsl2-2022/" />
+    <meta name="twitter:image" content="https://boxofcables.dev/content/images/2021/12/Screenshot-2021-12-15-220450.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Hayden Barnes" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Windows Subsystem for Linux" />
+    <meta name="twitter:site" content="@unixterminal" />
+    <meta name="twitter:creator" content="@unixterminal" />
+    <meta property="og:image:width" content="1475" />
+    <meta property="og:image:height" content="778" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Box of Cables",
+        "url": "https://boxofcables.dev/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://boxofcables.dev/favicon.png",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Hayden Barnes",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://boxofcables.dev/content/images/2022/07/5546CC9B-B5B9-4408-BC28-DF22DB1F89AE.jpeg",
+            "width": 1536,
+            "height": 2048
+        },
+        "url": "https://boxofcables.dev/author/hayden/",
+        "sameAs": [
+            "https://twitter.com/unixterminal"
+        ]
+    },
+    "headline": "Build An Accelerated KVM Guest Custom Kernel for WSL 2 - 2022 Edition",
+    "url": "https://boxofcables.dev/kvm-optimized-custom-kernel-wsl2-2022/",
+    "datePublished": "2021-12-15T23:04:03.000Z",
+    "dateModified": "2022-01-27T19:41:28.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://boxofcables.dev/content/images/2021/12/Screenshot-2021-12-15-220450.png",
+        "width": 1920,
+        "height": 1080
+    },
+    "keywords": "Windows Subsystem for Linux",
+    "description": "Updated, simpler guide for building a custom Linux kernel for WSL 2 optimized for running nested KVM guests.",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://boxofcables.dev/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.47" />
+    <link rel="alternate" type="application/rss+xml" title="Box of Cables" href="https://boxofcables.dev/rss/" />
+    <script defer src="https://unpkg.com/@tryghost/portal@~1.22.0/umd/portal.min.js" data-ghost="https://boxofcables.dev/" crossorigin="anonymous"></script><style id="gh-members-styles">.gh-post-upgrade-cta-content,
+.gh-post-upgrade-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.gh-post-upgrade-cta-content {
+    border-radius: 8px;
+    padding: 40px 4vw;
+}
+
+.gh-post-upgrade-cta h2 {
+    color: #ffffff;
+    font-size: 28px;
+    letter-spacing: -0.2px;
+    margin: 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta p {
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+.gh-post-upgrade-cta small {
+    font-size: 16px;
+    letter-spacing: -0.2px;
+}
+
+.gh-post-upgrade-cta a {
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.gh-post-upgrade-cta a.gh-btn {
+    display: block;
+    background: #ffffff;
+    text-decoration: none;
+    margin: 28px 0 0;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.gh-post-upgrade-cta a.gh-btn:hover {
+    opacity: 0.92;
+}</style>
+    <script defer src="/public/cards.min.js?v=d774584798"></script><style>:root {--ghost-accent-color: #15171A;}</style>
+    <link rel="stylesheet" type="text/css" href="/public/cards.min.css?v=d774584798">
+
+</head>
+<body class="post-template tag-wsl">
+<div class="viewport">
+
+    <header id="gh-head" class="gh-head has-cover">
+        <nav class="gh-head-inner inner gh-container">
+
+            <div class="gh-head-brand">
+                <a class="gh-head-logo" href="https://boxofcables.dev">
+                        Box of Cables
+                </a>
+                <a class="gh-burger" role="button">
+                    <div class="gh-burger-box">
+                        <div class="gh-burger-inner"></div>
+                    </div>
+                </a>
+            </div>
+            <div class="gh-head-menu">
+                <ul class="nav">
+    <li class="nav-home"><a href="https://boxofcables.dev/">Home</a></li>
+</ul>
+
+            </div>
+            <div class="gh-head-actions">
+                <div class="gh-social">
+                        <a class="gh-social-twitter" href="https://twitter.com/unixterminal" title="Twitter" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+                </div>
+
+                    <a class="gh-head-button" href="#/portal/signup" data-portal="signup">Subscribe</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="site-content">
+        
+
+
+
+<main id="site-main" class="site-main">
+    <article class="article post tag-wsl ">
+
+        <header class="article-header gh-canvas">
+
+            <section class="article-tag">
+                <a href="https://boxofcables.dev/tag/wsl/">Windows Subsystem for Linux</a>
+            </section>
+
+            <h1 class="article-title">Build An Accelerated KVM Guest Custom Kernel for WSL 2 - 2022 Edition</h1>
+
+            <p class="article-excerpt">Updated, simpler guide for building a custom Linux kernel for WSL 2 optimized for running nested KVM guests.</p>
+
+            <div class="article-byline">
+                <section class="article-byline-content">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <a href="/author/hayden/" class="author-avatar">
+                                <img class="author-profile-image" src="/content/images/size/w100/2022/07/5546CC9B-B5B9-4408-BC28-DF22DB1F89AE.jpeg" alt="Hayden Barnes" />
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="article-byline-meta">
+                        <h4 class="author-name"><a href="/author/hayden/">Hayden Barnes</a></h4>
+                        <div class="byline-meta-content">
+                            <time class="byline-meta-date" datetime="2021-12-15">Dec 15, 2021</time>
+                            <span class="byline-reading-time"><span class="bull">&bull;</span> 3 min read</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <figure class="article-image">
+                <img
+                    srcset="/content/images/size/w300/2021/12/Screenshot-2021-12-15-220450.png 300w,
+                            /content/images/size/w600/2021/12/Screenshot-2021-12-15-220450.png 600w,
+                            /content/images/size/w1000/2021/12/Screenshot-2021-12-15-220450.png 1000w,
+                            /content/images/size/w2000/2021/12/Screenshot-2021-12-15-220450.png 2000w"
+                    sizes="(min-width: 1400px) 1400px, 92vw"
+                    src="/content/images/size/w2000/2021/12/Screenshot-2021-12-15-220450.png"
+                    alt="Build An Accelerated KVM Guest Custom Kernel for WSL 2 - 2022 Edition"
+                />
+            </figure>
+        </header>
+
+        <section class="gh-content gh-canvas">
+            <p></p><p>This guide walks you through the process of building a basic accelerated KVM custom kernel for WSL 2 that can be used with any WSL 2 distro you have installed.</p><p>This guide has been updated and simplified. </p><h3 id="requirements">Requirements</h3><p>Windows 11, build 22000+<br><a href="https://docs.microsoft.com/en-us/windows/wsl/install">WSL 2</a> <br><a href="https://www.microsoft.com/store/productId/9MSSK2ZXXN11">OpenSUSE Tumbleweed</a><br>This guide works with Intel and AMD processors</p><figure class="kg-card kg-gallery-card kg-width-wide"><div class="kg-gallery-container"><div class="kg-gallery-row"><div class="kg-gallery-image"><img src="https://boxofcables.dev/content/images/2021/12/Screenshot-2021-12-15-161523-1.png" width="1239" height="650" loading="lazy" alt srcset="https://boxofcables.dev/content/images/size/w600/2021/12/Screenshot-2021-12-15-161523-1.png 600w, https://boxofcables.dev/content/images/size/w1000/2021/12/Screenshot-2021-12-15-161523-1.png 1000w, https://boxofcables.dev/content/images/2021/12/Screenshot-2021-12-15-161523-1.png 1239w" sizes="(min-width: 720px) 720px"></div><div class="kg-gallery-image"><img src="https://boxofcables.dev/content/images/2021/12/Screenshot-2021-12-15-161543-1.png" width="460" height="423" loading="lazy" alt></div><div class="kg-gallery-image"><img src="https://boxofcables.dev/content/images/2021/12/Screenshot-2021-12-15-161718-2.png" width="1006" height="466" loading="lazy" alt srcset="https://boxofcables.dev/content/images/size/w600/2021/12/Screenshot-2021-12-15-161718-2.png 600w, https://boxofcables.dev/content/images/size/w1000/2021/12/Screenshot-2021-12-15-161718-2.png 1000w, https://boxofcables.dev/content/images/2021/12/Screenshot-2021-12-15-161718-2.png 1006w" sizes="(min-width: 720px) 720px"></div></div></div></figure><h3 id="update-opensuse-and-install-build-dependencies">Update openSUSE and install build dependencies</h3><p>Run:</p><pre><code class="language-Bash">sudo zypper -n up
+
+sudo bash -c "zypper in -y -t pattern devel_basis &amp;&amp; zypper in -y bc openssl openssl-devel dwarves rpm-build libelf-devel aria2 jq"</code></pre><figure class="kg-card kg-image-card"><img src="https://boxofcables.dev/content/images/2021/12/image-18.png" class="kg-image" alt loading="lazy" width="1006" height="466" srcset="https://boxofcables.dev/content/images/size/w600/2021/12/image-18.png 600w, https://boxofcables.dev/content/images/size/w1000/2021/12/image-18.png 1000w, https://boxofcables.dev/content/images/2021/12/image-18.png 1006w" sizes="(min-width: 720px) 720px"></figure><h3 id="get-the-microsoft-wsl-2-kernel-sources">Get the Microsoft WSL 2 kernel sources</h3><p>Run:</p><pre><code>curl -s https://api.github.com/repos/microsoft/WSL2-Linux-Kernel/releases/latest | jq -r '.name' | sed 's/$/.tar.gz/' | sed 's#^#https://github.com/microsoft/WSL2-Linux-Kernel/archive/refs/tags/#' | aria2c -i -
+
+tar -xf *.tar.gz</code></pre><figure class="kg-card kg-image-card"><img src="https://boxofcables.dev/content/images/2021/12/image-21.png" class="kg-image" alt loading="lazy" width="1114" height="682" srcset="https://boxofcables.dev/content/images/size/w600/2021/12/image-21.png 600w, https://boxofcables.dev/content/images/size/w1000/2021/12/image-21.png 1000w, https://boxofcables.dev/content/images/2021/12/image-21.png 1114w" sizes="(min-width: 720px) 720px"></figure><figure class="kg-card kg-image-card"><img src="https://boxofcables.dev/content/images/2021/12/image-22.png" class="kg-image" alt loading="lazy" width="1114" height="178" srcset="https://boxofcables.dev/content/images/size/w600/2021/12/image-22.png 600w, https://boxofcables.dev/content/images/size/w1000/2021/12/image-22.png 1000w, https://boxofcables.dev/content/images/2021/12/image-22.png 1114w" sizes="(min-width: 720px) 720px"></figure><h3 id="change-to-the-kernel-directory">Change to the kernel directory</h3><p>Run:</p><pre><code>cd "$(find -type d -name "WSL2-Linux-Kernel-linux-msft-wsl-*")"</code></pre><figure class="kg-card kg-image-card"><img src="https://boxofcables.dev/content/images/2021/12/image-23.png" class="kg-image" alt loading="lazy" width="1162" height="466" srcset="https://boxofcables.dev/content/images/size/w600/2021/12/image-23.png 600w, https://boxofcables.dev/content/images/size/w1000/2021/12/image-23.png 1000w, https://boxofcables.dev/content/images/2021/12/image-23.png 1162w" sizes="(min-width: 720px) 720px"></figure><h3 id="copy-the-default-microsoft-kernel-configuration">Copy the default Microsoft kernel configuration</h3><p>Run:</p><pre><code>cp Microsoft/config-wsl .config</code></pre><figure class="kg-card kg-image-card"><img src="https://boxofcables.dev/content/images/2021/12/image-24.png" class="kg-image" alt loading="lazy" width="1162" height="466" srcset="https://boxofcables.dev/content/images/size/w600/2021/12/image-24.png 600w, https://boxofcables.dev/content/images/size/w1000/2021/12/image-24.png 1000w, https://boxofcables.dev/content/images/2021/12/image-24.png 1162w" sizes="(min-width: 720px) 720px"></figure><h3 id="tweak-the-default-microsoft-kernel-configuration-for-kvm-guests">Tweak the default Microsoft kernel configuration for KVM guests</h3><p>The following tweaks are based on kernel version 5.14.</p><p>Run:</p><pre><code>sed -i 's/# CONFIG_KVM_GUEST is not set/CONFIG_KVM_GUEST=y/g' .config
+
+sed -i 's/# CONFIG_ARCH_CPUIDLE_HALTPOLL is not set/CONFIG_ARCH_CPUIDLE_HALTPOLL=y/g' .config
+
+sed -i 's/# CONFIG_HYPERV_IOMMU is not set/CONFIG_HYPERV_IOMMU=y/g' .config
+
+sed -i '/^# CONFIG_PARAVIRT_TIME_ACCOUNTING is not set/a CONFIG_PARAVIRT_CLOCK=y' .config
+
+sed -i '/^# CONFIG_CPU_IDLE_GOV_TEO is not set/a CONFIG_CPU_IDLE_GOV_HALTPOLL=y' .config
+
+sed -i '/^CONFIG_CPU_IDLE_GOV_HALTPOLL=y/a CONFIG_HALTPOLL_CPUIDLE=y' .config
+
+sed -i 's/CONFIG_HAVE_ARCH_KCSAN=y/CONFIG_HAVE_ARCH_KCSAN=n/g' .config
+
+sed -i '/^CONFIG_HAVE_ARCH_KCSAN=n/a CONFIG_KCSAN=n' .config
+</code></pre><figure class="kg-card kg-image-card"><img src="https://boxofcables.dev/content/images/2021/12/image-27.png" class="kg-image" alt loading="lazy" width="1318" height="466" srcset="https://boxofcables.dev/content/images/size/w600/2021/12/image-27.png 600w, https://boxofcables.dev/content/images/size/w1000/2021/12/image-27.png 1000w, https://boxofcables.dev/content/images/2021/12/image-27.png 1318w" sizes="(min-width: 720px) 720px"></figure><h3 id="build-the-kernel">Build the kernel</h3><p>Run:</p><pre><code>make -j 8</code></pre><figure class="kg-card kg-image-card"><img src="https://boxofcables.dev/content/images/2021/12/image-28.png" class="kg-image" alt loading="lazy" width="1318" height="466" srcset="https://boxofcables.dev/content/images/size/w600/2021/12/image-28.png 600w, https://boxofcables.dev/content/images/size/w1000/2021/12/image-28.png 1000w, https://boxofcables.dev/content/images/2021/12/image-28.png 1318w" sizes="(min-width: 720px) 720px"></figure><h3 id="copy-the-built-kernel-to-your-windows-users-home-folder">Copy the built kernel to your Windows user's home folder</h3><p>From WSL:</p><pre><code>powershell.exe /C 'Copy-Item .\arch\x86\boot\bzImage $env:USERPROFILE'</code></pre><figure class="kg-card kg-image-card"><img src="https://boxofcables.dev/content/images/2021/12/image-29.png" class="kg-image" alt loading="lazy" width="1318" height="610" srcset="https://boxofcables.dev/content/images/size/w600/2021/12/image-29.png 600w, https://boxofcables.dev/content/images/size/w1000/2021/12/image-29.png 1000w, https://boxofcables.dev/content/images/2021/12/image-29.png 1318w" sizes="(min-width: 720px) 720px"></figure><h3 id="point-to-your-custom-kernel-in-wslconfig">Point to your custom kernel in .wslconfig</h3><p>From WSL:</p><pre><code>powershell.exe /C 'Write-Output [wsl2]`nkernel=$env:USERPROFILE\bzImage | % {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII'</code></pre><figure class="kg-card kg-image-card"><img src="https://boxofcables.dev/content/images/2021/12/image-32.png" class="kg-image" alt loading="lazy" width="1318" height="610" srcset="https://boxofcables.dev/content/images/size/w600/2021/12/image-32.png 600w, https://boxofcables.dev/content/images/size/w1000/2021/12/image-32.png 1000w, https://boxofcables.dev/content/images/2021/12/image-32.png 1318w" sizes="(min-width: 720px) 720px"></figure><h3 id="restart-wsl">Restart WSL</h3><p>Open a PowerShell terminal and run:</p><pre><code>wsl.exe --shutdown</code></pre><figure class="kg-card kg-image-card"><img src="https://boxofcables.dev/content/images/2021/12/image-33.png" class="kg-image" alt loading="lazy" width="1150" height="400" srcset="https://boxofcables.dev/content/images/size/w600/2021/12/image-33.png 600w, https://boxofcables.dev/content/images/size/w1000/2021/12/image-33.png 1000w, https://boxofcables.dev/content/images/2021/12/image-33.png 1150w" sizes="(min-width: 720px) 720px"></figure><h3 id="confirm-you-are-booting-your-custom-kernel">Confirm you are booting your custom kernel</h3><p>Confirm you are running your new kernel by checking the date, which should be very recent. Run:</p><pre><code>wsl.exe uname -a</code></pre><figure class="kg-card kg-image-card"><img src="https://boxofcables.dev/content/images/2021/12/image-34.png" class="kg-image" alt loading="lazy" width="1402" height="562" srcset="https://boxofcables.dev/content/images/size/w600/2021/12/image-34.png 600w, https://boxofcables.dev/content/images/size/w1000/2021/12/image-34.png 1000w, https://boxofcables.dev/content/images/2021/12/image-34.png 1402w" sizes="(min-width: 720px) 720px"></figure><p></p><p>Congrats, your WSL 2 kernel is now optimized for KVM guests. </p><p>Now...what are you going to run with that?</p>
+        </section>
+
+
+    </article>
+</main>
+
+
+    <section class="footer-cta ">
+        <div class="inner">
+            <h2>Sign up for more like this.</h2>
+            <a class="footer-cta-button" href="#/portal" data-portal>
+                <div class="footer-cta-input">Enter your email</div>
+                <span>Subscribe</span>
+            </a>
+        </div>
+    </section>
+
+
+
+
+            <aside class="read-more-wrap">
+                <div class="read-more inner">
+                        
+<article class="post-card post ">
+
+    <a class="post-card-image-link" href="/windows-dev-drive-benchmarks/">
+        <img class="post-card-image"
+            srcset="/content/images/size/w300/2023/05/Screenshot-2023-05-30-104009.png 300w,
+                    /content/images/size/w600/2023/05/Screenshot-2023-05-30-104009.png 600w,
+                    /content/images/size/w1000/2023/05/Screenshot-2023-05-30-104009.png 1000w,
+                    /content/images/size/w2000/2023/05/Screenshot-2023-05-30-104009.png 2000w"
+            sizes="(max-width: 1000px) 400px, 800px"
+            src="/content/images/size/w600/2023/05/Screenshot-2023-05-30-104009.png"
+            alt="Windows Dev Drive Benchmarks"
+            loading="lazy"
+        />
+    </a>
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="/windows-dev-drive-benchmarks/">
+            <header class="post-card-header">
+                <h2 class="post-card-title">Windows Dev Drive Benchmarks</h2>
+            </header>
+            <div class="post-card-excerpt">
+                <p>Putting Windows Dev Drive through it's paces on the Windows Dev Kit 2023.</p>
+            </div>
+        </a>
+
+        <footer class="post-card-meta">
+            <ul class="author-list">
+                <li class="author-list-item">
+                    <a href="/author/hayden/" class="static-avatar">
+                        <img class="author-profile-image" src="/content/images/size/w100/2022/07/5546CC9B-B5B9-4408-BC28-DF22DB1F89AE.jpeg" alt="Hayden Barnes" loading="lazy" />
+                    </a>
+                </li>
+            </ul>
+            <div class="post-card-byline-content">
+                <span class="post-card-byline-author"><a href="/author/hayden/">Hayden Barnes</a></span>
+                <span class="post-card-byline-date"><time datetime="2023-05-30">May 30, 2023</time> <span class="bull">&bull;</span> 3 min read</span>
+            </div>
+        </footer>
+
+    </div>
+
+</article>
+                        
+<article class="post-card post ">
+
+    <a class="post-card-image-link" href="/the-github-copilot-lawsuit-threatens-open-source-and-human-progress-1/">
+        <img class="post-card-image"
+            srcset="/content/images/size/w300/2022/11/Screenshot-2022-11-07-090626.png 300w,
+                    /content/images/size/w600/2022/11/Screenshot-2022-11-07-090626.png 600w,
+                    /content/images/size/w1000/2022/11/Screenshot-2022-11-07-090626.png 1000w,
+                    /content/images/size/w2000/2022/11/Screenshot-2022-11-07-090626.png 2000w"
+            sizes="(max-width: 1000px) 400px, 800px"
+            src="/content/images/size/w600/2022/11/Screenshot-2022-11-07-090626.png"
+            alt="The GitHub Copilot Lawsuit Threatens Open Source and Human Progress"
+            loading="lazy"
+        />
+    </a>
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="/the-github-copilot-lawsuit-threatens-open-source-and-human-progress-1/">
+            <header class="post-card-header">
+                <h2 class="post-card-title">The GitHub Copilot Lawsuit Threatens Open Source and Human Progress</h2>
+            </header>
+            <div class="post-card-excerpt">
+                <p>The vague complaints of the Copilot plaintiffs are nothing compared to the damage to free software and human progress if they won.</p>
+            </div>
+        </a>
+
+        <footer class="post-card-meta">
+            <ul class="author-list">
+                <li class="author-list-item">
+                    <a href="/author/hayden/" class="static-avatar">
+                        <img class="author-profile-image" src="/content/images/size/w100/2022/07/5546CC9B-B5B9-4408-BC28-DF22DB1F89AE.jpeg" alt="Hayden Barnes" loading="lazy" />
+                    </a>
+                </li>
+            </ul>
+            <div class="post-card-byline-content">
+                <span class="post-card-byline-author"><a href="/author/hayden/">Hayden Barnes</a></span>
+                <span class="post-card-byline-date"><time datetime="2022-11-07">Nov 7, 2022</time> <span class="bull">&bull;</span> 8 min read</span>
+            </div>
+        </footer>
+
+    </div>
+
+</article>
+                        
+<article class="post-card post ">
+
+    <a class="post-card-image-link" href="/cbl-delridge-is-dead-long-live-cbl-mariner/">
+        <img class="post-card-image"
+            srcset="/content/images/size/w300/2022/11/Screenshot-2022-11-03-174613-2.png 300w,
+                    /content/images/size/w600/2022/11/Screenshot-2022-11-03-174613-2.png 600w,
+                    /content/images/size/w1000/2022/11/Screenshot-2022-11-03-174613-2.png 1000w,
+                    /content/images/size/w2000/2022/11/Screenshot-2022-11-03-174613-2.png 2000w"
+            sizes="(max-width: 1000px) 400px, 800px"
+            src="/content/images/size/w600/2022/11/Screenshot-2022-11-03-174613-2.png"
+            alt="Microsoft&#x27;s CBL-Delridge is 404, long live CBL-Mariner"
+            loading="lazy"
+        />
+    </a>
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="/cbl-delridge-is-dead-long-live-cbl-mariner/">
+            <header class="post-card-header">
+                <h2 class="post-card-title">Microsoft&#x27;s CBL-Delridge is 404, long live CBL-Mariner</h2>
+            </header>
+            <div class="post-card-excerpt">
+                <p>Microsoft is increasingly standardizing on its in-house CBL-Mariner Linux distribution. Is this Microsoft Linux?</p>
+            </div>
+        </a>
+
+        <footer class="post-card-meta">
+            <ul class="author-list">
+                <li class="author-list-item">
+                    <a href="/author/hayden/" class="static-avatar">
+                        <img class="author-profile-image" src="/content/images/size/w100/2022/07/5546CC9B-B5B9-4408-BC28-DF22DB1F89AE.jpeg" alt="Hayden Barnes" loading="lazy" />
+                    </a>
+                </li>
+            </ul>
+            <div class="post-card-byline-content">
+                <span class="post-card-byline-author"><a href="/author/hayden/">Hayden Barnes</a></span>
+                <span class="post-card-byline-date"><time datetime="2022-11-03">Nov 3, 2022</time> <span class="bull">&bull;</span> 4 min read</span>
+            </div>
+        </footer>
+
+    </div>
+
+</article>
+                </div>
+            </aside>
+
+
+
+    </div>
+
+    <footer class="site-footer outer">
+        <div class="inner">
+            <section class="copyright"><a href="https://boxofcables.dev">Box of Cables</a> &copy; 2023</section>
+            <nav class="site-footer-nav">
+                
+            </nav>
+            <div><a href="https://ghost.org/" target="_blank" rel="noopener">Powered by Ghost</a></div>
+        </div>
+    </footer>
+
+</div>
+
+
+<script
+    src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous">
+</script>
+<script src="/assets/built/casper.js?v=d774584798"></script>
+<script>
+$(document).ready(function () {
+    // Mobile Menu Trigger
+    $('.gh-burger').click(function () {
+        $('body').toggleClass('gh-head-open');
+    });
+    // FitVids - Makes video embeds responsive
+    $(".gh-content").fitVids();
+});
+</script>
+
+
+
+</body>
+</html>
