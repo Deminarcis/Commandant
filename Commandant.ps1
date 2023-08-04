@@ -42,7 +42,7 @@ winget install 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'microsoft.Pow
 winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
 Write-Output "[+]  Installing a newer Powershell"
 winget install microsoft.powershell --accept-package-agreements -h --accept-source-agreements
-Write-Output "[+]  Enabling KVM/QEMU"
+Write-Output "[+]  setting up custom kernel for WSL"
 powershell.exe /C 'Copy-Item .\WSL Kernel\bzImage $env:USERPROFILE'
 powershell.exe /C 'Write-Output [wsl2]`nkernel=$env:USERPROFILE\bzImage | % {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII'
 wsl.exe --shutdown
