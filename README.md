@@ -30,7 +30,7 @@ Because Flare and Commando have failed to install so many times that i'm not sur
 
 - A MS Account that signs into the MS Store (havin the account sign into apps but not the system works just fine)
 
-- You need to install (App Installer)[https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1?hl=en-au&gl=au&rtc=1] from MSStore before running this script
+- You need to install [App Installer](https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1?hl=en-au&gl=au&rtc=1) from MSStore before running this script
 
 #### Notes:
 
@@ -38,7 +38,7 @@ This is my first powershell project, please open an issue if something doesnt wo
 
 This tool will disable real time protection in windows to accomodate Kali.
 
-Thank you to (Hayden Barnes)[https://boxofcables.dev] for the guide on custom WSL kernels, allowing QEMU to be used in a container
+Thank you to [Hayden Barnes](https://boxofcables.dev) for the guide on custom WSL kernels, allowing QEMU to be used in a container
 No moification is made to the WSL2 Kernel included that is not described in the guide included.
 
 #### TODO
