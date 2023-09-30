@@ -26,9 +26,6 @@ SetExecutionPolicy RemoteSigned
 Write-Output "[+]  Checking for updates"
 Install-Module -Name PSWindowsUpdate -Force -AllowClobber
 Import-Module PSWindowsUpdate
-# Change this later, it will break windows defender but is necessary to install Kali smoothly
-#Set-MpPreference -DisableRealtimeMonitoring $true
-# Get Windows updates
 Get-WindowsUpdate
 Write-Output "[+]  Installing WSL2"
 wsl --install
@@ -37,7 +34,7 @@ Write-Output '[!!]  The next step may fail if you dont have a Microsoft account 
 ### Update everything Winget can find
 winget upgrade -r --include-unknown
 Write-Output "[+]  Installing Host Tools"
-winget install 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'microsoft.Powertoys' 'vmware.workstationplayer'
+winget install 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'microsoft.Powertoys' 'oracle.virtualbox'
 ### Install Kali
 winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
 Write-Output "[+]  Installing a newer Powershell"

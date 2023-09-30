@@ -12,7 +12,7 @@ I wrote this tool for a job and the employer was nice enough to let me publicall
 
 #### Why make this?
 
-Because Flare and Commando have failed to install so many times that i'm not sure whether i'm stupid or they are actually broken
+Because Flare and Commando have failed to install so many times that i'm not sure whether I'm stupid or they are actually broken
 
 ---
 
@@ -36,17 +36,5 @@ Because Flare and Commando have failed to install so many times that i'm not sur
 
 This is my first powershell project, please open an issue if something doesnt work and i'll accomodate as best I can.
 
-This tool will disable real time protection in windows to accomodate Kali.
-
 Thank you to [Hayden Barnes](https://boxofcables.dev) for the guide on custom WSL kernels, allowing QEMU to be used in a container
 No moification is made to the WSL2 Kernel included that is not described in the guide included.
-
-#### TODO
-- Consider tools closer to stuff Mandiant offers in Commando
-- Add more common forensics tools (either in container or native)
-- Consider adding docker/podman
-- Consider including case study and knowledge base tools (maltego and obsidian come to mind)
-- Consider Windows container tools to isolate malware inspection tools and malware away from the host (is this what boxstarter is for?)
-- Consider adding a hypervisor for those that are familiar with VMs (probably Hyper-V or Virtualbox due to licensing)
-- Find out if we can use FireEye repos and packages (may not be feasible based on licensing if there is any)
-- Learn how to break script for reboot and pick it back up after reboot
