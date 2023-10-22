@@ -3,6 +3,18 @@
     Import-Module PSReadLine
 }
 
+Install-Module -Name PSDepend -Repository PSGallery
+Import-Module PSDepend
+Get-Command -Module PSDepend
+Install-Module Pscx -Scope CurrentUser
+Install-Module -Name Terminal-Icons -Repository PSGallery
+Install-Module -Name PSWindowsUpdate -Repository PSGallery
+Install-Module -Name TabExpansionPlusPlus -Repository PSGallery
+Install-Module -Name PSUtil -Repository PSGallery
+Import-Module Terminal-Icons
+Import-Module PSUtil
+Import-Module Pscx
+Import-Module TabExpansionPlusPlus
 Import-Module PSWindowsUpdate
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
