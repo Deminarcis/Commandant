@@ -3,18 +3,30 @@
     Import-Module PSReadLine
 }
 
-Install-Module -Name PSDepend -Scope CurrentUser -Repository PSGallery
-Import-Module PSDepend
-Install-Module Pscx -Scope CurrentUser -AllowClobber
-Install-Module -Name Terminal-Icons -Scope CurrentUser -Repository PSGallery
-Install-Module -Name PSWindowsUpdate -Scope CurrentUser -Repository PSGallery
-Install-Module -Name TabExpansionPlusPlus -Scope CurrentUser -Repository PSGallery -AllowClobber
-Install-Module -Name PSUtil -Scope CurrentUser -Repository PSGallery
-Import-Module Terminal-Icons
-Import-Module PSUtil
-Import-Module Pscx
-Import-Module TabExpansionPlusPlus
-Import-Module PSWindowsUpdate
+if ($IsWindows) {
+  Install-Module -Name PSDepend -Scope CurrentUser -Repository PSGallery
+  Import-Module PSDepend
+  Install-Module Pscx -Scope CurrentUser -AllowClobber
+  Install-Module -Name Terminal-Icons -Scope CurrentUser -Repository PSGallery
+  Install-Module -Name PSWindowsUpdate -Scope CurrentUser -Repository PSGallery
+  Install-Module -Name TabExpansionPlusPlus -Scope CurrentUser -Repository PSGallery -AllowClobber
+  Install-Module -Name PSUtil -Scope CurrentUser -Repository PSGallery
+  Import-Module Terminal-Icons
+  Import-Module PSUtil
+  Import-Module Pscx
+  Import-Module TabExpansionPlusPlus
+  Import-Module PSWindowsUpdate
+} else {
+  Install-Module -Name PSDepend -Scope CurrentUser -Repository PSGallery
+  Import-Module PSDepend
+  Install-Module -Name Terminal-Icons -Scope CurrentUser -Repository PSGallery
+  Install-Module -Name TabExpansionPlusPlus -Scope CurrentUser -Repository PSGallery -AllowClobber
+  Install-Module -Name PSUtil -Scope CurrentUser -Repository PSGallery
+  Import-Module Terminal-Icons
+  Import-Module PSUtil
+  Import-Module TabExpansionPlusPlus
+}
+
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
