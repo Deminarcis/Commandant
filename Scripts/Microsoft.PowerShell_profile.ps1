@@ -6,10 +6,10 @@
 Install-Module -Name PSDepend -Repository PSGallery
 Import-Module PSDepend
 Get-Command -Module PSDepend
-Install-Module Pscx -Scope CurrentUser
+Install-Module Pscx -Scope CurrentUser -AllowClobber
 Install-Module -Name Terminal-Icons -Repository PSGallery
 Install-Module -Name PSWindowsUpdate -Repository PSGallery
-Install-Module -Name TabExpansionPlusPlus -Repository PSGallery
+Install-Module -Name TabExpansionPlusPlus -Repository PSGallery -AllowClobber
 Install-Module -Name PSUtil -Repository PSGallery
 Import-Module Terminal-Icons
 Import-Module PSUtil
@@ -20,7 +20,7 @@ Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 function prompt {
-    $Time = (Get-Date).ToString("hh:mm") 
+    $Time = (Get-Date).ToString("hh:mm")
     $host.ui.rawui.WindowTitle = (Get-Location)
     # The following block is surrounded by two delimiters.
     # These delimiters must not be modified. Thanks.
@@ -28,7 +28,7 @@ function prompt {
     $PROMPT_ALTERNATIVE='twoline'
     $NEWLINE_BEFORE_PROMPT='no'
     # STOP KALI CONFIG VARIABLES
-    
+
       $esc = [char]27
       $bell = [char]7
       $bold = "$esc[1m"
