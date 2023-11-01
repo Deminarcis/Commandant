@@ -10,7 +10,7 @@ if ($IsWindows) {
   Install-Module -Name Terminal-Icons -Scope CurrentUser -Repository PSGallery
   Install-Module -Name PSWindowsUpdate -Scope CurrentUser -Repository PSGallery
   Install-Module -Name TabExpansionPlusPlus -Scope CurrentUser -Repository PSGallery -AllowClobber
-  Install-Module -Name PSUtil -Scope CurrentUser -Repository PSGallery
+  Install-Module -Name PSUtil -Scope CurrentUser -Repository PSGallery -AllowClobber
   Import-Module Terminal-Icons
   Import-Module PSUtil
   Import-Module Pscx
@@ -21,7 +21,7 @@ if ($IsWindows) {
   Import-Module PSDepend
   Install-Module -Name Terminal-Icons -Scope CurrentUser -Repository PSGallery
   Install-Module -Name TabExpansionPlusPlus -Scope CurrentUser -Repository PSGallery -AllowClobber
-  Install-Module -Name PSUtil -Scope CurrentUser -Repository PSGallery
+  Install-Module -Name PSUtil -Scope CurrentUser -Repository PSGallery -AllowClobber
   Import-Module Terminal-Icons
   Import-Module PSUtil
   Import-Module TabExpansionPlusPlus
@@ -35,10 +35,10 @@ function prompt {
     $host.ui.rawui.WindowTitle = (Get-Location)
     # The following block is surrounded by two delimiters.
     # These delimiters must not be modified. Thanks.
-    # START KALI CONFIG VARIABLES
+    # START CONFIG VARIABLES
     $PROMPT_ALTERNATIVE='twoline'
     $NEWLINE_BEFORE_PROMPT='no'
-    # STOP KALI CONFIG VARIABLES
+    # STOP CONFIG VARIABLES
 
       $esc = [char]27
       $bell = [char]7
