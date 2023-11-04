@@ -1,11 +1,6 @@
-# if you started this script without admin rights, this will first start a new console with admin rights then run the script below
-# the original console will be closed
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     # add -noexit before -encodedcommand to keep the admin console open after the script is run
     start-process powershell "-encodedcommand $([Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($script:MyInvocation.MyCommand.ScriptBlock)))" -Verb RunAs
-    # comment this out to leave the non admin console open, but you'll not be needing it since a new one will open with admin rights
-    # NOTE!: if you do comment this out, the rest of the script will be executed first as non admin, then again when the admin console appears
-    # you could add another if statement down below saying if you're not admin, do something else, or add an else to this if statment
     exit
 }
 
