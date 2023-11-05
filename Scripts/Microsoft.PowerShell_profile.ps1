@@ -31,7 +31,7 @@ Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 function prompt {
-    $Time = (Get-Date).ToString("hh:mm")
+    $Time = (Get-Date).ToString("HH:mm")
     $host.ui.rawui.WindowTitle = (Get-Location)
     # The following block is surrounded by two delimiters.
     # These delimiters must not be modified. Thanks.
