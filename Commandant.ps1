@@ -29,16 +29,14 @@ Write-Output '[!!]  The next step may fail if you dont have a Microsoft account 
 ### Update everything Winget can find
 winget upgrade -r --include-unknown
 Write-Output "[+]  Installing Host Tools"
-winget install 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'microsoft.Powertoys' 'oracle.virtualbox'
+winget install --accept-package-agreements -h --accept-source-agreements 'Microsoft.Powershell' 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'Microsoft.VisualStudio.2022.Community' 'Microsoft.VisualStudio.2022.BuildTools' 'Microsoft.Powertoys' 'Oracle.VirtualBox' 'JetBrains.PyCharm.Community' 'JetBrains.IntelliJIDEA.Community' 'Microsoft.DotNet.Runtime.8' 'Microsoft.DotNet.SDK.8' 'Microsoft.DotNet.DesktopRuntime.8' 'Microsoft.DevHome' 'Microsoft.DotNet.Runtime.7' 'Microsoft.DotNet.SDK.7' 'Microsoft.DotNet.DesktopRuntime.7' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal'
 ### Install Kali
 winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
-Write-Output "[+]  Installing a newer Powershell"
-winget install microsoft.powershell --accept-package-agreements -h --accept-source-agreements
+### Copy Custom kernel for WSL
 Write-Output "[+]  setting up custom kernel for WSL"
 powershell.exe /C 'Copy-Item .\WSL Kernel\bzImage $env:USERPROFILE'
 powershell.exe /C 'Write-Output [wsl2]`nkernel=$env:USERPROFILE\bzImage | % {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII'
 wsl.exe --shutdown
-wsl.exe uname -a
 Write-Output "[!!] Adding WSL paths as Windows Defender exceptions (Increases performance of containers) "
 Add-MpPreference -ExclusionPath “\\wsl$\”
 Add-MpPreference -ExclusionPath “\\wsl.localhost\”
