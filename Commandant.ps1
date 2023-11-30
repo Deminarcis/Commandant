@@ -1,3 +1,6 @@
+###
+# Check context is an administrator, if not elevate
+###
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     # add -noexit before -encodedcommand to keep the admin console open after the script is run
     start-process powershell "-encodedcommand $([Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($script:MyInvocation.MyCommand.ScriptBlock)))" -Verb RunAs
@@ -40,4 +43,6 @@ wsl.exe --shutdown
 Write-Output "[!!] Adding WSL paths as Windows Defender exceptions (Increases performance of containers) "
 Add-MpPreference -ExclusionPath “\\wsl$\”
 Add-MpPreference -ExclusionPath “\\wsl.localhost\”
+### Setting up Powershell profile
+Powershell.exe  /C 'Copy-Item .\Scripts\Microsoft.PowerShell_profile.ps1 $env:HOME\Documents\PowerShell\'
 Write-Output "[!!] Setup complete! Please restart your PC  [!!]"
