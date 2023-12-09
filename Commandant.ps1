@@ -13,7 +13,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 $wingetInstalled = cmd /c where winget '2>&1'
 if ( $wingetInstalled -like '*winget.exe*' )
 {
-    Write-Output "[!!] winget is already installed"
+    Write-Output "[!!] Winget is already installed, continuing to set up"
 }
 else
 {
