@@ -26,7 +26,7 @@ Install-Module -Name PSWindowsUpdate -Force -AllowClobber
 Import-Module PSWindowsUpdate
 Get-WindowsUpdate
 Write-Output "[+]  Installing WSL2"
-wsl --install
+Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName Microsoft-Windows-Subsystem-Linux
 ### Break here for reboot?
 Write-Output '[!!]  The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
 ### Update everything Winget can find
@@ -34,7 +34,11 @@ winget upgrade -r --include-unknown
 Write-Output "[+]  Installing Apps (IDEs, Git, firefox, etc.)"
 winget install --accept-package-agreements -h --accept-source-agreements 'Microsoft.Powershell' 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'Microsoft.VisualStudio.2022.Community' 'Microsoft.VisualStudio.2022.BuildTools' 'Microsoft.Powertoys' 'JetBrains.PyCharm.Community' 'JetBrains.IntelliJIDEA.Community' 'Microsoft.DotNet.Runtime.8' 'Microsoft.DotNet.SDK.8' 'Microsoft.DotNet.DesktopRuntime.8' 'Microsoft.DevHome' 'Microsoft.DotNet.Runtime.7' 'Microsoft.DotNet.SDK.7' 'Microsoft.DotNet.DesktopRuntime.7' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'vmware.workstationplayer'
 ### Install Kali
+Write-Output '[+] Installing Kali from MS store'
 winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
+### Install  sysinternals
+Write-Output '[+] Installing SysInternals from MS store'
+winget install  9P7KNL5RWT26 -s msstore --accept-package-agreements -h --accept-source-agreements
 ### Copy Custom kernel for WSL
 Write-Output "[+]  setting up custom kernel for WSL"
 powershell.exe /C 'Copy-Item .\WSL Kernel\bzImage $env:USERPROFILE'
