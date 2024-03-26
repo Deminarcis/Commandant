@@ -53,6 +53,7 @@ Add-MpPreference -ExclusionPath “\\wsl$\”
 Add-MpPreference -ExclusionPath “\\wsl.localhost\”
 ### Setting up Powershell profile
 Powershell.exe  /C 'Copy-Item .\Scripts\Microsoft.PowerShell_profile.ps1 $env:HOME\Documents\PowerShell\'
-Write-Output "[+]  Setting Hypervisor extensions to off"
-bcdedit /set hypervisorlaunchtype off
+Write-Output "[+]  Setting Hypervisor extensions to auto"
+### TODO: How to turn off core isolation so we can use the extensions for libvirt?
+bcdedit /set hypervisorlaunchtype auto
 Write-Output "[!!] Setup complete! Please restart your PC  [!!]"
