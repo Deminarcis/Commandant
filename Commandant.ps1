@@ -31,14 +31,16 @@ Write-Output '[!!]  The next step may fail if you dont have a Microsoft account 
 ### Update everything Winget can find
 winget upgrade -r --include-unknown
 Write-Output "[+]  Installing Apps (IDEs, Git, firefox, etc.)"
-winget install --accept-package-agreements -h --accept-source-agreements 'Microsoft.Powershell' 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'Microsoft.VisualStudio.2022.Community' 'Microsoft.VisualStudio.2022.BuildTools' 'Microsoft.Powertoys' 'JetBrains.PyCharm.Community' 'JetBrains.IntelliJIDEA.Community' 'Microsoft.DotNet.Runtime.8' 'Microsoft.DotNet.SDK.8' 'Microsoft.DotNet.DesktopRuntime.8' 'Microsoft.DevHome' 'Microsoft.DotNet.Runtime.7' 'Microsoft.DotNet.SDK.7' 'Microsoft.DotNet.DesktopRuntime.7' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'vmware.workstationplayer'
+winget install --accept-package-agreements -h --accept-source-agreements 'Microsoft.Powershell' 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'Oracle.Virtualbox'
 ### Install Kali
 Write-Output '[+] Installing Kali from MS store'
 winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
 ### Install  sysinternals
 Write-Output '[+] Installing SysInternals from MS store'
 winget install  9P7KNL5RWT26 -s msstore --accept-package-agreements -h --accept-source-agreements
-Write-Output '[+] Installing Ubuntu container for virt manager incase the WSL install earlier somehow didnt do this'
+Write-Output '[+] Installing Python 3.12 from MS store'
+winget install  9NCVDN91XZQP -s msstore --accept-package-agreements -h --accept-source-agreements
+Write-Output '[+] Installing Ubuntu container from the MS Store for virt manager in-case the WSL install earlier somehow didnt do this'
 winget isntall  9PDXGNCFSCZV -s msstore --accept-package-agreements -h --accept-source-agreements
 wsl.exe -d Ubuntu -- sudo apt update
 wsl.exe -d Ubuntu -- sudo apt -y full-upgrade
@@ -54,6 +56,5 @@ Add-MpPreference -ExclusionPath “\\wsl.localhost\”
 ### Setting up Powershell profile
 Powershell.exe  /C 'Copy-Item .\Scripts\Microsoft.PowerShell_profile.ps1 $env:HOME\Documents\PowerShell\'
 Write-Output "[+]  Setting Hypervisor extensions to auto"
-### TODO: How to turn off core isolation so we can use the extensions for libvirt?
 bcdedit /set hypervisorlaunchtype auto
 Write-Output "[!!] Setup complete! Please restart your PC  [!!]"
