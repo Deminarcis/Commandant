@@ -14,7 +14,6 @@ if ($IsWindows) {
   Import-Module PSUtil
   Import-Module Pscx
   Import-Module TabExpansionPlusPlus
-  Import-Module PSWindowsUpdate
 } else {
   Install-Module -Name PSDepend -Scope CurrentUser -Repository PSGallery
   Import-Module PSDepend
@@ -32,8 +31,6 @@ Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 function prompt {
     $Time = (Get-Date).ToString("HH:mm")
     $host.ui.rawui.WindowTitle = (Get-Location)
-    # The following block is surrounded by two delimiters.
-    # These delimiters must not be modified. Thanks.
     # START CONFIG VARIABLES
     $PROMPT_ALTERNATIVE='twoline'
     $NEWLINE_BEFORE_PROMPT='no'
