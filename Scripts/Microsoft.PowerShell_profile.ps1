@@ -8,7 +8,6 @@ if ($IsWindows) {
   Import-Module PSDepend
   Install-Module Pscx -Scope CurrentUser -AllowClobber
   Install-Module -Name Terminal-Icons -Scope CurrentUser -Repository PSGallery
-  Install-Module -Name PSWindowsUpdate -Scope CurrentUser -Repository PSGallery -Force
   Install-Module -Name TabExpansionPlusPlus -Scope CurrentUser -Repository PSGallery -AllowClobber
   Install-Module -Name PSUtil -Scope CurrentUser -Repository PSGallery -AllowClobber
   Import-Module Terminal-Icons
