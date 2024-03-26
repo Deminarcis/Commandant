@@ -22,6 +22,8 @@ else
 }
 SetExecutionPolicy RemoteSigned
 Write-Output "[+]  Installing WSL2"
+Write-Output "[!!]  Enabling Hyper V and the use of Hyper V on this system after installing WSL2 this way will remove the ability to use nested virtualization which is turned on by default in WSL2"
+Write-Output "[!!]  This will stop you running things like KVM/QEMU inside of WSL2"
 Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName Microsoft-Windows-Subsystem-Linux
 ### Break here for reboot?
 Write-Output '[!!]  The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
