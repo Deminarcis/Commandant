@@ -14,7 +14,8 @@ if ($IsWindows) {
   Import-Module PSUtil
   Import-Module Pscx
   Import-Module TabExpansionPlusPlus
-} else {
+}
+else {
   Install-Module -Name PSDepend -Scope CurrentUser -Repository PSGallery
   Import-Module PSDepend
   Install-Module -Name Terminal-Icons -Scope CurrentUser -Repository PSGallery
