@@ -21,10 +21,6 @@ else
     exit
 }
 SetExecutionPolicy RemoteSigned
-Write-Output "[+]  Checking for updates"
-Install-Module -Name PSWindowsUpdate -Force -AllowClobber
-Import-Module PSWindowsUpdate
-Get-WindowsUpdate
 Write-Output "[+]  Installing WSL2"
 Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName Microsoft-Windows-Subsystem-Linux
 ### Break here for reboot?
