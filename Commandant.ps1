@@ -25,6 +25,7 @@ Write-Output "[+]  Installing WSL2"
 Write-Output "[!!]  Enabling Hyper V and the use of Hyper V on this system after installing WSL2 this way will remove the ability to use nested virtualization which is turned on by default in WSL2"
 Write-Output "[!!]  This will stop you running things like KVM/QEMU inside of WSL2"
 Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName Microsoft-Windows-Subsystem-Linux
+Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName VirtualMachinePlatform
 ### Break here for reboot?
 Write-Output '[!!]  The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
 ### Update everything Winget can find
@@ -37,6 +38,11 @@ winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-
 ### Install  sysinternals
 Write-Output '[+] Installing SysInternals from MS store'
 winget install  9P7KNL5RWT26 -s msstore --accept-package-agreements -h --accept-source-agreements
+Write-Output '[+] Installing Ubuntu container for virt manager incase the WSL install earlier somehow didnt do this'
+winget isntall  9PDXGNCFSCZV -s msstore --accept-package-agreements -h --accept-source-agreements
+wsl.exe -d Ubuntu -- sudo apt update
+wsl.exe -d Ubuntu -- sudo apt -y full-upgrade
+wsl.exe -d Ubuntu -- sudo apt -y install virt-manager
 ### Copy Custom kernel for WSL
 Write-Output "[+]  setting up custom kernel for WSL"
 powershell.exe /C 'Copy-Item .\WSL Kernel\bzImage $env:USERPROFILE'
@@ -47,4 +53,6 @@ Add-MpPreference -ExclusionPath “\\wsl$\”
 Add-MpPreference -ExclusionPath “\\wsl.localhost\”
 ### Setting up Powershell profile
 Powershell.exe  /C 'Copy-Item .\Scripts\Microsoft.PowerShell_profile.ps1 $env:HOME\Documents\PowerShell\'
+Write-Output "[+]  Setting Hypervisor extensions to off"
+bcdedit /set hypervisorlaunchtype off
 Write-Output "[!!] Setup complete! Please restart your PC  [!!]"
