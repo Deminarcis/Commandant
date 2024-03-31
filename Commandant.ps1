@@ -7,9 +7,9 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     exit
 }
 
-#####
-# BEGIN SCIPT:
-#####
+################
+# BEGIN SCIPT: #
+################
 $wingetInstalled = cmd /c where winget '2>&1'
 if ( $wingetInstalled -like '*winget.exe*' )
 {
@@ -34,14 +34,24 @@ winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-
 Write-Output '[+] Installing Ubuntu container from the MS Store'
 winget isntall  9PDXGNCFSCZV -s msstore --accept-package-agreements -h --accept-source-agreements
 ### Provision Ubuntu
+Write-Output '[+] Installing components inside Ubuntu, you may be asked for a password multiple times'
+wsl.exe -d Ubuntu -- curl -s https://julianfairfax.gitlab.io/package-repo/pub.gpg | gpg --dearmor | sudo dd of=/usr/share/keyrings/julians-package-repo.gpg
+wsl.exe -d Ubuntu -- echo 'deb [ signed-by=/usr/share/keyrings/julians-package-repo.gpg ] https://julianfairfax.gitlab.io/package-repo/debs packages main' | sudo tee /etc/apt/sources.list.d/julians-package-repo.list
+wsl.exe -d Ubuntu -- sudo add-apt-repository ppa:kisak/kisak-mesa -y
 wsl.exe -d Ubuntu -- sudo apt update
-wsl.exe -d Ubuntu -- sudo apt -y full-upgrade
-wsl.exe -d Ubuntu -- sudo apt -y install virt-manager
+wsl.exe -d Ubuntu -- sudo apt full-upgrade -y
+wsl.exe -d Ubuntu -- sudo apt install mesa-utils mesa-opencl-icd mesa-common-dev mesa-drm-shim mesa-va-drivers mesa-vdpau-drivers mesa-vulkan-drivers libosmesa6 libglu1-mesa libgles2-mesa virt-manager flatpak yaru-theme* fonts-ubuntu*
+wsl.exe -d Ubuntu -- sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+### Refreshing the session for flatpak variables
+wsl.exe --shutdown
+wsl.exe -d Ubuntu -- gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3' && gsettings set org.gnome.desktop.interface color-scheme 'default'
+wsl.exe -d Ubuntu -- gsettings set org.gnome.desktop.interface icon-theme 'Yaru'
+wsl.exe -d Ubuntu -- sudo flatpak install org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
 Write-Output '[!!]  The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
 ### Update everything Winget can find
 winget upgrade -r --include-unknown
-Write-Output "[+]  Installing Apps (IDEs, Git, firefox, etc.)"
-winget install --accept-package-agreements -h --accept-source-agreements 'Microsoft.Powershell' 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'Oracle.Virtualbox'
+Write-Output "[+]  Installing Additional Apps"
+winget install --accept-package-agreements -h --accept-source-agreements 'Microsoft.Powershell' 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'Oracle.Virtualbox' 'Jetbrains.Toolbox' 'GNU.Nano' 'sharkdp.bat'
 ### Install  sysinternals
 Write-Output '[+] Installing SysInternals from MS store'
 winget install  9P7KNL5RWT26 -s msstore --accept-package-agreements -h --accept-source-agreements
