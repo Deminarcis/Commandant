@@ -27,13 +27,13 @@ Write-Output "[!!]  This will stop you running things like KVM/QEMU inside of WS
 Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName Microsoft-Windows-Subsystem-Linux
 Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName VirtualMachinePlatform
 wsl --install --no-distribution
-### Install Kali
+### Install Kali as a container (intentionally unconfigured)
 Write-Output '[+] Installing Kali from MS store'
 winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
-### Install Ubuntu
+### Install Ubuntu as a container
 Write-Output '[+] Installing Ubuntu container from the MS Store'
 winget isntall  9PDXGNCFSCZV -s msstore --accept-package-agreements -h --accept-source-agreements
-### Provision Ubuntu
+### Provision Ubuntu container
 Write-Output '[+] Installing components inside Ubuntu, you may be asked for a password multiple times'
 wsl.exe -d Ubuntu -- curl -s https://julianfairfax.gitlab.io/package-repo/pub.gpg | gpg --dearmor | sudo dd of=/usr/share/keyrings/julians-package-repo.gpg
 wsl.exe -d Ubuntu -- echo 'deb [ signed-by=/usr/share/keyrings/julians-package-repo.gpg ] https://julianfairfax.gitlab.io/package-repo/debs packages main' | sudo tee /etc/apt/sources.list.d/julians-package-repo.list
