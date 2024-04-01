@@ -21,6 +21,7 @@ wsl.exe --shutdown
 Write-Output '[+] Installing adw-gtk3 theme'
 wsl.exe -d Ubuntu --exec wget https://github.com/lassekongo83/adw-gtk3/releases/download/v5.3/adw-gtk3v5.3.tar.xz
 wsl.exe -d Ubuntu --exec sudo tar -xjf adw-gtk3v5.3.tar.xz -C /usr/share/themes/
+wsl.exe -d Ubuntu --exec rm adw-gtk3v5.3.tar.xz
 Write-Output '[+] Applying Yaru and adw-gtk3 styling to apps'
 wsl.exe -d Ubuntu --exec gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
 wsl.exe -d Ubuntu --exec gsettings set org.gnome.desktop.interface color-scheme 'default'
