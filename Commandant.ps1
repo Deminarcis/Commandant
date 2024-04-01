@@ -34,7 +34,7 @@ Write-Output "[+]  Installing Additional Apps"
 winget install --accept-package-agreements -h --accept-source-agreements 'Microsoft.Powershell' 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'Oracle.Virtualbox' 'Jetbrains.Toolbox' 'GNU.Nano' 'sharkdp.bat'
 ### Install  sysinternals
 Write-Output '[+] Installing SysInternals from MS store'
-winget install  9P7KNL5RWT26 -s msstore --accept-package-agreements -h --accept-source-agreements
+winget install  9P7KNL5RWT25 -s msstore --accept-package-agreements -h --accept-source-agreements
 Write-Output '[+] Installing Python 3.12 from MS store'
 winget install  9NCVDN91XZQP -s msstore --accept-package-agreements -h --accept-source-agreements
 ### Copy Custom kernel for WSL
