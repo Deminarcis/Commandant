@@ -39,14 +39,14 @@ Write-Output '[+] Installing Python 3.12 from MS store'
 winget install  9NCVDN91XZQP -s msstore --accept-package-agreements -h --accept-source-agreements
 ### Copy Custom kernel for WSL
 Write-Output "[+]  setting up custom kernel for WSL"
-powershell.exe /C Copy-Item .\WSL Kernel\bzImage $env:USERPROFILE
-powershell.exe /C Write-Output [wsl2]`nkernel=$env:USERPROFILE\bzImage | % {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII
+powershell.exe /C 'Copy-Item .\WSL Kernel\bzImage $env:USERPROFILE'
+powershell.exe /C 'Write-Output [wsl2]`nkernel=$env:USERPROFILE\bzImage | % {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII'
 wsl.exe --shutdown
 Write-Output "[+] Adding WSL paths as Windows Defender exceptions (Increases performance of containers) "
 Add-MpPreference -ExclusionPath “\\wsl$\”
 Add-MpPreference -ExclusionPath “\\wsl.localhost\”
 ### Setting up Powershell profile
-Powershell.exe  /C Copy-Item .\Scripts\Microsoft.PowerShell_profile.ps1 $env:HOME\Documents\PowerShell\
+Powershell.exe  /C 'Copy-Item .\Scripts\Microsoft.PowerShell_profile.ps1 $env:USERPROFILE\Documents\PowerShell\'
 Write-Output "[+]  Setting Hypervisor extensions to auto"
 bcdedit /set hypervisorlaunchtype auto
 Write-Output "[!!] Setup complete! Please restart your PC. then run configure_wsl from the same folder to finish installation [!!]"
