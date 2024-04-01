@@ -16,6 +16,6 @@ winget uninstall  9PKR34TNCV07 -s msstore
 winget uninstall  9PDXGNCFSCZV -s msstore
 winget uninstall  9P7KNL5RWT26 -s msstore
 winget uninstall  9NCVDN91XZQP -s msstore
-winget uninstall 'Microsoft.Powershell' 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'Oracle.Virtualbox' 'Jetbrains.Toolbox' 'GNU.Nano' 'sharkdp.bat'
+winget uninstall 'Microsoft.Powershell' 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Oracle.Virtualbox' 'Jetbrains.Toolbox' 'GNU.Nano' 'sharkdp.bat'
 Remove-Item '$env:USERPROFILE\bzImage'
 Remove-Item -Recurse '$env:HOME\Documents\PowerShell\'
