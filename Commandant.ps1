@@ -28,7 +28,7 @@ Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName Microsoft-Windows-
 Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName VirtualMachinePlatform
 wsl --install --no-distribution
 Write-Output '[!!]  The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
-### Update everything Winget can find
+Write-Output "[+]  Updating everything Winget can find already installed"
 winget upgrade -r --include-unknown
 Write-Output "[+]  Installing Additional Apps"
 winget install --accept-package-agreements -h --accept-source-agreements 'Microsoft.Powershell' 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'Oracle.Virtualbox' 'Jetbrains.Toolbox' 'GNU.Nano' 'sharkdp.bat'
