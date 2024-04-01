@@ -20,7 +20,7 @@ else
     Write-Output "Please install winget (App Installer) from the store before continuing"
     exit
 }
-SetExecutionPolicy RemoteSigned
+Set-ExecutionPolicy RemoteSigned
 Write-Output "[+]  Installing WSL2"
 Write-Output "[!!]  Enabling Hyper V and the use of Hyper V on this system after installing WSL2 this way will remove the ability to use nested virtualization which is turned on by default in WSL2"
 Write-Output "[!!]  This will stop you running things like KVM/QEMU inside of WSL2"
