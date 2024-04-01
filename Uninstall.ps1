@@ -23,3 +23,4 @@ winget uninstall  9NCVDN91XZQP -s msstore
 winget uninstall 'Microsoft.Powershell' 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Oracle.Virtualbox' 'Jetbrains.Toolbox' 'GNU.Nano' 'sharkdp.bat'
 Remove-Item '$env:USERPROFILE\bzImage'
 Remove-Item -Recurse '$env:HOME\Documents\PowerShell\'
+Remove-Item '$env:USERPROFILE\.wslconfig'

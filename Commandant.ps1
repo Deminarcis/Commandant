@@ -39,7 +39,7 @@ Write-Output '[+] Installing Python 3.12 from MS store'
 winget install  9NCVDN91XZQP -s msstore --accept-package-agreements -h --accept-source-agreements
 ### Copy Custom kernel for WSL
 Write-Output "[+]  setting up custom kernel for WSL"
-Copy-Item .\WSL Kernel\bzImage $env:USERPROFILE
+Copy-Item '.\WSL Kernel\bzImage' $env:USERPROFILE
 Write-Output [wsl2]`nkernel=$env:USERPROFILE\bzImage | ForEach-Object {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII
 wsl.exe --shutdown
 Write-Output "[+] Adding WSL paths as Windows Defender exceptions (Increases performance of containers) "

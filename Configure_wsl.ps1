@@ -6,15 +6,16 @@ Write-Output '[+] Installing Ubuntu container from the MS Store'
 winget install  9PDXGNCFSCZV -s msstore --accept-package-agreements -h --accept-source-agreements
 ### Provision Ubuntu container
 Write-Output '[+] Installing components inside Ubuntu, you may be asked for a password multiple times'
-wsl.exe -d Ubuntu -- "curl -s https://julianfairfax.gitlab.io/package-repo/pub.gpg | gpg --dearmor | sudo dd of=/usr/share/keyrings/julians-package-repo.gpg"
-wsl.exe -d Ubuntu -- "echo 'deb [ signed-by=/usr/share/keyrings/julians-package-repo.gpg ] https://julianfairfax.gitlab.io/package-repo/debs packages main' | sudo tee /etc/apt/sources.list.d/julians-package-repo.list"
-wsl.exe -d Ubuntu -- "sudo add-apt-repository ppa:kisak/kisak-mesa -y"
-wsl.exe -d Ubuntu -- "sudo apt update"
-wsl.exe -d Ubuntu -- "sudo apt full-upgrade -y"
-wsl.exe -d Ubuntu -- "sudo apt install mesa-utils mesa-opencl-icd mesa-common-dev mesa-drm-shim mesa-va-drivers mesa-vdpau-drivers mesa-vulkan-drivers libosmesa6 libglu1-mesa libgles2-mesa virt-manager flatpak yaru-theme* fonts-ubuntu*"
-wsl.exe -d Ubuntu -- "sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
+wsl.exe -d Ubuntu --exec sudo add-apt-repository ppa:kisak/kisak-mesa -y
+wsl.exe -d Ubuntu --exec sudo apt update
+wsl.exe -d Ubuntu --exec sudo apt full-upgrade -y
+wsl.exe -d Ubuntu --exec sudo apt install mesa-utils mesa-opencl-icd mesa-common-dev mesa-drm-shim mesa-va-drivers mesa-vdpau-drivers mesa-vulkan-drivers libosmesa6 libglu1-mesa libgles2-mesa virt-manager flatpak yaru-theme* fonts-ubuntu*
+wsl.exe -d Ubuntu --exec sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 ### Refreshing the session for flatpak variables
 wsl.exe --shutdown
-wsl.exe -d Ubuntu -- "gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3' && gsettings set org.gnome.desktop.interface color-scheme 'default'"
-wsl.exe -d Ubuntu -- "gsettings set org.gnome.desktop.interface icon-theme 'Yaru'"
-wsl.exe -d Ubuntu -- "sudo flatpak install org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark"
+wsl.exe -d Ubuntu --exec wget https://github.com/lassekongo83/adw-gtk3/releases/download/v5.3/adw-gtk3v5.3.tar.xz
+wsl.exe -d Ubuntu --exec sudo tar -xvf adw-gtk3v5.3.tar.xz -C /usr/share/themes/
+wsl.exe -d Ubuntu --exec gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
+wsl.exe -d Ubuntu --exec gsettings set org.gnome.desktop.interface color-scheme 'default'
+wsl.exe -d Ubuntu --exec gsettings set org.gnome.desktop.interface icon-theme 'Yaru'
+wsl.exe -d Ubuntu --exec sudo flatpak install org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
