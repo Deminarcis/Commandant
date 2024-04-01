@@ -1,3 +1,9 @@
+### Install Kali as a container (intentionally unconfigured)
+Write-Output '[+] Installing Kali from MS store'
+winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
+### Install Ubuntu as a container
+Write-Output '[+] Installing Ubuntu container from the MS Store'
+winget install  9PDXGNCFSCZV -s msstore --accept-package-agreements -h --accept-source-agreements
 ### Provision Ubuntu container
 Write-Output '[+] Installing components inside Ubuntu, you may be asked for a password multiple times'
 wsl.exe -d Ubuntu -- "curl -s https://julianfairfax.gitlab.io/package-repo/pub.gpg | gpg --dearmor | sudo dd of=/usr/share/keyrings/julians-package-repo.gpg"

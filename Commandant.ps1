@@ -27,12 +27,6 @@ Write-Output "[!!]  This will stop you running things like KVM/QEMU inside of WS
 Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName Microsoft-Windows-Subsystem-Linux
 Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName VirtualMachinePlatform
 wsl --install --no-distribution
-### Install Kali as a container (intentionally unconfigured)
-Write-Output '[+] Installing Kali from MS store'
-winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
-### Install Ubuntu as a container
-Write-Output '[+] Installing Ubuntu container from the MS Store'
-winget install  9PDXGNCFSCZV -s msstore --accept-package-agreements -h --accept-source-agreements
 Write-Output '[!!]  The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
 ### Update everything Winget can find
 winget upgrade -r --include-unknown
