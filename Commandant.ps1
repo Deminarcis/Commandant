@@ -44,7 +44,7 @@ wsl.exe -d Ubuntu -- sudo apt install mesa-utils mesa-opencl-icd mesa-common-dev
 wsl.exe -d Ubuntu -- sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 ### Refreshing the session for flatpak variables
 wsl.exe --shutdown
-wsl.exe -d Ubuntu -- gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3' && gsettings set org.gnome.desktop.interface color-scheme 'default'
+wsl.exe -d Ubuntu -- "gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3' && gsettings set org.gnome.desktop.interface color-scheme 'default'"
 wsl.exe -d Ubuntu -- gsettings set org.gnome.desktop.interface icon-theme 'Yaru'
 wsl.exe -d Ubuntu -- sudo flatpak install org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
 Write-Output '[!!]  The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
