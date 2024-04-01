@@ -32,7 +32,7 @@ Write-Output '[+] Installing Kali from MS store'
 winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
 ### Install Ubuntu as a container
 Write-Output '[+] Installing Ubuntu container from the MS Store'
-winget isntall  9PDXGNCFSCZV -s msstore --accept-package-agreements -h --accept-source-agreements
+winget install  9PDXGNCFSCZV -s msstore --accept-package-agreements -h --accept-source-agreements
 Write-Output '[!!]  The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
 ### Update everything Winget can find
 winget upgrade -r --include-unknown
