@@ -55,4 +55,4 @@ Add-MpPreference -ExclusionPath “\\wsl.localhost\”
 Powershell.exe  /C 'Copy-Item .\Scripts\Microsoft.PowerShell_profile.ps1 $env:HOME\Documents\PowerShell\'
 Write-Output "[+]  Setting Hypervisor extensions to auto"
 bcdedit /set hypervisorlaunchtype auto
-Write-Output "[!!] Setup complete! Please restart your PC. then run configure_wsl from the same folder to finish set [!!]"
+Write-Output "[!!] Setup complete! Please restart your PC. then run configure_wsl from the same folder to finish installation [!!]"
