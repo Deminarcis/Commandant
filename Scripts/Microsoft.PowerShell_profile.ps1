@@ -14,7 +14,6 @@ if ($IsWindows) {
   Install-Module -Name PSWriteHTML -Scope CurrentUser -Repository PSGallery -AllowClobber
   Install-Module -Name PSWritePDF -Scope CurrentUser -Repository PSGallery -AllowClobber -Force
   Install-Module -Name PSWriteWord -Scope CurrentUser -Repository PSGallery -AllowClobber
-  Install-Module -Name PSScriptTools -Scope CurrentUser -Repository PSGallery -AllowClobber
   Import-Module Terminal-Icons
   Import-Module PSUtil
   Import-Module Pscx
@@ -32,7 +31,6 @@ else {
   Install-Module -Name TabExpansionPlusPlus -Scope CurrentUser -Repository PSGallery -AllowClobber
   Install-Module -Name PSUtil -Scope CurrentUser -Repository PSGallery -AllowClobber
   Install-Module -Name PSUnixUtilCompleters -Scope CurrentUser -Repository PSGallery -AllowClobber
-  Install-Module -Name PSScriptTools -Scope CurrentUser -Repository PSGallery -AllowClobber
   Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
   $env:COMPLETION_SHELL_PREFERENCE = '/usr/bin/zsh'
   Import-Module PSUnixUtilCompleters
