@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 # Build environment is based on latest stable Fedora. This is here for transparency but you may use it if you wish to build your own kernel for WSL2
-if [ -f /etc/redhat-release ] || [ -f /etc/fedora-release  ]; then
+if [ -f /usr/bin/dnf ]; then
     sudo dnf upgrade -y --refresh
     sudo dnf install -y qt5-qtbase-devel libXi-devel gcc-c++ kernel-devel kernel-headers openssl bc openssl-devel elfutils-libelf-devel aria2 jq
-elif [ -f /etc/debian_version ]; then
+elif [ -f /usr/bin/apt ]; then
     sudo apt update
     sudo apt install -y build-essential flex bison dwarves libssl-dev libelf-dev jq aria2 bc
-elif [ -f /etc/suse-release ] ; then
+elif [ -f /usr/bin/zypper ] ; then
     sudo zypper -n up
     sudo bash -c "zypper in -y -t pattern devel_basis && zypper in -y bc openssl openssl-devel dwarves rpm-build libelf-devel aria2 jq"
+fi
+if [ -f 'kernel-wsl2' ]; then
+    rm -rf kernel-wsl2
 fi
 mkdir -p kernel-wsl2
 cd kernel-wsl2
@@ -24,8 +27,12 @@ sed -i '/^# CONFIG_CPU_IDLE_GOV_TEO is not set/a CONFIG_CPU_IDLE_GOV_HALTPOLL=y'
 sed -i '/^CONFIG_CPU_IDLE_GOV_HALTPOLL=y/a CONFIG_HALTPOLL_CPUIDLE=y' .config
 sed -i 's/CONFIG_HAVE_ARCH_KCSAN=y/CONFIG_HAVE_ARCH_KCSAN=n/g' .config
 sed -i '/^CONFIG_HAVE_ARCH_KCSAN=n/a CONFIG_KCSAN=n' .config
-#Setting core count to 7 as a 6 core CPU is more common
-make -j 7
+#Setting core count to max -2 unless you have 4 cores or less
+if [ $(nproc) > 4 ]; then
+    make -j$(nproc --ignore=2)
+else 
+    make
+fi
 if [ -f "/etc/wsl.conf" ]; then
     powershell.exe /C 'Copy-Item .\arch\x86\boot\bzImage $env:USERPROFILE'
     powershell.exe /C 'Write-Output [wsl2]`nkernel=$env:USERPROFILE\bzImage | % {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII'
