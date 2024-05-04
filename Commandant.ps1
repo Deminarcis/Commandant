@@ -43,7 +43,6 @@ winget install 9P8LTPGCBZXD -s msstore --accept-package-agreements -h --accept-s
 Write-Output "[+]  setting up custom kernel for WSL"
 Copy-Item '.\WSL Kernel\bzImage' $env:USERPROFILE
 Write-Output [wsl2]`nkernel=$env:USERPROFILE\bzImage | ForEach-Object {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII
-wsl.exe --shutdown
 Write-Output "[+] Adding WSL paths as Windows Defender exceptions (Increases performance of containers) "
 Add-MpPreference -ExclusionPath “\\wsl$\”
 Add-MpPreference -ExclusionPath “\\wsl.localhost\”
