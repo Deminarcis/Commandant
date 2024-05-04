@@ -31,7 +31,7 @@ Write-Output '[!!]  The next step may fail if you dont have a Microsoft account 
 Write-Output "[+]  Updating everything Winget can find already installed"
 winget upgrade -r --include-unknown
 Write-Output "[+]  Installing Additional Apps"
-winget install --accept-package-agreements -h --accept-source-agreements 'Microsoft.Powershell' 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'Oracle.Virtualbox' 'Jetbrains.Toolbox' 'GNU.Nano' 'sharkdp.bat'
+winget install --accept-package-agreements -h --accept-source-agreements 'Microsoft.Powershell' 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'Oracle.Virtualbox' 'GNU.Nano' 'sharkdp.bat'
 ### Install  sysinternals
 Write-Output '[+] Installing SysInternals from MS store'
 winget install 9P7KNL5RWT25 -s msstore --accept-package-agreements -h --accept-source-agreements
