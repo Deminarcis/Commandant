@@ -41,14 +41,14 @@ Write-Output '[+] Installing Wintoys from MS store'
 winget install 9P8LTPGCBZXD -s msstore --accept-package-agreements -h --accept-source-agreements
 ### Copy Custom kernel for WSL
 Write-Output "[+]  setting up custom kernel for WSL"
-Copy-Item '.\WSL Kernel\bzImage' $env:USERPROFILE
+Copy-Item '..\WSL Kernel\bzImage' $env:USERPROFILE
 Write-Output [wsl2]`nkernel=$env:USERPROFILE\bzImage | ForEach-Object {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII
 Write-Output "[+] Adding WSL paths as Windows Defender exceptions (Increases performance of containers) "
 Add-MpPreference -ExclusionPath “\\wsl$\”
 Add-MpPreference -ExclusionPath “\\wsl.localhost\”
 ### Setting up Powershell profile
 New-Item "$env:USERPROFILE\Documents\PowerShell\" -Type Directory
-Copy-Item .\Scripts\Microsoft.PowerShell_profile.ps1 $env:USERPROFILE\Documents\PowerShell\
+Copy-Item '..\Scripts\Microsoft.PowerShell_profile.ps1' $env:USERPROFILE\Documents\PowerShell\
 Write-Output "[+]  Setting Hypervisor extensions to auto"
 bcdedit /set hypervisorlaunchtype auto
 Write-Output "[!!] Setup complete! Please restart your PC. then run configure_wsl from the same folder to finish installation [!!]"
