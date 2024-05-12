@@ -1,34 +1,32 @@
 ## Commandant
 
-It's not Commando-vm but it might be close..... one day
+
 
 ---
 
 ~~Consider this initial upload alpha quality. It works eventually but needs some more work to be complete~~
 
-This tool is insipred by Commando VM. But acts more as a companion to an existing windows install rather than a full install by itself
+This tool is insipred by Commando VM. But acts more as a companion to an existing OS install rather than a full install by itself
 
 #### Why make this?
 
-Because Flare and Commando have failed to install so many times that i'm not sure whether I'm stupid or they are actually broken. Also this has allowed me to get acclimated with learning Powershell (My daily driver is Linux)
+Boredom mostly. As a hacker who uses multiple OS' I wanted something simple that would meet my needs, but also be flexible and available
 
 ---
 
 ### System Requirements
 
-- Windows 11 22H2 Pro or something that can install WLS2 GA from the MS store
+- Windows 11 22H2 Pro (or something that can install WLS2 GA from the MS store) Or macOS 13 (tested on an intel Mac)
 
 - Administrator access
 
-- Powershell - The one included in Windows will do fine, this script will install the latest one for you
+- Powershell or zsh
 
 - Preferably 8GB+ of RAM (tested with 8GB, 4GB should do according to taskmanager), but best not to thin provision your host.
 
 - HDD/SSD space will be determined by how much you install, I havent tested but i'd expect 10-15GB to be enough to get started
 
-- A MS Account that signs into the MS Store (having the account sign into apps but not the system works just fine)
-
-- You need to install [App Installer](https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1?hl=en-au&gl=au&rtc=1) from MS Store before running this script
+- A MS Account that signs into the MS Store if you are on Windows (having the account sign into apps but not the system works just fine). You need to install [App Installer](https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1?hl=en-au&gl=au&rtc=1) from MS Store before running this script
 
 #### Notes:
 
