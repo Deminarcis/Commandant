@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Build environment is based on latest stable Fedora. This is here for transparency but you may use it if you wish to build your own kernel for WSL2
+# Build environment is based on latest stable Fedora. 
+echo -e '[+]  This script is here for transparency but you may use it if you wish to build your own kernel for WSL2. It is recmmended to use the binary in the WSL Kernel folder. \n If the project hasnt been updated in some time this script will try and build the latest kernel microsoft offers. \n It is recommended to run this in a clean contsiner or a VM'
 if [ -f /usr/bin/dnf ]; then
     sudo dnf upgrade -y --refresh
     sudo dnf install -y qt5-qtbase-devel libXi-devel gcc-c++ kernel-devel kernel-headers openssl bc openssl-devel elfutils-libelf-devel aria2 jq
