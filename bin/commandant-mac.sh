@@ -19,5 +19,7 @@ podman machine start
 podman info
 pomdan pull docker.io/kalilinux/kali-rolling:latest
 podman pull docker.io/library/ubuntu:latest
+podman create --name=Kali docker.io/kalilinux/kali-rolling:latest
+podman create --name=Ubuntu docker.io/library/ubuntu:latest
 echo -e "Adding custom zshrc"
 cp -rvf ../Scripts/.zshrc ~/.zshrc
