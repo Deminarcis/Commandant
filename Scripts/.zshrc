@@ -94,8 +94,14 @@ fi
 configure_prompt() {
     prompt_symbol=💀
     export RPROMPT="%F{yellow}%~%F{white}"
+#Original Prompt
+    #export PROMPT="
+#%F{magenta}┌──[%F{yellow}%n%F{magenta}]-[%F{green}@%m%F{magenta}] $prompt_symbol -%F{magenta}[%F{blue}%T - %D{%d-%m-%y}%F{magenta}]
+#%F{magenta}└─ %F{white}"
+
+#Prompt V2 (no incons)
     export PROMPT="
-%F{magenta}┌──[%F{yellow}%n%F{magenta}]-[%F{green}@%m%F{magenta}] $prompt_symbol %F{magenta}[%F{blue}%T - %D%F{magenta}]
+%F{magenta}┌──[%F{yellow}%n%F{magenta}]-[%F{green}@%m%F{magenta}]--%F{magenta}[%F{blue}%T - %D{%d-%m-%y}%F{magenta}]
 %F{magenta}└─ %F{white}"
 
     PS2='%F{red}:%F{magenta}:%F{blue}: %F{white}> '
@@ -254,6 +260,9 @@ if [ -f /usr/bin/eza ]; then
 else
     alias ls='ls -alhZ --color=auto'
 fi
+if [ -f /usr/bin/dnf5 ]; then
+    alias dnf ='dnf5'
+fi
 alias df-all='df -Th --total'
 alias external-ip='curl icanhazip.com'
 alias broken-symlink='find . -type l -! -exec test -e {} \; -print'
@@ -272,5 +281,4 @@ fi
 
 #turn dotnet and powershell telemetry off
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
-# Added by ProtonUp-Qt on 27-08-2023 12:29:15
-if [ -d "/home/jmaher/stl/prefix" ]; then export PATH="$PATH:/home/jmaher/stl/prefix"; fi
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
