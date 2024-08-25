@@ -257,8 +257,10 @@ alias start-sunshine='systemctl --user start sunshine.service'
 alias stop-sunshine='systemctl --user stop sunshine.service'
 if [ -f /usr/bin/eza ]; then
     alias ls='eza -algh --color=auto --icons'
+elif [ -f /usr/local/bin/eza ]; then
+    alias ls='eza -algh --color=auto --icons'
 else
-    alias ls='ls -alhZ --color=auto'
+    alias ls='ls -alh --color=auto'
 fi
 if [ -f /usr/bin/dnf5 ]; then
     alias dnf ='dnf5'
@@ -267,7 +269,7 @@ alias df-all='df -Th --total'
 alias external-ip='curl icanhazip.com'
 alias broken-symlink='find . -type l -! -exec test -e {} \; -print'
 
-if [[ $(uname) || "Linux"  ]]; then
+if [[ $(uname) == "Linux"  ]]; then
     alias open='xdg-open'
 fi
 
@@ -281,4 +283,7 @@ fi
 
 #turn dotnet and powershell telemetry off
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+#Brew on linux
+if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
