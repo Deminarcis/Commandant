@@ -93,20 +93,22 @@ function prompt {
 Set-Alias update-modules modules
 
 ### Import modules
-if (!(Test-Path "env:USERPROFILE\Documents\PowerShell\Terminal-Icons")) {
-    Import-Module Terminal-Icons
-}
-if (!(Test-Path "env:USERPROFILE\Documents\PowerShell\PSDepend")) {
-  Import-Module PSDepend
-}
-if (!(Test-Path "env:USERPROFILE\Documents\PowerShell\Pscx")) {
-  Import-Module Pscx
-}
-if (!(Test-Path "env:USERPROFILE\Documents\PowerShell\PSUtil")) {
-  Import-Module PSUtil
-}
-if (!(Test-Path "env:USERPROFILE\Documents\PowerShell\TabExpansionPlusPlus")) {
-  Import-Module TabExpansionPlusPlus
+if($IsWindows -eq 'True'){
+  if (!(Test-Path "env:USERPROFILE\Documents\PowerShell\Terminal-Icons")) {
+      Import-Module Terminal-Icons
+  }
+  if (!(Test-Path "env:USERPROFILE\Documents\PowerShell\PSDepend")) {
+    Import-Module PSDepend
+  }
+  if (!(Test-Path "env:USERPROFILE\Documents\PowerShell\Pscx")) {
+    Import-Module Pscx
+  }
+  if (!(Test-Path "env:USERPROFILE\Documents\PowerShell\PSUtil")) {
+    Import-Module PSUtil
+  }
+  if (!(Test-Path "env:USERPROFILE\Documents\PowerShell\TabExpansionPlusPlus")) {
+    Import-Module TabExpansionPlusPlus
+  }
 }
 if($IsWindows -eq 'False'){
   if (!(Test-Path "~/.local/share/powershell/modules/TabExpansionPlusPlus")) {
