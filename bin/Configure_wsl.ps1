@@ -32,6 +32,6 @@ Write-Output '[+] Installing flatpak theme to match styling on flatpaks'
 wsl.exe -d Ubuntu --exec sudo flatpak install org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
 #setting up zshrc
 wsl.exe -d Ubuntu --exec sudo apt install -y zsh-syntax-highlighting zsh-autosuggestions zsh
-wsl.exe -d Ubuntu --exec cp $HOST_FOLDER/Scripts/.zshrc -rvfi ~/.zshrc
+wsl.exe -d Ubuntu --exec cp $HOST_FOLDER/Scripts/zshrc -rvfi ~/.zshrc
 Clear-Variable -Name HOST_FOLDER
 Write-Output "[!!] Done! [!!]"
