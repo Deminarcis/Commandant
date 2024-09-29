@@ -10,7 +10,7 @@ This tool is insipred by Commando VM. But acts more as a companion to an existin
 
 #### Why make this?
 
-Boredom mostly. As a hacker who uses multiple OS' I wanted something simple that would meet my needs, but also be flexible and available
+Boredom mostly. As a hacker who uses multiple Operating Systems I wanted something simple that would meet my needs, but also be flexible and available
 
 ---
 
@@ -34,3 +34,6 @@ This is my first powershell project, please open an issue if something doesnt wo
 
 Thank you to [Hayden Barnes](https://boxofcables.dev) for the guide on custom WSL kernels, allowing QEMU to be used in a container
 No moification is made to the WSL2 Kernel included that is not described in the guide included. I have included my build script from [my other repo](https://github.com/Deminarcis/WSL2-Kernel-KVM), the build included in this repo will be whatever is newest from Microsoft's sources.
+
+If installing this in a VM please use KVM/QEMU (Regular QEMU should be ok, Gnome Boxes and UTM should also work fine), Hyper-V or VMWare. This will not work in VirtualBox 7 at time of writing. You will also need nesting/SLAT enabled to use this script.
+It will install fine but the containers will not load if the hypervisor does not support nesting or SLAT

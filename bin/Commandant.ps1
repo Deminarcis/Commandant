@@ -51,4 +51,5 @@ New-Item "$env:USERPROFILE\Documents\PowerShell\" -Type Directory
 Copy-Item '..\Scripts\Microsoft.PowerShell_profile.ps1' $env:USERPROFILE\Documents\PowerShell\
 Write-Output "[+]  Setting Hypervisor extensions to auto"
 bcdedit /set hypervisorlaunchtype auto
+Copy-Item '.\Configure_wsl.ps1' 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\'
 Write-Output "[!!] Setup complete! Please restart your PC. then run configure_wsl from the same folder to finish installation [!!]"
