@@ -47,7 +47,7 @@ Write-Output "[+] Adding WSL paths as Windows Defender exceptions (Increases per
 Add-MpPreference -ExclusionPath “\\wsl$\”
 Add-MpPreference -ExclusionPath “\\wsl.localhost\”
 ### Setting up Powershell profile
-New-Item "$env:USERPROFILE\Documents\PowerShell\" -Type Directory
+New-Item $env:USERPROFILE\Documents\PowerShell\ -Type Directory
 Copy-Item '..\Scripts\Microsoft.PowerShell_profile.ps1' $env:USERPROFILE\Documents\PowerShell\
 Write-Output "[+]  Setting Hypervisor extensions to auto"
 bcdedit /set hypervisorlaunchtype auto
