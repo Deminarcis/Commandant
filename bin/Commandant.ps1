@@ -10,16 +10,32 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 ##################
 #  BEGIN SCIPT:  #
 ##################
+
+Write-Host "                               #                        #                
+                                           ##                       ##               
+  ###### #######  ##   ## ##   ## ######## ###  ## ####### ######## ###  ## ######## 
+ ###           ## ### ### ### ###       ## #### ##       ##      ## #### ##    ###   
+ ###      ##   ## ####### #######  ####### #######  ###  ## ####### #######    ###   
+ ###      ##   ## ## # ## ## # ##  ###  ## ### ###  ###  ## ###  ## ### ###    ###   
+  ######   #####  ##   ## ##   ##  ###  ## ###  ##  ######  ###  ## ###  ##    ###   
+                  ##      ##                     #                        #          
+"
+$DependencyCheck = 0
 $wingetInstalled = cmd /c where winget '2>&1'
 if ( $wingetInstalled -like '*winget.exe*' )
 {
     Write-Output "[!!] Winget is already installed, continuing to set up"
+}
+elseif ($DependencyCheck -eq 1 ) {
+    Write-Output "skipping dependency checks for test runs"
 }
 else
 {
     Write-Output "Please install winget (App Installer) from the store before continuing"
     exit
 }
+Write-Host "Press Any Key to Start Install"
+pause
 Set-ExecutionPolicy RemoteSigned
 Write-Output "[+]  Installing WSL2"
 Write-Output "[!!]  Enabling Hyper V and the use of Hyper V on this system after installing WSL2 this way will remove the ability to use nested virtualization which is turned on by default in WSL2"
