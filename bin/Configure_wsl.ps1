@@ -1,5 +1,3 @@
-#setting variables
-Set-Variable -Name HOST_FOLDER -Value $(Get-Location)
 ### Install Kali as a container (intentionally unconfigured)
 Write-Output '[+] Installing Kali from MS store'
 winget install  9PKR34TNCV07 -s msstore --accept-package-agreements -h --accept-source-agreements
@@ -32,6 +30,5 @@ Write-Output '[+] Installing flatpak theme to match styling on flatpaks'
 wsl.exe -d Ubuntu --exec sudo flatpak install org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
 #setting up zshrc
 wsl.exe -d Ubuntu --exec sudo apt install -y zsh-syntax-highlighting zsh-autosuggestions zsh
-wsl.exe -d Ubuntu --exec cp $HOST_FOLDER/Scripts/zshrc -rvfi ~/.zshrc
-Clear-Variable -Name HOST_FOLDER
+Delete-Item 'C:\Users\$env:UserName\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\Configure_wsl.ps1'
 Write-Output "[!!] Done! [!!]"

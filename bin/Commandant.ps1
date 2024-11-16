@@ -6,11 +6,9 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     start-process powershell "-encodedcommand $([Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($script:MyInvocation.MyCommand.ScriptBlock)))" -Verb RunAs
     exit
 }
-
 ##################
 #  BEGIN SCIPT:  #
 ##################
-
 Write-Host "                               #                        #                
                                            ##                       ##               
   ###### #######  ##   ## ##   ## ######## ###  ## ####### ######## ###  ## ######## 
@@ -34,7 +32,6 @@ else
     Write-Output "Please install winget (App Installer) from the store before continuing"
     exit
 }
-Write-Host "Press Any Key to Start Install"
 pause
 Set-ExecutionPolicy RemoteSigned
 Write-Output "[+]  Installing WSL2"
@@ -67,5 +64,5 @@ New-Item $env:USERPROFILE\Documents\PowerShell\ -Type Directory
 Copy-Item '..\Scripts\Microsoft.PowerShell_profile.ps1' $env:USERPROFILE\Documents\PowerShell\
 Write-Output "[+]  Setting Hypervisor extensions to auto"
 bcdedit /set hypervisorlaunchtype auto
-Copy-Item '.\Configure_wsl.ps1' 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\'
-Write-Output "[!!] Setup complete! Please restart your PC. then run configure_wsl from the same folder to finish installation [!!]"
+Copy-Item '.\Configure_wsl.ps1' 'C:\Users\$env:UserName\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\'
+Write-Output "[!!] Setup complete! Please restart your PC. WSL2 will be configured on next reboot [!!]"
