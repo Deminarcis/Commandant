@@ -8,7 +8,8 @@ echo -e '[+] Setting up Flathub for flatpaks'
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 ### Refreshing the session for flatpak variables
 echo -e '[+] Installing theming'
-
+#TODO: Get branded theming to work
+sudo apt install kali-themes
 echo -e '[+] Applying styling to apps'
 gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
 gsettings set org.gnome.desktop.interface color-scheme 'default'
