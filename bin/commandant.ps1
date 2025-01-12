@@ -42,24 +42,24 @@ Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName VirtualMachinePlat
 wsl --install --no-distribution
 Write-Output '[!!]  The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
 Write-Output "[+]  Updating everything Winget can find already installed"
-winget upgrade --all --accept-package-agreements -h --accept-source-agreements
+winget upgrade --all --accept-package-agreements --accept-source-agreements
 Write-Output "[+]  Installing Additional Apps"
-winget install --accept-package-agreements -h --accept-source-agreements 'Microsoft.Powershell' 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'GNU.Nano' 'sharkdp.bat'
+winget install --accept-package-agreements --accept-source-agreements 'Microsoft.Powershell' 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'GNU.Nano' 'sharkdp.bat'
 ### Install  sysinternals
 Write-Output '[+] Installing SysInternals from MS store'
-winget install 9P7KNL5RWT25 -s msstore --accept-package-agreements -h --accept-source-agreements
+winget install 9P7KNL5RWT25 -s msstore --accept-package-agreements --accept-source-agreements
 Write-Output '[+] Installing latest Python from MS store'
-winget install 9NCVDN91XZQP -s msstore --accept-package-agreements -h --accept-source-agreements
+winget install 9NCVDN91XZQP -s msstore --accept-package-agreements --accept-source-agreements
 ### Copy Custom kernel for WSL
 Write-Output "[+]  setting up custom kernel for WSL"
 Copy-Item '..\WSL Kernel\bzImage' $env:USERPROFILE
-Write-Output [wsl2]`nkernel=$env:USERPROFILE\bzImage | ForEach-Object {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII
+Write-Output "[wsl2]`nkernel=$env:USERPROFILE\bzImage" | ForEach-Object {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII
 Write-Output "[+] Adding WSL paths as Windows Defender exceptions (Increases performance of containers) "
-Add-MpPreference -ExclusionPath “\\wsl$\”
-Add-MpPreference -ExclusionPath “\\wsl.localhost\”
+Add-MpPreference -ExclusionPath "\\wsl$\"
+Add-MpPreference -ExclusionPath "\\wsl.localhost\"
 ### Setting up Powershell profile
-New-Item $env:USERPROFILE\Documents\PowerShell\ -Type Directory
-Copy-Item '..\Scripts\Microsoft.PowerShell_profile.ps1' '$env:USERPROFILE\Documents\PowerShell\'
+New-Item $env:USERPROFILE\Documents\PowerShell\ -Type Directory -Force
+Copy-Item '..\Scripts\Microsoft.PowerShell_profile.ps1' "$env:USERPROFILE\Documents\PowerShell\"
 Write-Output "[+]  Setting Hypervisor extensions to auto"
 bcdedit /set hypervisorlaunchtype auto
 Write-Output "[!!] Setup complete! Please restart your PC. [!!]"
