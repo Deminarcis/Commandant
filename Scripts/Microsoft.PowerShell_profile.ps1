@@ -73,8 +73,8 @@ function prompt {
         Write-Host "┌──[" -NoNewLine -ForegroundColor Magenta
         Write-Host "$([environment]::username)" -NoNewLine -ForegroundColor Red
         Write-Host "]--[" -NoNewLine -ForegroundColor Magenta
-        Write-Host "@$([system.environment]::MachineName)${reset}" -NoNewLine -ForegroundColor Yellow
-        Write-Host " - $Time " -NoNewLine -ForegroundColor Cyan
+        Write-Host "@$([system.environment]::MachineName)${reset}" -NoNewLine -ForegroundColor white
+        Write-Host " - $Time " -NoNewLine -ForegroundColor white
         Write-Host "]-[" -NoNewLine -ForegroundColor Magenta
         Write-Host "$(Get-Location)${reset}" -NoNewLine -ForegroundColor White
         Write-Host "]" -ForegroundColor Magenta
