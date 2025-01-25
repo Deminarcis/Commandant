@@ -6,9 +6,9 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     start-process powershell "-encodedcommand $([Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($script:MyInvocation.MyCommand.ScriptBlock)))" -Verb RunAs
     exit
 }
-##################
-#  BEGIN SCIPT:  #
-##################
+###################
+#  BEGIN SCRIPT:  #
+###################
 Write-Host "                               #                        #                
                                            ##                       ##               
   ###### #######  ##   ## ##   ## ######## ###  ## ####### ######## ###  ## ######## 
@@ -44,7 +44,8 @@ Write-Output '[!!]  The next step may fail if you dont have a Microsoft account 
 Write-Output "[+]  Updating everything Winget can find already installed"
 winget upgrade --all --accept-package-agreements --accept-source-agreements
 Write-Output "[+]  Installing Additional Apps"
-winget install --accept-package-agreements --accept-source-agreements 'Microsoft.Powershell' 'Git.git' '7zip.7zip' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'GNU.Nano' 'sharkdp.bat'
+winget install --accept-package-agreements --accept-source-agreements 'Microsoft.Powershell' 'Git.git' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'GNU.Nano' 'sharkdp.bat' 'helix.helix' 'eza-community.eza' 'Giorgiotani.Peazip'
+powershell -ExecutionPolicy Bypass -Command "Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://superfile.netlify.app/install.ps1'))"
 ### Install  sysinternals
 Write-Output '[+] Installing SysInternals from MS store'
 winget install 9P7KNL5RWT25 -s msstore --accept-package-agreements --accept-source-agreements
