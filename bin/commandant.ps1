@@ -34,14 +34,33 @@ else
 }
 pause
 Set-ExecutionPolicy RemoteSigned
-Write-Output "[+]  Installing WSL2"
-#Write-Output "[!!]  Enabling Hyper V and the use of Hyper V on this system after installing WSL2 this way will remove the ability to use nested virtualization which is turned on by default in WSL2"
-#Write-Output "[!!]  This will stop you running things like KVM/QEMU inside of WSL2"
-Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName Microsoft-Windows-Subsystem-Linux
-Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName VirtualMachinePlatform
-wsl --install --no-distribution
-Write-Output '[!!]  The next step may fail if you dont have a Microsoft account logged in to the store or this PC'
-Write-Output "[+]  Updating everything Winget can find already installed"
+function wsl-branch {
+    $options = @(
+        "Stable"
+        "Pre Release"
+        "Dont Install WSL"
+    )
+    $choice = $options | Out-GridView -Title "Select WSL Branch" -OutputMode Single
+    switch ($choice) {
+        "Stable" {
+            Write-Output "[+]  Installing WSL2 Stable Branch"
+            Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName Microsoft-Windows-Subsystem-Linux
+            Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName VirtualMachinePlatform
+            wsl --install --no-distribution
+        }
+        "Pre Release" {
+            Write-Output "[+]  Installing WSL2 Pre Release Branch"
+            Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName Microsoft-Windows-Subsystem-Linux
+            Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName VirtualMachinePlatform
+            wsl --install --no-distribution --pre-release
+        }
+        "Dont Install WSL" {
+            Write-Output "[+]  Skipping WSL Installation"
+        }
+    }
+}
+wsl-branch
+Write-Output "[+]  Updating everything Winget can find"
 winget upgrade --all --accept-package-agreements --accept-source-agreements
 Write-Output "[+]  Installing Additional Apps"
 winget install --accept-package-agreements --accept-source-agreements 'Microsoft.Powershell' 'Git.git' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'GNU.Nano' 'sharkdp.bat' 'helix.helix' 'eza-community.eza' 'Giorgiotani.Peazip'
@@ -52,15 +71,41 @@ winget install 9P7KNL5RWT25 -s msstore --accept-package-agreements --accept-sour
 Write-Output '[+] Installing latest Python from MS store'
 winget install 9NCVDN91XZQP -s msstore --accept-package-agreements --accept-source-agreements
 ### Copy Custom kernel for WSL
+function CustomKernel{
+    $options = @(
+        "Yes"
+        "No"
+    )
+    $choice = Read-Host "Do you want to install a custom kernel for WSL? ($($options -join ', '))"
+    if ($choice -eq "Yes") {
+        Write-Output "[+] Installing custom kernel for WSL"
+        Copy-Item '..\WSL Kernel\bzImage' $env:USERPROFILE
+        Write-Output "[wsl2]`nkernel=$env:USERPROFILE\bzImage" | ForEach-Object {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII
+    } else {
+        Write-Output "[+] Skipping custom kernel installation"
+    }
+}
 Write-Output "[+]  setting up custom kernel for WSL"
-Copy-Item '..\WSL Kernel\bzImage' $env:USERPROFILE
-Write-Output "[wsl2]`nkernel=$env:USERPROFILE\bzImage" | ForEach-Object {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII
+CustomKernel
 Write-Output "[+] Adding WSL paths as Windows Defender exceptions (Increases performance of containers) "
 Add-MpPreference -ExclusionPath "\\wsl$\"
 Add-MpPreference -ExclusionPath "\\wsl.localhost\"
 ### Setting up Powershell profile
-New-Item $env:USERPROFILE\Documents\PowerShell\ -Type Directory -Force
-Copy-Item '..\Scripts\Microsoft.PowerShell_profile.ps1' "$env:USERPROFILE\Documents\PowerShell\"
+function customPS {
+    $options = @(
+        "Yes"
+        "No"
+    )
+    $choice = Read-Host "Do you want to install a Powershell Prompt? ($($options -join ', '))"
+    if ($choice -eq "Yes") {
+        Write-Output "[+] Installing custom powershell prompt"
+        New-Item $env:USERPROFILE\Documents\PowerShell\ -Type Directory -Force
+        Copy-Item '..\Scripts\Microsoft.PowerShell_profile.ps1' "$env:USERPROFILE\Documents\PowerShell\"
+    } else {
+        Write-Output "[+] Skipping custom powershell prompt"
+    }
+}
+customPS
 Write-Output "[+]  Setting Hypervisor extensions to auto"
 bcdedit /set hypervisorlaunchtype auto
 Write-Output "[!!] Setup complete! Please restart your PC. [!!]"
