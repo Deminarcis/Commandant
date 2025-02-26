@@ -34,7 +34,7 @@ else
 }
 pause
 Set-ExecutionPolicy RemoteSigned
-function wsl-branch {
+function wsl_branch {
     $options = @(
         "Stable"
         "Pre Release"
@@ -59,7 +59,7 @@ function wsl-branch {
         }
     }
 }
-wsl-branch
+wsl_branch
 Write-Output "[+]  Updating everything Winget can find"
 winget upgrade --all --accept-package-agreements --accept-source-agreements
 Write-Output "[+]  Installing Additional Apps"
