@@ -91,7 +91,7 @@ Write-Output "[+] Adding WSL paths as Windows Defender exceptions (Increases per
 Add-MpPreference -ExclusionPath "\\wsl$\"
 Add-MpPreference -ExclusionPath "\\wsl.localhost\"
 ### Setting up Powershell profile
-function customPS {
+function customPSprompt {
     $options = @(
         "Yes"
         "No"
@@ -105,7 +105,7 @@ function customPS {
         Write-Output "[+] Skipping custom powershell prompt"
     }
 }
-customPS
+customPSprompt
 Write-Output "[+]  Setting Hypervisor extensions to auto"
 bcdedit /set hypervisorlaunchtype auto
 Write-Output "[!!] Setup complete! Please restart your PC. [!!]"
