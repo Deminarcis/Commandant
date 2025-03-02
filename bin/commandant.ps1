@@ -6,41 +6,48 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     start-process powershell "-encodedcommand $([Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($script:MyInvocation.MyCommand.ScriptBlock)))" -Verb RunAs
     exit
 }
-###################
-#  BEGIN SCRIPT:  #
-###################
-Write-Host "                               #                        #                
-                                           ##                       ##               
-  ###### #######  ##   ## ##   ## ######## ###  ## ####### ######## ###  ## ######## 
- ###           ## ### ### ### ###       ## #### ##       ##      ## #### ##    ###   
- ###      ##   ## ####### #######  ####### #######  ###  ## ####### #######    ###   
- ###      ##   ## ## # ## ## # ##  ###  ## ### ###  ###  ## ###  ## ### ###    ###   
-  ######   #####  ##   ## ##   ##  ###  ## ###  ##  ######  ###  ## ###  ##    ###   
-                  ##      ##                     #                        #          
-"
-$DependencyCheck = 0
-$wingetInstalled = cmd /c where winget '2>&1'
-if ( $wingetInstalled -like '*winget.exe*' )
-{
-    Write-Output "[!!] Winget is already installed, continuing to set up"
-}
-elseif ($DependencyCheck -eq 1 ) {
-    Write-Output "skipping dependency checks for test runs"
-}
-else
-{
-    Write-Output "Please install winget (App Installer) from the store before continuing"
-    exit
-}
-pause
+
+#############################
+# Configure the environment #
+#############################
 Set-ExecutionPolicy RemoteSigned
-function wsl_branch {
-    $options = @(
-        "Stable"
-        "Pre Release"
-        "Dont Install WSL"
-    )
-    $choice = $options | Out-GridView -Title "Select WSL Branch" -OutputMode Single
+#set the window dimensions
+$height = 50
+$width = 80
+
+Write-Host -NoNewline ("-" * $width)
+for ($i = 1; $i -lt $height - 1; $i++) {
+    Write-Host -NoNewline "|"
+    for ($j = 1; $j -lt $width - 2; $j++) {
+        Write-Host -NoNewline " "
+    }
+    Write-Host -NoNewline "|"
+}
+Write-Host -NoNewline ("-" * $width)
+
+$ps_script = @ {
+    $DependencyCheck = 0
+    $wingetInstalled = cmd /c where winget '2>&1'
+    if ( $wingetInstalled -like '*winget.exe*' )
+    {
+        Write-Output "[!!] Winget is already installed, continuing to set up"
+    }
+    elseif ($DependencyCheck -eq 1 ) {
+        Write-Output "skipping dependency checks for test runs"
+    }
+    else
+    {
+        Write-Output "Please install winget (App Installer) from the store before continuing"
+        exit
+    }
+    pause
+    function wsl_branch {
+        $options = @(
+            "Stable"
+            "Pre Release"
+            "Dont Install WSL"
+        )
+        $choice = $options | Out-GridView -Title "Select WSL Branch" -OutputMode Single
     switch ($choice) {
         "Stable" {
             Write-Output "[+]  Installing WSL2 Stable Branch"
@@ -109,3 +116,4 @@ customPSprompt
 Write-Output "[+]  Setting Hypervisor extensions to auto"
 bcdedit /set hypervisorlaunchtype auto
 Write-Output "[!!] Setup complete! Please restart your PC. [!!]"
+}
