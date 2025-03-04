@@ -123,7 +123,7 @@ do {
     $choice = Read-Host "Pick a number to continue or press 'q' to quit ot 'o' to view the options again"
 
     if ($choice -eq 'q' -or $choice -eq 'quit') {
-        break
+        exit
     }
 
     switch ($choice) {
