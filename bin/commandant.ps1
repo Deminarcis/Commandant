@@ -4,9 +4,6 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     exit
 }
 
-$windowSize = New-Object System.Management.Automation.Host.Size(80, 50)
-Set-WindowSize -Window $windowSize
-
 $skipdeps = 0
 $wingetInstalled = cmd /c where winget '2>&1'
 if ( $wingetInstalled -like '*winget.exe*' )
@@ -21,6 +18,24 @@ elseif ($skipdeps -eq 1 ) {
     exit
 }
 pause
+
+function show_tui {
+# Simple TUI for Commandant with a fancy border
+Write-Host ""
+Write-Host ""
+Write-Host "┌─────────────────────────────────────────┐"
+Write-Host "|   Welcome to the Commandant             |"
+Write-Host "|   Available actions:                    |"
+Write-Host "|   1. Install WSL2                       |"
+Write-Host "|   2. Install Apps                       |"
+Write-Host "|   3. Install Custom WSL Kernel          |"
+Write-Host "|   4. Install Custom Powershell Prompt   |"
+Write-Host "|   5. Install everything                 |"
+Write-Host "|   q to Quit                             |"
+Write-Host "└─────────────────────────────────────────┘"
+Write-Host ""
+Write-Host ""
+}
 
 function install_wsl2 {
     Write-Host "[+] Installing WSL2..."
@@ -100,23 +115,12 @@ function install_everything {
     install_custom_prompt
 }
 
-# Simple TUI for Commandant with a fancy border
-Write-Host "┌─────────────────────────────────────────┐"
-Write-Host "|   Welcome to the Commandant             |"
-Write-Host "|   Available actions:                    |"
-Write-Host "|   1. Install WSL2                       |"
-Write-Host "|   2. Install Apps                       |"
-Write-Host "|   3. Install Custom WSL Kernel          |"
-Write-Host "|   4. Install Custom Powershell Prompt   |"
-Write-Host "|   5. Install everything                 |"
-Write-Host "|   q to Quit                             |"
-Write-Host "└─────────────────────────────────────────┘"
-
+show_tui
 $choices = @()
 
 do {
     Write-Host
-    $choice = Read-Host "Pick a number to continue or press 'q' to quit"
+    $choice = Read-Host "Pick a number to continue or press 'q' to quit ot 'o' to view the options again"
 
     if ($choice -eq 'q' -or $choice -eq 'quit') {
         break
@@ -128,22 +132,9 @@ do {
         3 { install_custom_kernel }
         4 { install_custom_prompt }
         5 { install_everything }
-        default { Write-Host "Invalid choice. Please pick a valid option or 'q' to quit."
+        'o' { show_tui }
+        default { Write-Host "Pick a number to continue or press 'q' to quit ot 'o' to view the options again"
             continue
         }
     }
-
-    $choices += $choice
 } while ($true)
-
-Write-Host
-Write-Host "Ok! we will do the following:"
-$choices | ForEach-Object {
-    switch ($_) {
-        1 { Write-Host "- Install WSL2" }
-        2 { Write-Host "- Install Apps" }
-        3 { Write-Host "- Install Custom WSL Kernel" }
-        4 { Write-Host "- Install Custom Powershell Prompt" }
-        5 { Write-Host "- Install everything" }
-    }
-}
