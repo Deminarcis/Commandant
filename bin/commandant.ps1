@@ -1,8 +1,4 @@
-if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-    # add -noexit before -encodedcommand to keep the admin console open after the script is run
-    start-process powershell "-encodedcommand $([Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($script:MyInvocation.MyCommand.ScriptBlock)))" -Verb RunAs
-    exit
-}
+#Requires -RunAsAdministrator
 
 $skipdeps = 0
 $wingetInstalled = cmd /c where winget '2>&1'
