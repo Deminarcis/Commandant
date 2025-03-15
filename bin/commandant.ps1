@@ -80,7 +80,7 @@ function install_apps {
     Write-Output "[+]  Updating installed apps before we start"
     winget upgrade --all --accept-package-agreements --accept-source-agreements
     Write-Output "[+]  Installing Apps"
-    winget install --accept-package-agreements --accept-source-agreements 'Microsoft.Powershell' 'Git.git' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Firefox' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'GNU.Nano' 'sharkdp.bat' 'helix.helix' 'eza-community.eza' 'Giorgiotani.Peazip'
+    winget install --accept-package-agreements --accept-source-agreements 'Microsoft.Powershell' 'Git.git' 'Microsoft.VisualStudioCode' 'Microsoft.Powertoys' 'Microsoft.DevHome' 'Mozilla.Thunderbird' 'Microsoft.WindowsTerminal' 'GNU.Nano' 'sharkdp.bat' 'helix.helix' 'eza-community.eza' 'Giorgiotani.Peazip'
     powershell -ExecutionPolicy Bypass -Command "Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://superfile.netlify.app/install.ps1'))"
     ### Install  sysinternals
     winget install 9P7KNL5RWT25 -s msstore --accept-package-agreements --accept-source-agreements
