@@ -16,21 +16,24 @@ elseif ($skipdeps -eq 1 ) {
 pause
 
 function show_tui {
-# Simple TUI for Commandant with a fancy border
-Write-Host ""
-Write-Host ""
-Write-Host "┌─────────────────────────────────────────┐"
-Write-Host "|   Welcome to the Commandant             |"
-Write-Host "|   Available actions:                    |"
-Write-Host "|   1. Install WSL2                       |"
-Write-Host "|   2. Install Apps                       |"
-Write-Host "|   3. Install Custom WSL Kernel          |"
-Write-Host "|   4. Install Custom Powershell Prompt   |"
-Write-Host "|   5. Install everything                 |"
-Write-Host "|   q to Quit                             |"
-Write-Host "└─────────────────────────────────────────┘"
-Write-Host ""
-Write-Host ""
+    # Professional TUI for Commandant with rounded corners
+    $border = "╭─────────────────────────────────────────╮"
+    $borderEnd = "╰─────────────────────────────────────────╯"
+
+    Write-Host ""
+    Write-Host ""
+    Write-Host $border
+    Write-Host "|   Welcome to the Commandant             |"
+    Write-Host "|   Available actions:                    |"
+    Write-Host "|   1. Install WSL2                       |"
+    Write-Host "|   2. Install Apps                       |"
+    Write-Host "|   3. Install Custom WSL Kernel          |"
+    Write-Host "|   4. Install Custom Powershell Prompt   |"
+    Write-Host "|   5. Install everything                 |"
+    Write-Host "|   q to Quit                             |"
+    Write-Host $borderEnd
+    Write-Host ""
+    Write-Host ""
 }
 
 function install_wsl2 {
