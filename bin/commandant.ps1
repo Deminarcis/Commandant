@@ -66,54 +66,67 @@ function install_wsl2 {
     }
     wsl_branch
     Write-Output "[+] Done!"
-    sleep 30
+    sleep 10
     show_tui
 }
 
 function install_apps {
-
     Write-Host "[+] Installing Apps..."
     # List of available apps with descriptions
     $appList = @{
-        "PowerShell Core"     = 'Microsoft.Powershell'
-        "Git CLI"             = 'Git.git'
-        "Visual Studio Code"  = 'Microsoft.VisualStudioCode'
-        "Microsoft Powertoys" = 'Microsoft.Powertoys'
-        "Windows Terminal"    = 'Microsoft.WindowsTerminal'
-        "Zen Browser"         = 'Zen-Team.Zen-Browser'
-        "Firefox"             = 'Mozilla.Firefox'
-        "Floorp"              = 'Ablaze.Floorp'
-        "Brave"               = 'Brave.brave'
-        "Thunderbird"         = 'Mozilla.Thunderbird'
-        "Bat"                 = 'sharkdp.bat'
-        "Nano"                = 'GNU.Nano'
-        "MS Edit"             = 'Microsoft.Edit'
-        "Eza"                 = 'eza-community.eza'
-        "Helix"               = 'helix.helix'
-        "Sysinternals"        = 'sysinternals'
-        "Files"               = 'filescommunity.files'
-        "7Zip"                = '7zip.7zip'
-        "Bitwarden"           = 'Bitwarden.Bitwarden'
-        "Bleachbit"           = 'bleachbit.bleachbit'
-        "FastFetch"           = 'fastfetch-cli.fastfetch'
-        "Wget"                = 'Gnu.wget2'
-        "Libreoffice"         = 'TheDocumentFoundation.Libreoffice'
-        "Discord"             = 'Discord.Discord'
-        "Telegram"            = 'Telegram.TelegramDesktop'
-        "Obsidian"            = 'obsidian.obsidian'
-        "Qbittorrent"         = 'qbittorrent.qbittorrent'
-        "Steam"               = 'Valve.Steam'
-        "Plex"                = 'Plex.PlexMediaPlayer'
-        "Haruna"              = 'Kde.Haruna'
-        "Okular PDF Viewer"   = 'Kde.Okular'
-        "Plex Server"         = 'Plex.PlexMediaServer'
+        "PowerShell Core"       = 'Microsoft.Powershell'
+        "Git CLI"               = 'Git.git'
+        "Visual Studio Code"    = 'Microsoft.VisualStudioCode'
+        "Microsoft Powertoys"   = 'Microsoft.Powertoys'
+        "Windows Terminal"      = 'Microsoft.WindowsTerminal'
+        "Zen Browser"           = 'Zen-Team.Zen-Browser'
+        "Firefox"               = 'Mozilla.Firefox'
+        "Floorp"                = 'Ablaze.Floorp'
+        "Brave"                 = 'Brave.brave'
+        "Thunderbird"           = 'Mozilla.Thunderbird'
+        "Bat"                   = 'sharkdp.bat'
+        "Nano"                  = 'GNU.Nano'
+        "MS Edit"               = 'Microsoft.Edit'
+        "Eza"                   = 'eza-community.eza'
+        "Helix"                 = 'helix.helix'
+        "Sysinternals"          = 'sysinternals'
+        "Files"                 = 'filescommunity.files'
+        "7Zip"                  = '7zip.7zip'
+        "Bitwarden"             = 'Bitwarden.Bitwarden'
+        "Bleachbit"             = 'bleachbit.bleachbit'
+        "FastFetch"             = 'fastfetch-cli.fastfetch'
+        "Wget"                  = 'Gnu.wget2'
+        "Libreoffice"           = 'TheDocumentFoundation.Libreoffice'
+        "Discord"               = 'Discord.Discord'
+        "Telegram"              = 'Telegram.TelegramDesktop'
+        "Obsidian"              = 'obsidian.obsidian'
+        "Qbittorrent"           = 'qbittorrent.qbittorrent'
+        "Steam"                 = 'Valve.Steam'
+        "Plex"                  = 'Plex.PlexMediaPlayer'
+        "Haruna"                = 'Kde.Haruna'
+        "Okular PDF Viewer"     = 'Kde.Okular'
+        "Plex Server"           = 'Plex.PlexMediaServer'
+        "Jellyfin Media Server" = 'Jellyfin.Server'
+        "Jellyfin Media Player" = 'Jellyfin.JellyfinMediaPlayer'
+        "Github Desktop"        = 'GitHub.GitHubDesktop'
+        "Winfsp"                = 'WinFsp.WinFsp'
+        "Podman Desktop"        = 'RedHat.Podman-Desktop'
+        "Docker Desktop"        = 'Docker.DockerDesktop'
+        "Prism Launcher"        = 'PrismLauncher.PrismLauncher'
+        "Jetbrains Toolbox"     = 'JetBrains.Toolbox'
         # Add more apps as needed...
     }
 
-    # Display the menu for user to pick apps
+    # Display the menu for user to pick apps in two columns
     Write-Host "Please select which applications you want to install:"
-    foreach ($app in $appList.GetEnumerator()) {
-        Write-Host "$($app.Key) - $([int][char]'1' + [array]::IndexOf($_,$app))"
+    $apps = $appList.GetEnumerator() | ForEach-Object { [PSCustomObject]@{Number = $_.Value; Name = $_.Key } }
+
+    $columnWidth = [math]::Ceiling($apps.Count / 2)
+    for ($i = 0; $i -lt $columnWidth; $i++) {
+        Write-Host "[$($apps[$i].Number)] {0,-30}" -f $apps[$i].Name -nonewline
+        if (($i + $columnWidth) -lt $apps.Count) {
+            Write-Host " [$($apps[$i+$columnWidth].Number)] {0,-30}" -f $apps[$i + $columnWidth].Name
+        }
     }
 
     # Get user input for selected apps
@@ -143,9 +156,9 @@ function install_apps {
         winget install --accept-package-agreements --accept-source-agreements $app
     }
     Write-Output "[+] Making sure apps are up to date"
-    winget upgrad --all -u
+    winget upgrade -u --all
     Write-Output "[+] Done!"
-    sleep 30
+    sleep 10
     show_tui
 }
 
@@ -155,7 +168,7 @@ function install_custom_kernel {
     Copy-Item '..\WSL Kernel\bzImage' $env:USERPROFILE
     Write-Output "[wsl2]`nkernel=$env:USERPROFILE\bzImage" | ForEach-Object {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII -Append
     Write-Output "[+] Done!"
-    sleep 30
+    sleep 10
     show_tui
 }
 
@@ -164,42 +177,42 @@ function install_custom_prompt {
     New-Item $env:USERPROFILE\Documents\PowerShell\ -Type Directory -Force
     Copy-Item '..\Scripts\Microsoft.PowerShell_profile.ps1' "$env:USERPROFILE\Documents\PowerShell\"
     Write-Output "[+] Done!"
-    sleep 30
+    sleep 10
     show_tui
 }
 
 function fedora_wsl {
     wsl --install FedoraLinux-42
     Write-Output "[+] Done!"
-    sleep 30
+    sleep 10
     show_tui
 }
 
 function ubuntu_wsl {
     wsl --install Ubuntu
     Write-Output "[+] Done!"
-    sleep 30
+    sleep 10
     show_tui
 }
 
 function arch_wsl {
     wsl --install archlinux
     Write-Output "[+] Done!"
-    sleep 30
+    sleep 10
     show_tui
 }
 
 function kali_wsl {
     wsl --install kali-linux
     Write-Output "[+] Done!"
-    sleep 30
+    sleep 10
     show_tui
 }
 
 function suse_leap_wsl {
     wsl --install openSUSE-Leap-15.6
     Write-Output "[+] Done!"
-    sleep 30
+    sleep 10
     show_tui
 }
 
@@ -211,7 +224,7 @@ function install_everything {
     install_custom_kernel
     install_custom_prompt
     Write-Output "[+] Done!"
-    sleep 30
+    sleep 10
     show_tui
 }
 #End of Functions list
