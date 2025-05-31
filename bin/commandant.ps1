@@ -118,7 +118,8 @@ function install_apps {
 
 
     Write-Host "Select apps to install (use numbers separated by commas):"
-    $Apps.Keys | ForEach-Object { [int]$i++; Write-Host "$i) $_" }
+    $i = 1
+    $Apps.Keys | ForEach-Object { [int]$i++; Write-Host "$i) $_"; $i++ }
 
     $selection = Read-Host "Enter your choices"
     $selectedIndexes = $selection -split "," | ForEach-Object { ($_ -as [int]) - 1 }
@@ -134,7 +135,7 @@ function install_apps {
     foreach ($app in $selectedApps) {
         Write-Host "Installing $app..."
         try{
-            winget install --id $Apps[$app] --accept-package-agreements --accept-source-agreements
+            winget install --id $Apps[$app] --accept-package-agreements --accept-source-agreements -ErrorAction Stop
             Write-Host "$app installed successfully"
         }
         catch{
