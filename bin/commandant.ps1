@@ -141,8 +141,6 @@ function install_apps {
             Write-Host "Error installing $($Apps.Name): $_" -ForegroundColor Red
         }
     }
-    Write-Output "[+] Performing App Updates"
-    winget upgrade -u --all
     Write-Output "[+] Done!"
     sleep 10
     show_tui
