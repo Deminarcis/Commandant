@@ -71,9 +71,8 @@ function install_wsl2 {
 }
 
 function install_apps {
-    Write-Host "[+] Installing Apps..."
     # List of available apps with descriptions
-    $appList = @{
+    $Apps= @{
         "PowerShell Core"       = 'Microsoft.Powershell'
         "Git CLI"               = 'Git.git'
         "Visual Studio Code"    = 'Microsoft.VisualStudioCode'
@@ -117,45 +116,33 @@ function install_apps {
         # Add more apps as needed...
     }
 
-    # Display the menu for user to pick apps in two columns
-    Write-Host "Please select which applications you want to install:"
-    $apps = $appList.GetEnumerator() | ForEach-Object { [PSCustomObject]@{Number = $_.Value; Name = $_.Key } }
 
-    $columnWidth = [math]::Ceiling($apps.Count / 2)
-    for ($i = 0; $i -lt $columnWidth; $i++) {
-        Write-Host "[$($apps[$i].Number)] {0,-30}" -f $apps[$i].Name -nonewline
-        if (($i + $columnWidth) -lt $apps.Count) {
-            Write-Host " [$($apps[$i+$columnWidth].Number)] {0,-30}" -f $apps[$i + $columnWidth].Name
-        }
+    Write-Host "Select apps to install (use numbers separated by commas):"
+    $index = 1
+    $Apps.Keys | ForEach-Object { Write-Host "$index) $_"; $index++ }
+
+    $selection = Read-Host "Enter your choices"
+    $selectedIndexes = $selection -split "," | ForEach-Object { $_.Trim() -as [int] }
+
+    $selectedApps = $selectedIndexes | Where-Object { $_ -gt 0 -and $_ -le $Apps.Count } | ForEach-Object { $Apps.Keys[$_ - 1] }
+
+    if ($selectedApps.Count -eq 0) {
+        Write-Host "No valid selection made."
+        return
     }
 
-    # Get user input for selected apps
-    $selectedApps = @()
-    do {
-        $userChoice = Read-Host "Enter the number corresponding to your choice (e.g., 1, 2, 3). Enter 'done' when finished."
-        if ($userChoice -match '\d') {
-            $index = [int]$userChoice - 1 # Convert user input to array index
-            if ($index -ge 0 -and $index -lt $appList.Count) {
-                $selectedApp = $appList.GetEnumerator() | Select-Object -Index $index | ForEach-Object Key
-                $selectedApps += $selectedApp
-            }
-            else {
-                Write-Host "Invalid choice. Please try again."
-            }
-        }
-        elseif ($userChoice -eq 'done') {
-            break
-        }
-        else {
-            Write-Host "Invalid input. Please enter a number or 'done'."
-        }
-    } while ($true)
-
-    # Install selected apps using winget
+    Write-Host "Installing selected apps..."
     foreach ($app in $selectedApps) {
-        winget install --accept-package-agreements --accept-source-agreements $app
+        Write-Host "Installing $app..."
+        try{
+            winget install --id $Apps[$app] --accept-package-agreements --accept-source-agreements
+            Write-Host "$app installed successfully"
+        }
+        catch{
+            Write-Host "Error installing ${app}: $_" -ForegroundColor Red
+        }
     }
-    Write-Output "[+] Making sure apps are up to date"
+    Write-Output "[+] Performing App Updates"
     winget upgrade -u --all
     Write-Output "[+] Done!"
     sleep 10
