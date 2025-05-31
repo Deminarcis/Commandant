@@ -134,7 +134,7 @@ function install_apps {
     foreach ($app in $selectedApps) {
         Write-Host "Installing $($Apps.Name)..."
         try{
-            winget install --id $Apps.ID --accept-package-agreements --accept-source-agreements -ErrorAction Stop
+            winget install --id $Apps.ID --accept-package-agreements --accept-source-agreements --ErrorAction Stop
             Write-Host "$($Apps.Name) installed successfully"
         }
         catch{
