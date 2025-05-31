@@ -118,13 +118,12 @@ function install_apps {
 
 
     Write-Host "Select apps to install (use numbers separated by commas):"
-    $index = 1
-    $Apps.Keys | ForEach-Object { Write-Host "$index) $_"; $index++ }
+    $Apps.Keys | ForEach-Object { [int]$i++; Write-Host "$i) $_" }
 
     $selection = Read-Host "Enter your choices"
-    $selectedIndexes = $selection -split "," | ForEach-Object { $_.Trim() -as [int] }
+    $selectedIndexes = $selection -split "," | ForEach-Object { ($_ -as [int]) - 1 }
 
-    $selectedApps = $selectedIndexes | Where-Object { $_ -gt 0 -and $_ -le $Apps.Count } | ForEach-Object { $Apps.Keys[$_ - 1] }
+    $selectedApps = $selectedIndexes | Where-Object { $_ -gt 0 -and $_ -le $Apps.Count } | ForEach-Object { $Apps.Keys[$_] }
 
     if ($selectedApps.Count -eq 0) {
         Write-Host "No valid selection made."
