@@ -73,58 +73,57 @@ function install_wsl2 {
 function install_apps {
     # List of available apps with descriptions
     $Apps= @{
-        "PowerShell Core"       = 'Microsoft.Powershell'
-        "Git CLI"               = 'Git.git'
-        "Visual Studio Code"    = 'Microsoft.VisualStudioCode'
-        "Microsoft Powertoys"   = 'Microsoft.Powertoys'
-        "Windows Terminal"      = 'Microsoft.WindowsTerminal'
-        "Zen Browser"           = 'Zen-Team.Zen-Browser'
-        "Firefox"               = 'Mozilla.Firefox'
-        "Floorp"                = 'Ablaze.Floorp'
-        "Brave"                 = 'Brave.brave'
-        "Thunderbird"           = 'Mozilla.Thunderbird'
-        "Bat"                   = 'sharkdp.bat'
-        "Nano"                  = 'GNU.Nano'
-        "MS Edit"               = 'Microsoft.Edit'
-        "Eza"                   = 'eza-community.eza'
-        "Helix"                 = 'helix.helix'
-        "Sysinternals"          = 'sysinternals'
-        "Files"                 = 'filescommunity.files'
-        "7Zip"                  = '7zip.7zip'
-        "Bitwarden"             = 'Bitwarden.Bitwarden'
-        "Bleachbit"             = 'bleachbit.bleachbit'
-        "FastFetch"             = 'fastfetch-cli.fastfetch'
-        "Wget"                  = 'Gnu.wget2'
-        "Libreoffice"           = 'TheDocumentFoundation.Libreoffice'
-        "Discord"               = 'Discord.Discord'
-        "Telegram"              = 'Telegram.TelegramDesktop'
-        "Obsidian"              = 'obsidian.obsidian'
-        "Qbittorrent"           = 'qbittorrent.qbittorrent'
-        "Steam"                 = 'Valve.Steam'
-        "Plex"                  = 'Plex.PlexMediaPlayer'
-        "Haruna"                = 'Kde.Haruna'
-        "Okular PDF Viewer"     = 'Kde.Okular'
-        "Plex Server"           = 'Plex.PlexMediaServer'
-        "Jellyfin Media Server" = 'Jellyfin.Server'
-        "Jellyfin Media Player" = 'Jellyfin.JellyfinMediaPlayer'
-        "Github Desktop"        = 'GitHub.GitHubDesktop'
-        "Winfsp"                = 'WinFsp.WinFsp'
-        "Podman Desktop"        = 'RedHat.Podman-Desktop'
-        "Docker Desktop"        = 'Docker.DockerDesktop'
-        "Prism Launcher"        = 'PrismLauncher.PrismLauncher'
-        "Jetbrains Toolbox"     = 'JetBrains.Toolbox'
-        # Add more apps as needed...
+        1  = @{ Name = "PowerShell Core"; ID = "Microsoft.Powershell" }
+        2  = @{ Name = "Git CLI"; ID = "Git.git" }
+        3  = @{ Name = "Visual Studio Code"; ID = "Microsoft.VisualStudioCode" }
+        4  = @{ Name = "Microsoft Powertoys"; ID = "Microsoft.Powertoys" }
+        5  = @{ Name = "Windows Terminal"; ID = "Microsoft.WindowsTerminal" }
+        6  = @{ Name = "Zen Browser"; ID = "Zen-Team.Zen-Browser" }
+        7  = @{ Name = "Firefox"; ID = "Mozilla.Firefox" }
+        8  = @{ Name = "Floorp"; ID = "Ablaze.Floorp" }
+        9  = @{ Name = "Brave"; ID = "Brave.brave" }
+        10 = @{ Name = "Thunderbird"; ID = "Mozilla.Thunderbird" }
+        11 = @{ Name = "Bat"; ID = "sharkdp.bat" }
+        12 = @{ Name = "Nano"; ID = "GNU.Nano" }
+        13 = @{ Name = "MS Edit"; ID = "Microsoft.Edit" }
+        14 = @{ Name = "Eza"; ID = "eza-community.eza" }
+        15 = @{ Name = "Helix"; ID = "helix.helix" }
+        16 = @{ Name = "Sysinternals"; ID = "sysinternals" }
+        17 = @{ Name = "Files"; ID = "filescommunity.files" }
+        18 = @{ Name = "7Zip"; ID = "7zip.7zip" }
+        19 = @{ Name = "Bitwarden"; ID = "Bitwarden.Bitwarden" }
+        20 = @{ Name = "Bleachbit"; ID = "bleachbit.bleachbit" }
+        21 = @{ Name = "FastFetch"; ID = "fastfetch-cli.fastfetch" }
+        22 = @{ Name = "Wget"; ID = "Gnu.wget2" }
+        23 = @{ Name = "Libreoffice"; ID = "TheDocumentFoundation.Libreoffice" }
+        24 = @{ Name = "Discord"; ID = "Discord.Discord" }
+        25 = @{ Name = "Telegram"; ID = "Telegram.TelegramDesktop" }
+        26 = @{ Name = "Obsidian"; ID = "obsidian.obsidian" }
+        27 = @{ Name = "Qbittorrent"; ID = "qbittorrent.qbittorrent" }
+        28 = @{ Name = "Steam"; ID = "Valve.Steam" }
+        29 = @{ Name = "Plex"; ID = "Plex.PlexMediaPlayer" }
+        30 = @{ Name = "Haruna"; ID = "Kde.Haruna" }
+        31 = @{ Name = "Okular PDF Viewer"; ID = "Kde.Okular" }
+        32 = @{ Name = "Plex Server"; ID = "Plex.PlexMediaServer" }
+        33 = @{ Name = "Jellyfin Media Server"; ID = "Jellyfin.Server" }
+        34 = @{ Name = "Jellyfin Media Player"; ID = "Jellyfin.JellyfinMediaPlayer" }
+        35 = @{ Name = "Github Desktop"; ID = "GitHub.GitHubDesktop" }
+        36 = @{ Name = "Winfsp"; ID = "WinFsp.WinFsp" }
+        37 = @{ Name = "Podman Desktop"; ID = "RedHat.Podman-Desktop" }
+        38 = @{ Name = "Docker Desktop"; ID = "Docker.DockerDesktop" }
+        39 = @{ Name = "Prism Launcher"; ID = "PrismLauncher.PrismLauncher" }
+        40 = @{ Name = "Jetbrains Toolbox"; ID = "JetBrains.Toolbox" }
     }
 
 
     Write-Host "Select apps to install (use numbers separated by commas):"
-    $i = 1
-    $Apps.Keys | ForEach-Object { [int]$i++; Write-Host "$i) $_"; $i++ }
-
+    foreach ($key in $Apps.Keys) {
+        Write-Host "$key) $($Apps[$key].Name)"
+    }
     $selection = Read-Host "Enter your choices"
-    $selectedIndexes = $selection -split "," | ForEach-Object { ($_ -as [int]) - 1 }
+    $selectedIndexes = $selection -split "," | ForEach-Object { $_.Trim() -as [int] }
 
-    $selectedApps = $selectedIndexes | Where-Object { $_ -gt 0 -and $_ -le $Apps.Count } | ForEach-Object { $Apps.Keys[$_] }
+    $selectedApps = $selectedIndexes | Where-Object { $Apps.ContainsKey($_) } | ForEach-Object { $Apps[$_] }
 
     if ($selectedApps.Count -eq 0) {
         Write-Host "No valid selection made."
@@ -133,13 +132,13 @@ function install_apps {
 
     Write-Host "Installing selected apps..."
     foreach ($app in $selectedApps) {
-        Write-Host "Installing $app..."
+        Write-Host "Installing $($Apps.Name)..."
         try{
-            winget install --id $Apps[$app] --accept-package-agreements --accept-source-agreements -ErrorAction Stop
-            Write-Host "$app installed successfully"
+            winget install --id $Apps.ID --accept-package-agreements --accept-source-agreements -ErrorAction Stop
+            Write-Host "$($Apps.Name) installed successfully"
         }
         catch{
-            Write-Host "Error installing ${app}: $_" -ForegroundColor Red
+            Write-Host "Error installing $($Apps.Name): $_" -ForegroundColor Red
         }
     }
     Write-Output "[+] Performing App Updates"
