@@ -19,7 +19,6 @@ function show_tui {
     # Professional TUI for Commandant with rounded corners
     $border = "╭─────────────────────────────────────────╮"
     $borderEnd = "╰─────────────────────────────────────────╯"
-
     Write-Host ""
     Write-Host ""
     Write-Host $border
@@ -72,7 +71,7 @@ function install_wsl2 {
 
 function install_apps {
     # List of available apps with descriptions
-    $Apps= @{
+    $apps= @{
         1  = @{ Name = "PowerShell Core"; ID = "Microsoft.Powershell" }
         2  = @{ Name = "Git CLI"; ID = "Git.git" }
         3  = @{ Name = "Visual Studio Code"; ID = "Microsoft.VisualStudioCode" }
@@ -113,34 +112,49 @@ function install_apps {
         38 = @{ Name = "Docker Desktop"; ID = "Docker.DockerDesktop" }
         39 = @{ Name = "Prism Launcher"; ID = "PrismLauncher.PrismLauncher" }
         40 = @{ Name = "Jetbrains Toolbox"; ID = "JetBrains.Toolbox" }
+        'all' = @{ Name = "install all"; ID = "install all" }
     }
 
+    # Function to handle selection
+    Function onSelect($value)
+        if ($value -eq "install all")
+            {
+                # Install all selected apps
+                print "Installing all selected apps..."
+                foreach ($apps as $app)
+                    {
+                        install_single_app($app)
+                    }
+            }
+        else
+            {
+                # Validate the value is a number between 1 and count of apps
+                if (int.TryParse($value, $format) -and- 1 -le $value -le $apps.Count)
+                {
+                    $index = int.Parse($value) - 1
+                    print "Installing app $index+1..."
+                    install_single_app($apps[$index])
+                }
+                else
+                {
+                    # Invalid selection
+                    print "Invalid selection. Please choose a number or 'install all'."
+                }
+            }
+    EndFunction
 
-    Write-Host "Select apps to install (use numbers separated by commas):"
-    foreach ($key in $Apps.Keys) {
-        Write-Host "$key) $($Apps[$key].Name)"
+    # Function to install a single app
+    function install_single_app($app)
+    {
+        if ($app.name -ne "install all")
+        {
+            print "Installing app $app.name..."
+        # Replace this with actual installation logic for the app
+        # For example, using Install-WindowsApp or another method
+        # Note: This is a placeholder and should be replaced with actual code.
+        winget install --id $app.value --accept-package-agreements --accept-source-agreements
     }
-    $selection = Read-Host "Enter your choices"
-    $selectedIndexes = $selection -split "," | ForEach-Object { $_.Trim() -as [int] }
-
-    $selectedApps = $selectedIndexes | Where-Object { $Apps.ContainsKey($_) } | ForEach-Object { $Apps[$_] }
-
-    if ($selectedApps.Count -eq 0) {
-        Write-Host "No valid selection made."
-        return
-    }
-
-    Write-Host "Installing selected apps..."
-    foreach ($app in $selectedApps) {
-        Write-Host "Installing $($Apps.Name)..."
-        try{
-            winget install --id $Apps.ID --accept-package-agreements --accept-source-agreements
-            Write-Host "$($Apps.Name) installed successfully"
-        }
-        catch{
-            Write-Host "Error installing $($Apps.Name): $_" -ForegroundColor Red
-        }
-    }
+    EndFunction    
     Write-Output "[+] Done!"
     sleep 10
     show_tui
