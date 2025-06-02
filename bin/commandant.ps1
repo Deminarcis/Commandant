@@ -116,7 +116,7 @@ function install_apps {
     }
 
     # Function to handle selection
-    Function onSelect($value)
+    Function onSelect($value){
         if ($value -eq "install all")
             {
                 # Install all selected apps
@@ -141,7 +141,7 @@ function install_apps {
                     print "Invalid selection. Please choose a number or 'install all'."
                 }
             }
-    EndFunction
+    }
 
     # Function to install a single app
     function install_single_app($app)
@@ -153,8 +153,8 @@ function install_apps {
         # For example, using Install-WindowsApp or another method
         # Note: This is a placeholder and should be replaced with actual code.
         winget install --id $app.value --accept-package-agreements --accept-source-agreements
+        }
     }
-    EndFunction    
     Write-Output "[+] Done!"
     sleep 10
     show_tui
