@@ -121,7 +121,7 @@ function install_apps {
             {
                 # Install all selected apps
                 print "Installing all selected apps..."
-                foreach ($apps as $app)
+                foreach ($app in $apps)
                     {
                         install_single_app($app)
                     }
