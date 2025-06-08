@@ -64,7 +64,7 @@ function install_wsl2 {
     }
     wsl_branch
     Write-Output "[+] Done!"
-    sleep 10
+    Start-Sleep 10
     show_tui
 }
 
@@ -189,7 +189,7 @@ function install_custom_kernel {
     Copy-Item '..\WSL Kernel\bzImage' $env:USERPROFILE
     Write-Output "[wsl2]`nkernel=$env:USERPROFILE\bzImage" | ForEach-Object {$_.replace("\","\\")} | Out-File $env:USERPROFILE\.wslconfig -encoding ASCII -Append
     Write-Output "[+] Done!"
-    sleep 10
+    Start-Sleep 10
     show_tui
 }
 
@@ -198,42 +198,42 @@ function install_custom_prompt {
     New-Item $env:USERPROFILE\Documents\PowerShell\ -Type Directory -Force
     Copy-Item '..\Scripts\Microsoft.PowerShell_profile.ps1' "$env:USERPROFILE\Documents\PowerShell\"
     Write-Output "[+] Done!"
-    sleep 10
+    Start-Sleep 10
     show_tui
 }
 
 function fedora_wsl {
     wsl --install FedoraLinux-42
     Write-Output "[+] Done!"
-    sleep 10
+    Start-Sleep 10
     show_tui
 }
 
 function ubuntu_wsl {
     wsl --install Ubuntu
     Write-Output "[+] Done!"
-    sleep 10
+    Start-Sleep 10
     show_tui
 }
 
 function arch_wsl {
     wsl --install archlinux
     Write-Output "[+] Done!"
-    sleep 10
+    Start-Sleep 10
     show_tui
 }
 
 function kali_wsl {
     wsl --install kali-linux
     Write-Output "[+] Done!"
-    sleep 10
+    Start-Sleep 10
     show_tui
 }
 
 function suse_leap_wsl {
     wsl --install openSUSE-Leap-15.6
     Write-Output "[+] Done!"
-    sleep 10
+    Start-Sleep 10
     show_tui
 }
 
@@ -245,7 +245,7 @@ function install_everything {
     install_custom_kernel
     install_custom_prompt
     Write-Output "[+] Done!"
-    sleep 10
+    Start-Sleep 10
     show_tui
 }
 #End of Functions list
