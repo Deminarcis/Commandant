@@ -148,7 +148,7 @@ function install_apps {
                 Write-Host "`nInstallation completed successfully!" -ForegroundColor Green
             }
 
-            if ($selection -eq "q" or $selection -eq "Q" or $selection -eq "quit" or $selection -eq "Quit") {
+            if ($selection -eq "q" -or $selection -eq "Q" -or $selection -eq "quit" -or $selection -eq "Quit") {
                 Write-Host "`nReturning to Menu..."
                 start-sleep 5
                 show_tui
