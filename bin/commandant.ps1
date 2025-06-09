@@ -114,7 +114,7 @@ $apps= @{
 # New function for installing multiple apps
 # Main function to install apps via winget
 function install_apps {
-   get-variable $Apps
+   $apps.GetEnumerator() | Sort Name
     do {
         Write-Host "`nPick numbers to install (comma-separated):"
 
