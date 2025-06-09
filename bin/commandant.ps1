@@ -114,6 +114,7 @@ $apps= @{
 # New function for installing multiple apps
 # Main function to install apps via winget
 function install_apps {
+   get-variable $Apps
     do {
         Write-Host "`nPick numbers to install (comma-separated):"
 
@@ -154,33 +155,14 @@ function install_apps {
     } while ($true)
     Write-Output "[+] Done!"
     Start-Sleep -Seconds 10
-    show_tui # Assuming show_tui is defined elsewhere in the full environment
+    show_tui
 }
 
 # Function to show installed apps
 function show_installed_apps {
-    try {
-        $installedApps = Get-Winget package |
-        Where-Object { $_.Name -and $_.Publisher -and $_.Id } |
-        Select-Object Name, Id, Version
-
-        if ($installedApps) {
-            Write-Host "`nCurrently Installed Apps:"
-            foreach ($app in $installedApps) {
-                if ($app.Id -in $apps.Values.ID) {
-                    Write-Host " - $app.Name (ID: $app.Id)"
-                }
-            }
-        }
-        else {
-            Write-Host "`nUnable to determine installed apps. You can manually check in Settings > Apps."
-        }
-    }
-    catch {
-        Write-Host "`nError detecting installed apps: $($_)" -ForegroundColor Red
-    }
-    Start-Sleep -Seconds 60
-    show_tui # Assuming show_tui is defined elsewhere in the full environment
+    winget list | out-host -paging
+    Start-Sleep -Seconds 10
+    show_tui
 }
 
 function install_custom_kernel {
