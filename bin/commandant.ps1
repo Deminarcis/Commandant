@@ -116,12 +116,12 @@ $apps= @{
 function install_apps {
    $apps.GetEnumerator() | Sort Name
     do {
-        Write-Host "`nPick numbers to install (comma-separated):"
+        Write-Host "`nPick numbers to install (separate choices using space): `nOr type 'q' or 'quit' to return to the menu"
 
         $selection = Read-Host
 
         try {
-            $selectedIndexes = $selection -split ',' | ForEach-Object { [int]$_ }
+            $selectedIndexes = $selection -split ' ' | ForEach-Object { [int]$_ }
 
             # Validate input
             if (-not $selectedIndexes -or $selectedIndexes.Count -eq 0) {
@@ -146,6 +146,12 @@ function install_apps {
                 Write-Host "`nInstalling: $($apps[$selectedIndex].Name)`nID: $($apps[$selectedIndex].Id)"
                 winget install --silent --id $($apps[$selectedIndex].Id)
                 Write-Host "`nInstallation completed successfully!" -ForegroundColor Green
+            }
+
+            if ($selection -eq "q" or $selection -eq "Q" or $selection -eq "quit" or $selection -eq "Quit") {
+                Write-Host "`nReturning to Menu..."
+                start-sleep 5
+                show_tui
             }
         }
         catch {
