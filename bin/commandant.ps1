@@ -113,7 +113,7 @@ $apps= @{
 }
 # New function for installing multiple apps
 # Main function to install apps via winget
-function install_multiple_apps {
+function install_apps {
     do {
         Write-Host "`nPick numbers to install (comma-separated):"
 
