@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-
 if [ $EUID -eq "0" ]; then
     echo "Please do not run this script as root"
     exit 1
@@ -8,6 +7,7 @@ fi
 function ins_brew {
     # Install Homebrew
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
 }
 
 function ins_macports {
@@ -32,7 +32,7 @@ function show_tui_apps {
     echo -e ""
     echo -e ""
     echo -e "╭────────────────────────────────────────────────────────────────────────────╮"
-    echo -e "|   Welcome to the Commandant for MacOS                                      |"
+    echo -e "|   Welcome to the Commandant                                                |"
     echo -e "|   Pick an app to install                                                   |"
     echo -e "|   1. Ghostty             2. iTerm2           3. Kitty                      |"
     echo -e "|   4. Alacritty           5. Tmux             6. Zellij                     |"
@@ -146,7 +146,8 @@ function show_tui_apps {
            show_tui_apps ;;
         b) show_tui ;;
         o) show_tui_apps ;;
-        *) echo "Bad choice, please pick from the list above or press 'b' to go back" ;;
+        q) exit ;;
+        *) echo "Bad choice, please pick from the list above or press 'b' to go back or 'q' to quit" ;;
     esac
 }
 
@@ -156,13 +157,13 @@ function show_tui {
     echo -e ""
     echo -e ""
     echo -e "╭──────────────────────────────────────────────────────────────╮"
-    echo -e "|   Welcome to the Commandant for MacOS                        |"
+    echo -e "|   Welcome to the Commandant                                  |"
     echo -e "|   System Setup and Tweaks:                                   |"
-    echo -e "|   1. Install Containerization                                |"
+    echo -e "|   1. Install Containerization  (needs brew installed)        |"
     echo -e "|   2. Install Homebrew                                        |"
     echo -e "|   3. Install MacPorts                                        |"
-    echo -e "|   4. Install Apps                                            |"
-    echo -e "|   i - show apps installed                                    |"
+    echo -e "|   4. Install Apps    (needs brew or ports installed)         |"
+    echo -e "|   i - show installed apps                                    |"
     echo -e "|--------------------------------------------------------------|"
     echo -e "|   Container Templates (WIP)                                  |"
     echo -e "|   6.  Fedora                                                 |"
@@ -182,11 +183,11 @@ function show_tui {
 
     case $choice in
         1) ins_container
-       show_tui ;;
+        show_tui ;;
         2) ins_brew
-       show_tui ;;
+        show_tui ;;
         3) ins_macports
-       show_tui ;;
+        show_tui ;;
         4) show_tui_apps ;;
         i) list_installed
         sleep 10
