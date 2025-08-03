@@ -4,6 +4,23 @@ if [ $EUID -eq "0" ]; then
     exit 1
 fi
 
+#colour codes for the UI
+BLACK=`tput setaf 0`
+RED=`tput setaf 1`
+GREEN=`tput setaf 2`
+YELLOW=`tput setaf 3`
+BLUE=`tput setaf 4`
+MAGENTA=`tput setaf 5`
+CYAN=`tput setaf 6`
+WHITE=`tput setaf 7`
+BOLD=`tput bold`
+RESET=`tput sgr0`
+
+function xcode_utils() {
+    # Install Xcode Command Line Tools
+    xcode-select --install
+}
+
 function ins_brew {
     # Install Homebrew
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -12,7 +29,9 @@ function ins_brew {
 
 function ins_macports {
     # Install MacPorts
-    curl -fsSL https://raw.githubusercontent.com/macports/macports-base/master/configure | sh
+    xcode_utils
+    curl -O https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-15-Sequoia.pkg
+    ./MacPorts-2.11.4-15-Sequoia.pkg
 }
 
 function list_installed {
@@ -31,29 +50,31 @@ function show_tui_apps {
     # Professional TUI for Commandant with rounded corners
     echo -e ""
     echo -e ""
-    echo -e "╭────────────────────────────────────────────────────────────────────────────╮"
-    echo -e "|   Welcome to the Commandant                                                |"
-    echo -e "|   Pick an app to install                                                   |"
-    echo -e "|   1. Ghostty             2. iTerm2           3. Kitty                      |"
-    echo -e "|   4. Alacritty           5. Tmux             6. Zellij                     |"
-    echo -e "|   7. VSCode              8. Cursor           9. Zed                        |"
-    echo -e "|   10. Docker Destkop     11. Podman Desktop  12. Crossover                 |"
-    echo -e "|   13. UTM                14. VirtualBox      15. Veracrypt                 |"
-    echo -e "|   16. Orion              17. Google Chrome   18. Brave Browser             |"
-    echo -e "|   19. Zen                20. Firefox         21. Discord                   |"
-    echo -e "|   22. Thunderbird        23. Slack           24. Teams                     |"
-    echo -e "|   25. Zoom               26. Intellidock     27. Grid (requires Licence)   |"
-    echo -e "|   28. Jetbrains Toolbox  29. Bitwarden       30. Syncthing                 |"
-    echo -e "|   31. Helix              32. Eza             33. Bat                       |"
-    echo -e "|   34. Powershell                                                           |"
-    echo -e "|                                                                            |"
-    echo -e "|   f to install fomulaue not on this list                                   |"
-    echo -e "|   c to install cask not on this list                                       |"
-    echo -e "|   p to install port not on this list                                       |"
-    echo -e "|   i to show apps already installed by homebrew                             |"
-    echo -e "|   b to go back                                                             |"
-    echo -e "|   o to View Options                                                        |"
-    echo -e "╰────────────────────────────────────────────────────────────────────────────╯"
+    echo -e "${RED}╭────────────────────────────────────────────────────────────────────────────╮${RESET}"
+    echo -e "${RED}│${RESET}   Pick an app to install                                                   ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   1. Ghostty             2. iTerm2           3. Kitty                      ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   4. Alacritty           5. Tmux             6. Zellij                     ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   7. VSCode              8. Cursor           9. Zed                        ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   10. Docker Destkop     11. Podman Desktop  12. Crossover                 ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   13. UTM                14. VirtualBox      15. Veracrypt                 ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   16. Orion              17. Google Chrome   18. Brave Browser             ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   19. Zen                20. Firefox         21. Discord                   ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   22. Thunderbird        23. Slack           24. Teams                     ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   25. Zoom               26. Intellidock     27. Grid (requires Licence)   ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   28. Jetbrains Toolbox  29. Bitwarden       30. Syncthing                 ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   31. Helix              32. Eza             33. Bat                       ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   34. Powershell                                                           ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}                                                                            ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}                                                                            ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}                                                                            ${RED}│${RESET}"
+    echo -e "${RED}│${MAGENTA}╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   f to install fomulaue not on this list                                   ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   c to install cask not on this list                                       ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   p to install port not on this list                                       ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   i to show apps already installed by homebrew and ports                   ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   b to go back                                                             ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   o to View Options                                                        ${RED}│${RESET}"
+    echo -e "${RED}╰────────────────────────────────────────────────────────────────────────────╯${RESET}"
     echo -e ""
     echo -e ""
 
@@ -156,28 +177,28 @@ function show_tui {
     # Professional TUI for Commandant with rounded corners
     echo -e ""
     echo -e ""
-    echo -e "╭──────────────────────────────────────────────────────────────╮"
-    echo -e "|   Welcome to the Commandant                                  |"
-    echo -e "|   System Setup and Tweaks:                                   |"
-    echo -e "|   1. Install Containerization  (needs brew installed)        |"
-    echo -e "|   2. Install Homebrew                                        |"
-    echo -e "|   3. Install MacPorts                                        |"
-    echo -e "|   4. Install Apps    (needs brew or ports installed)         |"
-    echo -e "|   i - show installed apps                                    |"
-    echo -e "|--------------------------------------------------------------|"
-    echo -e "|   Container Templates (WIP)                                  |"
-    echo -e "|   6.  Fedora                                                 |"
-    echo -e "|   7.  Ubuntu                                                 |"
-    echo -e "|   8.  Kali                                                   |"
-    echo -e "|   9.  OpenSuse Leap                                          |"
-    echo -e "|   10. Arch!                                                  |"
-    echo -e "|--------------------------------------------------------------|"
-    echo -e "|   q to Quit                                                  |"
-    echo -e "|   o to View Options                                          |"
-    echo -e "╰──────────────────────────────────────────────────────────────╯"
+    echo -e "${RED}╭──────────────────────────────────────────────────────────────╮${RESET}"
+    echo -e "${BLUE}│${RESET}   Welcome to the Commandant                                  ${BLUE}│${RESET}"
+    echo -e "${YELLOW}│${RESET}   System Setup and Tweaks:                                   ${YELLOW}│${RESET}"
+    echo -e "${CYAN}│${RESET}   1  - Install Containerization  (needs brew installed)      ${CYAN}│${RESET}"
+    echo -e "${ORANGE}│${RESET}   2  - Install Homebrew                                      ${ORANGE}│${RESET}"
+    echo -e "${MAGENTA}│${RESET}   3  - Install MacPorts                                      ${MAGENTA}│${RESET}"
+    echo -e "${WHITE}│   4  - Install Apps    (needs brew or ports installed)       │${RESET}"
+    echo -e "${GREEN}│${RESET}   i  - show installed apps                                   ${GREEN}│${RESET}"
+    echo -e "${RED}│${MAGENTA}╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍${RESET}│${RESET}"
+    echo -e "${CYAN}│${RESET}   Container Templates (WIP)                                  ${CYAN}│${RESET}"
+    echo -e "${MAGENTA}│${RESET}   5  - Fedora                                                ${MAGENTA}│${RESET}"
+    echo -e "${ORANGE}│${RESET}   6  - Ubuntu                                                ${ORANGE}│${RESET}"
+    echo -e "${GREEN}│${RESET}   7  - Kali                                                  ${GREEN}│${RESET}"
+    echo -e "${MAGENTA}│${RESET}   8  - Arch!                                                 ${MAGENTA}│${RESET}"
+    echo -e "${YELLOW}│${RESET}   9  - CentOS                                                ${YELLOW}│${RESET}"
+    echo -e "${ORANGE}│${RESET}   10 - Blackarch                                             ${ORANGE}│${RESET}"
+    echo -e "${RED}│${MAGENTA}╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍${RED}│${RESET}"
+    echo -e "${ORANGE}│${RESET}  q to Quit                                                   ${ORANGE}│${RESET}"
+    echo -e "${MAGENTA}│${RESET}  o to View Options                                           ${MAGENTA}│${RESET}"
+    echo -e "${RED}╰──────────────────────────────────────────────────────────────╯${RESET}"
     echo -e ""
     echo -e ""
-
     echo -e "Pick a number to continue or press 'q' to quit or 'o' to view the options again: "
     read choice
 
@@ -192,6 +213,12 @@ function show_tui {
         i) list_installed
         sleep 10
         show_tui ;;
+        5) show_tui ;;
+        6) show_tui ;;
+        7) show_tui ;;
+        8) show_tui ;;
+        9) show_tui ;;
+        10) show_tui ;;
         o) show_tui ;;
         q) exit ;;
         *) echo "Bad choice, please pick from the list above or press 'q' to quit" ;;
