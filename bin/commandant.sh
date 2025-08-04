@@ -23,15 +23,16 @@ function xcode_utils() {
 
 function ins_brew {
     # Install Homebrew
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
+    xcode_utils
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
 function ins_macports {
     # Install MacPorts
     xcode_utils
-    curl -O https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-15-Sequoia.pkg
-    ./MacPorts-2.11.4-15-Sequoia.pkg
+    curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-15-Sequoia.pkg
+    chmod +x MacPorts-2.11.4-15-Sequoia.pkg
+    open MacPorts-2.11.4-15-Sequoia.pkg
 }
 
 function list_installed {
@@ -160,7 +161,7 @@ function show_tui_apps {
            show_tui_apps;;
         p) echo "Enter the name of the port you want to install"
            read port_name
-           port install $port_name
+           sudo port install $port_name
            show_tui_apps;;
         i) list_installed
            sleep 10
