@@ -30,9 +30,49 @@ function ins_brew {
 function ins_macports {
     # Install MacPorts
     xcode_utils
-    curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-15-Sequoia.pkg
-    chmod +x MacPorts-2.11.4-15-Sequoia.pkg
-    open MacPorts-2.11.4-15-Sequoia.pkg
+    echo -e ""
+    echo -e ""
+    echo -e "${YELLOW}╭───────────────────────────────────────────────────────────╮${RESET}"
+    echo -e "${YELLOW}│${RESET}   Which version of MacOS do you have?                     ${YELLOW}│${RESET}"
+    echo -e "${YELLOW}│${RESET}   1. Sequoia  (pick this one if you dont know)            ${YELLOW}│${RESET}"
+    echo -e "${YELLOW}│${RESET}   2. Sonoma                                               ${YELLOW}│${RESET}"
+    echo -e "${YELLOW}│${RESET}   3. Ventura                                              ${YELLOW}│${RESET}"
+    echo -e "${YELLOW}│${RESET}   4. Monterey                                             ${YELLOW}│${RESET}"
+    echo -e "${YELLOW}│${RESET}   5. Something else  (open website)                       ${YELLOW}│${RESET}"
+    echo -e "${YELLOW}│${RESET}                                                           ${YELLOW}│${RESET}"
+    echo -e "${YELLOW}│${RESET}                                                           ${YELLOW}│${RESET}"
+    echo -e "${YELLOW}│${MAGENTA}╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍${YELLOW}│${RESET}"
+    echo -e "${YELLOW}│${RESET}   b to go back                                            ${YELLOW}│${RESET}"
+    echo -e "${YELLOW}│${RESET}   o to View Options                                       ${YELLOW}│${RESET}"
+    echo -e "${YELLOW}╰───────────────────────────────────────────────────────────╯${RESET}"
+    echo -e ""
+    echo -e ""
+    echo -e "Pick a number to continue or press 'b' to go back or 'o' to view the options again: "
+    read choice
+
+    case $choice in
+        1) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-15-Sequoia.pkg
+           chmod +x MacPorts-2.11.4-15-Sequoia.pkg
+           open MacPorts-2.11.4-15-Sequoia.pkg
+           ins_macports ;;
+        2) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-14-Sonoma.pkg
+           chmod +x MacPorts-2.11.4-14-Sonoma.pkg
+           open MacPorts-2.11.4-14-Sonoma.pkg
+           ins_macports ;;
+        3) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-13-Ventura.pkg
+           chmod +x MacPorts-2.11.4-13-Ventura.pkg
+           open MacPorts-2.11.4-13-Ventura.pkg
+           ins_macports ;;
+        4) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-12-Monterey.pkg
+           chmod +x MacPorts-2.11.4-12-Monterey.pkg
+           open MacPorts-2.11.4-12-Monterey.pkg
+           ins_macports ;;
+        5) open 'https://www.macports.org/install.php'
+           ins_macports ;;
+        b) show_tui ;;
+        o) ins_macports ;;
+        *) echo "please pick something from the list above"
+    esac
 }
 
 function list_installed {
@@ -182,20 +222,20 @@ function show_tui {
     echo -e "${BLUE}│${RESET}   Welcome to the Commandant                                  ${BLUE}│${RESET}"
     echo -e "${YELLOW}│${RESET}   System Setup and Tweaks:                                   ${YELLOW}│${RESET}"
     echo -e "${CYAN}│${RESET}   1  - Install Containerization  (needs brew installed)      ${CYAN}│${RESET}"
-    echo -e "${ORANGE}│${RESET}   2  - Install Homebrew                                      ${ORANGE}│${RESET}"
+    echo -e "${YELLOW}│${RESET}   2  - Install Homebrew                                      ${YELLOW}│${RESET}"
     echo -e "${MAGENTA}│${RESET}   3  - Install MacPorts                                      ${MAGENTA}│${RESET}"
     echo -e "${WHITE}│   4  - Install Apps    (needs brew or ports installed)       │${RESET}"
     echo -e "${GREEN}│${RESET}   i  - show installed apps                                   ${GREEN}│${RESET}"
     echo -e "${RED}│${MAGENTA}╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍${RESET}│${RESET}"
     echo -e "${CYAN}│${RESET}   Container Templates (WIP)                                  ${CYAN}│${RESET}"
     echo -e "${MAGENTA}│${RESET}   5  - Fedora                                                ${MAGENTA}│${RESET}"
-    echo -e "${ORANGE}│${RESET}   6  - Ubuntu                                                ${ORANGE}│${RESET}"
+    echo -e "${YELLOW}│${RESET}   6  - Ubuntu                                                ${YELLOW}│${RESET}"
     echo -e "${GREEN}│${RESET}   7  - Kali                                                  ${GREEN}│${RESET}"
     echo -e "${MAGENTA}│${RESET}   8  - Arch!                                                 ${MAGENTA}│${RESET}"
-    echo -e "${YELLOW}│${RESET}   9  - CentOS                                                ${YELLOW}│${RESET}"
-    echo -e "${ORANGE}│${RESET}   10 - Blackarch                                             ${ORANGE}│${RESET}"
+    echo -e "${BLUE}│${RESET}   9  - CentOS                                                ${BLUE}│${RESET}"
+    echo -e "${YELLOW}│${RESET}   10 - Blackarch                                             ${YELLOW}│${RESET}"
     echo -e "${RED}│${MAGENTA}╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍${RED}│${RESET}"
-    echo -e "${ORANGE}│${RESET}  q to Quit                                                   ${ORANGE}│${RESET}"
+    echo -e "${YELLOW}│${RESET}  q to Quit                                                   ${YELLOW}│${RESET}"
     echo -e "${MAGENTA}│${RESET}  o to View Options                                           ${MAGENTA}│${RESET}"
     echo -e "${RED}╰──────────────────────────────────────────────────────────────╯${RESET}"
     echo -e ""
