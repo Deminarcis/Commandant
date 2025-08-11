@@ -84,9 +84,63 @@ function ins_container {
     brew install --cask container
 }
 
+function setup_container{
+    container system start
+}
+
+function setup_kali {
+
+}
+
+function setup_rhel {
+
+}
+
+function setup_centos {
+
+}
+function setup_leap {
+
+}
+
+function setup_fedora {
+
+}
+
+function setup_ubuntu {
+
+}
+
+function setup_blackarch {
+
+}
+
 ### Put any code not related to the TUI above this
 
 ### App installer gui
+
+function  show_tui_containers {
+    echo -e ""
+    echo -e ""
+    echo -e "${MAGENTA}╭───────────────────────────────────────────────────────────╮${RESET}"
+    echo -e "${MAGENTA}│${RESET}   Pick your container recipe                              ${MAGENTA}│${RESET}"
+    echo -e "${MAGENTA}│${RESET}   1. Ubuntu                                              ${MAGENTA}│${RESET}"
+    echo -e "${MAGENTA}│${RESET}   2. Fedora                                               ${MAGENTA}│${RESET}"
+    echo -e "${MAGENTA}│${RESET}   3. CentOS                                              ${MAGENTA}│${RESET}"
+    echo -e "${MAGENTA}│${RESET}   4. Red Hat                                             ${MAGENTA}│${RESET}"
+    echo -e "${MAGENTA}│${RESET}   5. Kali                                                ${MAGENTA}│${RESET}"
+    echo -e "${MAGENTA}│${RESET}   6. Blackarch                                           ${MAGENTA}│${RESET}"
+    echo -e "${MAGENTA}│${RESET}   7. OpenSUSE                                            ${MAGENTA}│${RESET}"
+    echo -e "${MAGENTA}│${MAGENTA}╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍${MAGENTA}│${RESET}"
+    echo -e "${MAGENTA}│${RESET}   b to go back                                            ${MAGENTA}│${RESET}"
+    echo -e "${MAGENTA}│${RESET}   o to View Options                                       ${MAGENTA}│${RESET}"
+    echo -e "${MAGENTA}╰───────────────────────────────────────────────────────────╯${RESET}"
+    echo -e ""
+    echo -e ""
+    echo -e "Pick a number to continue or press 'b' to go back or 'o' to view the options again: "
+    read choice
+}
+
 function show_tui_apps {
     # Professional TUI for Commandant with rounded corners
     echo -e ""
@@ -100,7 +154,7 @@ function show_tui_apps {
     echo -e "${RED}│${RESET}   13. UTM                14. VirtualBox      15. Veracrypt                 ${RED}│${RESET}"
     echo -e "${RED}│${RESET}   16. Orion              17. Google Chrome   18. Brave Browser             ${RED}│${RESET}"
     echo -e "${RED}│${RESET}   19. Zen                20. Firefox         21. Discord                   ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   22. Thunderbird        23. Slack           24. Teams                     ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   22. Thunderbird        23. xquartz       24. Teams                     ${RED}│${RESET}"
     echo -e "${RED}│${RESET}   25. Zoom               26. Intellidock     27. Grid (requires Licence)   ${RED}│${RESET}"
     echo -e "${RED}│${RESET}   28. Jetbrains Toolbox  29. Bitwarden       30. Syncthing                 ${RED}│${RESET}"
     echo -e "${RED}│${RESET}   31. Helix              32. Eza             33. Bat                       ${RED}│${RESET}"
@@ -167,7 +221,7 @@ function show_tui_apps {
            show_tui_apps ;;
         22) brew install thunderbird
            show_tui_apps ;;
-        23) brew install slack
+        23) brew install xquartz
            show_tui_apps ;;
         24) brew install microsoft-teams
            show_tui_apps ;;
@@ -227,13 +281,8 @@ function show_tui {
     echo -e "${WHITE}│   4  - Install Apps    (needs brew or ports installed)       │${RESET}"
     echo -e "${GREEN}│${RESET}   i  - show installed apps                                   ${GREEN}│${RESET}"
     echo -e "${RED}│${MAGENTA}╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍${RESET}│${RESET}"
-    echo -e "${CYAN}│${RESET}   Container Templates (WIP)                                  ${CYAN}│${RESET}"
-    echo -e "${MAGENTA}│${RESET}   5  - Fedora                                                ${MAGENTA}│${RESET}"
-    echo -e "${YELLOW}│${RESET}   6  - Ubuntu                                                ${YELLOW}│${RESET}"
-    echo -e "${GREEN}│${RESET}   7  - Kali                                                  ${GREEN}│${RESET}"
-    echo -e "${MAGENTA}│${RESET}   8  - Arch!                                                 ${MAGENTA}│${RESET}"
-    echo -e "${BLUE}│${RESET}   9  - CentOS                                                ${BLUE}│${RESET}"
-    echo -e "${YELLOW}│${RESET}   10 - Blackarch                                             ${YELLOW}│${RESET}"
+    echo -e "${CYAN}│${RESET}   Container Recipes                                         ${CYAN}│${RESET}"
+    echo -e "${MAGENTA}│${RESET}   5  - Setup Containers                                                ${MAGENTA}│${RESET}"
     echo -e "${RED}│${MAGENTA}╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍${RED}│${RESET}"
     echo -e "${YELLOW}│${RESET}  q to Quit                                                   ${YELLOW}│${RESET}"
     echo -e "${MAGENTA}│${RESET}  o to View Options                                           ${MAGENTA}│${RESET}"
@@ -248,18 +297,12 @@ function show_tui {
         show_tui ;;
         2) ins_brew
         show_tui ;;
-        3) ins_macports
-        show_tui ;;
+        3) ins_macports ;;
         4) show_tui_apps ;;
         i) list_installed
         sleep 10
         show_tui ;;
-        5) show_tui ;;
-        6) show_tui ;;
-        7) show_tui ;;
-        8) show_tui ;;
-        9) show_tui ;;
-        10) show_tui ;;
+        5) show_tui_containers ;;
         o) show_tui ;;
         q) exit ;;
         *) echo "Bad choice, please pick from the list above or press 'q' to quit" ;;
