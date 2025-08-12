@@ -84,39 +84,45 @@ function ins_container {
     brew install --cask container
 }
 
-function setup_container{
+function setup_container {
     container system start
 }
 
 function setup_kali {
-
+    setup_container
+    container image pull kalilinux/kali-rolling:latest
 }
 
 function setup_rhel {
-
+    setup_container
+    container image pull redhat:ubi10
 }
 
 function setup_centos {
-
+    setup_container
+    container image pull quay.io/centos/centos:stream10
 }
 function setup_leap {
-
+    setup_container
+    container image pull opensuse/leap:latest
 }
 
 function setup_fedora {
-
+    setup_container
+    container image pull fedora:latest
 }
 
 function setup_ubuntu {
-
+    setup_container
+    container image pull ubuntu:latest
 }
 
 function setup_blackarch {
-
+    setup_container
+    container image pull blackarch/blackarch:latest
 }
 
 ### Put any code not related to the TUI above this
-
 ### App installer gui
 
 function  show_tui_containers {
@@ -281,8 +287,8 @@ function show_tui {
     echo -e "${WHITE}│   4  - Install Apps    (needs brew or ports installed)       │${RESET}"
     echo -e "${GREEN}│${RESET}   i  - show installed apps                                   ${GREEN}│${RESET}"
     echo -e "${RED}│${MAGENTA}╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍${RESET}│${RESET}"
-    echo -e "${CYAN}│${RESET}   Container Recipes                                         ${CYAN}│${RESET}"
-    echo -e "${MAGENTA}│${RESET}   5  - Setup Containers                                                ${MAGENTA}│${RESET}"
+    echo -e "${CYAN}│${RESET}   Container Recipes                                          ${CYAN}│${RESET}"
+    echo -e "${MAGENTA}│${RESET}   5  - Setup Containers                                      ${MAGENTA}│${RESET}"
     echo -e "${RED}│${MAGENTA}╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍${RED}│${RESET}"
     echo -e "${YELLOW}│${RESET}  q to Quit                                                   ${YELLOW}│${RESET}"
     echo -e "${MAGENTA}│${RESET}  o to View Options                                           ${MAGENTA}│${RESET}"
