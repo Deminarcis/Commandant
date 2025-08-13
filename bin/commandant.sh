@@ -145,6 +145,23 @@ function  show_tui_containers {
     echo -e ""
     echo -e "Pick a number to continue or press 'b' to go back or 'o' to view the options again: "
     read choice
+
+    case $choice in
+        1) setup_ubuntu
+           show_tui_containers ;;
+        2) setup_fedora
+            show_tui_containers ;;
+        3) setup_centos
+            show_tui_containers ;;
+        4) setup_rhel
+            show_tui_containers ;;
+        5) setup_kali
+            show_tui_containers ;;
+        6) setup_blackarch
+            show_tui_containers ;;
+        7) setup_leap
+            show_tui_containers ;;
+    esac
 }
 
 function show_tui_apps {
