@@ -91,35 +91,57 @@ function setup_container {
 function setup_kali {
     setup_container
     container image pull kalilinux/kali-rolling:latest
+    # container dir to share
+    mkdir -p ~/containers/home/kali
+    container create --name Kali --volume ~/containers/home/kali:/home/kali --volume /tmp/.X11-unix:/tmp/.X11-unix
 }
 
 function setup_rhel {
     setup_container
     container image pull redhat:ubi10
+    # container dir to share
+    mkdir -p ~/containers/home/rhel
+    container create --name Kali --volume ~/containers/home/rhel:/home/rhel --volume /tmp/.X11-unix:/tmp/.X11-unix
 }
 
 function setup_centos {
     setup_container
     container image pull quay.io/centos/centos:stream10
+    # container dir to share
+    mkdir -p ~/containers/home/centos
+    container create --name Kali --volume ~/containers/home/centos:/home/centos --volume /tmp/.X11-unix:/tmp/.X11-unix
 }
+
 function setup_leap {
     setup_container
     container image pull opensuse/leap:latest
+    # container dir to share
+    mkdir -p ~/containers/home/opensuse
+    container create --name Kali --volume ~/containers/home/opensuse:/home/opensuse --volume /tmp/.X11-unix:/tmp/.X11-unix
 }
 
 function setup_fedora {
     setup_container
     container image pull fedora:latest
+    # container dir to share
+    mkdir -p ~/containers/home/fedora
+    container create --name Kali --volume ~/containers/home/fedora:/home/fedora --volume /tmp/.X11-unix:/tmp/.X11-unix
 }
 
 function setup_ubuntu {
     setup_container
     container image pull ubuntu:latest
+    # container dir to share
+    mkdir -p ~/containers/home/ubuntu
+    container create --name Kali --volume ~/containers/home/ubuntu:/home/ubuntu --volume /tmp/.X11-unix:/tmp/.X11-unix
 }
 
 function setup_blackarch {
     setup_container
     container image pull blackarch/blackarch:latest
+    # container dir to share
+    mkdir -p ~/containers/home/blackarch
+    container create --name Kali --volume ~/containers/home/blackarch:/home/blackarch --volume /tmp/.X11-unix:/tmp/.X11-unix
 }
 
 ### Put any code not related to the TUI above this
@@ -161,6 +183,9 @@ function  show_tui_containers {
             show_tui_containers ;;
         7) setup_leap
             show_tui_containers ;;
+        b) show_tui;;
+        o) show_tui_containers ;;
+        q) exit ;;
     esac
 }
 
@@ -172,16 +197,15 @@ function show_tui_apps {
     echo -e "${RED}│${RESET}   Pick an app to install                                                   ${RED}│${RESET}"
     echo -e "${RED}│${RESET}   1. Ghostty             2. iTerm2           3. Kitty                      ${RED}│${RESET}"
     echo -e "${RED}│${RESET}   4. Alacritty           5. Tmux             6. Zellij                     ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   7. VSCode              8. Cursor           9. Zed                        ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   10. Docker Destkop     11. Podman Desktop  12. Crossover                 ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   13. UTM                14. VirtualBox      15. Veracrypt                 ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   16. Orion              17. Google Chrome   18. Brave Browser             ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   19. Zen                20. Firefox         21. Discord                   ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   22. Thunderbird        23. xquartz       24. Teams                     ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   25. Zoom               26. Intellidock     27. Grid (requires Licence)   ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   28. Jetbrains Toolbox  29. Bitwarden       30. Syncthing                 ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   31. Helix              32. Eza             33. Bat                       ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   34. Powershell                                                           ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   7. VSCode              8. Zed              9. Docker Destkop             ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   10. Podman Desktop     11. Crossover       12. UTM                       ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   13. Veracrypt          14. Orion           15. Google Chrome             ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   16. Brave Browser      17. Zen             18. Firefox                   ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   19. Discord            20. Thunderbird     21. xquartz                   ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   22. Wine               23. Intellidock     24. Grid (requires Licence)   ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   25. Jetbrains Toolbox  26. Bitwarden       27. Syncthing                 ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   28. Helix              29. Eza             30. Bat                       ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   31. Powershell                                                           ${RED}│${RESET}"
     echo -e "${RED}│${RESET}                                                                            ${RED}│${RESET}"
     echo -e "${RED}│${RESET}                                                                            ${RED}│${RESET}"
     echo -e "${RED}│${RESET}                                                                            ${RED}│${RESET}"
@@ -214,8 +238,6 @@ function show_tui_apps {
            show_tui_apps ;;
         7) brew install visual-studio-code
            show_tui_apps ;;
-        8) brew install cursor
-           show_tui_apps ;;
         9) brew install zed
            show_tui_apps ;;
         10) brew install docker-desktop
@@ -225,8 +247,6 @@ function show_tui_apps {
         12) brew install crossover
            show_tui_apps ;;
         13) brew install utm
-           show_tui_apps ;;
-        14) brew install virtualbox
            show_tui_apps ;;
         15) brew install veracrypt
            show_tui_apps ;;
@@ -245,8 +265,7 @@ function show_tui_apps {
         22) brew install thunderbird
            show_tui_apps ;;
         23) brew install xquartz
-           show_tui_apps ;;
-        24) brew install microsoft-teams
+           xhost +localhost
            show_tui_apps ;;
         25) brew install zoom
            show_tui_apps ;;
