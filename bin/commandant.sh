@@ -200,8 +200,8 @@ function show_tui_apps {
     echo -e "${RED}│${RESET}   7. VSCode              8. Zed              9. Docker Destkop             ${RED}│${RESET}"
     echo -e "${RED}│${RESET}   10. Podman Desktop     11. Crossover       12. UTM                       ${RED}│${RESET}"
     echo -e "${RED}│${RESET}   13. Veracrypt          14. Orion           15. Google Chrome             ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   16. Brave Browser      17. Zen             18. Firefox                   ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   19. Discord            20. Thunderbird     21. xquartz                   ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   16. Brave Browser      17. Zen             18. Discord                   ${RED}│${RESET}"
+    echo -e "${RED}│${RESET}   19. Discord            20. xquartz         21. Wine                      ${RED}│${RESET}"
     echo -e "${RED}│${RESET}   22. Wine               23. Intellidock     24. Grid (requires Licence)   ${RED}│${RESET}"
     echo -e "${RED}│${RESET}   25. Jetbrains Toolbox  26. Bitwarden       27. Syncthing                 ${RED}│${RESET}"
     echo -e "${RED}│${RESET}   28. Helix              29. Eza             30. Bat                       ${RED}│${RESET}"
@@ -258,34 +258,27 @@ function show_tui_apps {
            show_tui_apps ;;
         19) brew install zen
            show_tui_apps ;;
-        20) brew install firefox
+        20) brew install discord
            show_tui_apps ;;
-        21) brew install discord
+        21) brew install xquartz
            show_tui_apps ;;
         22) brew install thunderbird
            show_tui_apps ;;
-        23) brew install xquartz
-           xhost +localhost
+        23) brew install grid
            show_tui_apps ;;
-        25) brew install zoom
+        24) brew install jetbrains-toolbox
            show_tui_apps ;;
-        26) brew install intellidock
+        25) brew install bitwarden
            show_tui_apps ;;
-        27) brew install grid
+        26) brew install syncthing
            show_tui_apps ;;
-        28) brew install jetbrains-toolbox
+        27) brew install helix
            show_tui_apps ;;
-        29) brew install bitwarden
+        28) brew install eza
            show_tui_apps ;;
-        30) brew install syncthing
+        29) brew install bat
            show_tui_apps ;;
-        31) brew install helix
-           show_tui_apps ;;
-        32) brew install eza
-           show_tui_apps ;;
-        33) brew install bat
-           show_tui_apps ;;
-        34) brew install powershell
+        30) brew install powershell
            show_tui_apps ;;
         f) echo "Enter the name of the package you want to install"
            read package_name
