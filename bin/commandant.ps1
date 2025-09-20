@@ -139,28 +139,29 @@ function install_apps {
         }
 
         switch ($choice) {
-            1 { winget install --id=Microsoft.PowerShell -e }
-            2 { winget install --id=Microsoft.VisualStudioCode -e }
-            3 { winget install --id=Microsoft.Powertoys -e }
-            4 { winget install --id=Zen-Team.Zen-Browser  -e}
-            5 { winget install --id=Brave.Brave -e }
-            6 { winget install --id=Mozilla.Firefox -e }
-            7 { winget install --id=Mozilla.Thunderbird -e }
-            8 { winget install --id=sharkdp.bat -e }
-            9 { winget install --id=gnu.nano -e }
-            10 { winget install --id=Microsoft.edit -e }
-            11 { winget install --id=eza-community.eza -e }
-            12 { winget install --id=helix.helix -e }
-            13 { winget install --id=Microsoft.Sysinternals.Suite -e }
-            14 { winget install --id=7zip.7zip -e }
-            15 { winget install --id=Bitwarden.Bitwarden -e }
-            16 { winget install --id=Bleachbit.bleachbit -e }
-            17 { winget install --id=Discord.Discord -e }
-            18 { winget install --id=Obsidian.Obsidian -e }
-            19 { winget install --id=Haruna.Haruna -e }
-            20 { winget install --id=WinFsp.WinFsp -e }
+            1 { winget install --id=Microsoft.PowerShell -e && install_apps }
+            2 { winget install --id=Microsoft.VisualStudioCode -e && install_apps }
+            3 { winget install --id=Microsoft.Powertoys -e && install_apps }
+            4 { winget install --id=Zen-Team.Zen-Browser  -e && install_apps }
+            5 { winget install --id=Brave.Brave -e && install_apps }
+            6 { winget install --id=Mozilla.Firefox -e && install_apps }
+            7 { winget install --id=Mozilla.Thunderbird -e && install_apps }
+            8 { winget install --id=sharkdp.bat -e && install_apps }
+            9 { winget install --id=gnu.nano -e && install_apps }
+            10 { winget install --id=Microsoft.edit -e && install_apps }
+            11 { winget install --id=eza-community.eza -e && install_apps }
+            12 { winget install --id=helix.helix -e && install_apps }
+            13 { winget install --id=Microsoft.Sysinternals.Suite -e && install_apps }
+            14 { winget install --id=7zip.7zip -e && install_apps }
+            15 { winget install --id=Bitwarden.Bitwarden -e && install_apps }
+            16 { winget install --id=Bleachbit.bleachbit -e && install_apps }
+            17 { winget install --id=Discord.Discord -e && install_apps }
+            18 { winget install --id=Obsidian.Obsidian -e && install_apps }
+            19 { winget install --id=Haruna.Haruna -e && install_apps }
+            20 { winget install --id=WinFsp.WinFsp -e && install_apps }
             'o' { install_apps }
             'i' { show_installed_apps }
+            'b' { show_tui }
             default { Write-Host "Pick a number to continue or press 'b' to go back or 'o' to view the options again"
                 continue
             }
@@ -233,7 +234,6 @@ function suse_leap_wsl {
 function install_everything {
     Write-Host "[+] Installing EVERYTHING!..."
     install_wsl2
-    install_apps
     install_custom_kernel
     install_custom_prompt
     Write-Output "[+] Done!"
