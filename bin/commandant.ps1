@@ -1,18 +1,3 @@
-#Requires -RunAsAdministrator
-$skipdeps = 0
-$wingetInstalled = cmd /c where winget '2>&1'
-if ( $wingetInstalled -like '*winget.exe*' )
-{
-    Write-Output "[!!] Winget is already installed, continuing to set up"
-}
-elseif ($skipdeps -eq 1 ) {
-    Write-Output "skipping dependency checks for test runs"
-}else
-{
-    Write-Output "Please install winget (App Installer) from the Microsoft Store or GitHub before continuing"
-    exit
-}
-
 function show_tui {
     Write-Host ""
     Write-Host ""
@@ -23,7 +8,7 @@ function show_tui {
     Write-Host "│   2. Install Apps ( i - show installed )  │"
     Write-Host "│   3. Install Custom WSL Kernel            │"
     Write-Host "│   4. Install Custom Powershell Prompt     │"
-    Write-Host "│   5. Install Everything  (1-5)            │"
+    Write-Host "│   5. Install Scoop                        │"
     Write-Host "│-------------------------------------------│"
     Write-Host "│   WSL Distros                             │"
     Write-Host "│   6.  Fedora                              │"
@@ -52,7 +37,7 @@ function show_tui {
             2 { install_apps }
             3 { install_custom_kernel }
             4 { install_custom_prompt }
-            5 { install_everything }
+            5 { install_scoop }
             6 { fedora_wsl }
             7 { ubuntu_wsl }
             8 { kali_wsl }
@@ -60,7 +45,8 @@ function show_tui {
             10 { arch_wsl }
             'o' { show_tui }
             'i' { show_installed_apps }
-            default { Write-Host "Pick a number to continue or press 'q' to quit ot 'o' to view the options again"
+
+            default { Write-Host "Pick a number to continue or press 'q' to quit or 'o' to view the options again"
                 continue
             }
         }
@@ -120,8 +106,9 @@ function install_apps {
     Write-Host "│    16. Bleachbit                          │"
     Write-Host "│    17. Discord                            │"
     Write-Host "│    18. Obsidian                           │"
-    Write-Host "│    19. Haruna                             │"
+    Write-Host "│    19. Haruna    (winget)                 │"
     Write-Host "│    20. WinFsp                             │"
+    Write-Host "│    21. Zed                                │"
     Write-Host "│-------------------------------------------│"
     Write-Host "│   b to Go Back                            │"
     Write-Host "╰───────────────────────────────────────────╯"
@@ -139,26 +126,27 @@ function install_apps {
         }
 
         switch ($choice) {
-            1 { winget install --id=Microsoft.PowerShell -e && install_apps }
-            2 { winget install --id=Microsoft.VisualStudioCode -e && install_apps }
-            3 { winget install --id=Microsoft.Powertoys -e && install_apps }
-            4 { winget install --id=Zen-Team.Zen-Browser  -e && install_apps }
-            5 { winget install --id=Brave.Brave -e && install_apps }
-            6 { winget install --id=Mozilla.Firefox -e && install_apps }
-            7 { winget install --id=Mozilla.Thunderbird -e && install_apps }
-            8 { winget install --id=sharkdp.bat -e && install_apps }
-            9 { winget install --id=gnu.nano -e && install_apps }
-            10 { winget install --id=Microsoft.edit -e && install_apps }
-            11 { winget install --id=eza-community.eza -e && install_apps }
-            12 { winget install --id=helix.helix -e && install_apps }
-            13 { winget install --id=Microsoft.Sysinternals.Suite -e && install_apps }
-            14 { winget install --id=7zip.7zip -e && install_apps }
-            15 { winget install --id=Bitwarden.Bitwarden -e && install_apps }
-            16 { winget install --id=Bleachbit.bleachbit -e && install_apps }
-            17 { winget install --id=Discord.Discord -e && install_apps }
-            18 { winget install --id=Obsidian.Obsidian -e && install_apps }
+            1 { scoop install pwsh && install_apps }
+            2 { scoop install vscode && install_apps }
+            3 { scoop install extras/powertoys && install_apps }
+            4 { scoop install extras/zen-browser && install_apps }
+            5 { scoop install extras/brave && install_apps }
+            6 { scoop install extras/firefox && install_apps }
+            7 { scoop install extras/thunderbird && install_apps }
+            8 { scoop install bat && install_apps }
+            9 { scoop install nano -e && install_apps }
+            10 { scoop install edit && install_apps }
+            11 { scoop install eza && install_apps }
+            12 { scoop install helix && install_apps }
+            13 { scoop install extras/sysinternals && install_apps }
+            14 { scoop install 7zip && install_apps }
+            15 { scoop install extras/bitwarden && install_apps }
+            16 { scoop install extras/bleachbit && install_apps }
+            17 { scoop install extras/discord && install_apps }
+            18 { scoop install extras/obsidian && install_apps }
             19 { winget install --id=Haruna.Haruna -e && install_apps }
-            20 { winget install --id=WinFsp.WinFsp -e && install_apps }
+            20 { scoop install nonportable/winfsp-np && install_apps }
+            21 { scoop install extras/zed && install_apps }
             'o' { install_apps }
             'i' { show_installed_apps }
             'b' { show_tui }
@@ -171,7 +159,8 @@ function install_apps {
 
 # Function to show installed apps
 function show_installed_apps {
-    winget list | out-host -paging
+    winget list
+    scoop list
     Start-Sleep -Seconds 10
     show_tui
 }
@@ -231,11 +220,16 @@ function suse_leap_wsl {
 }
 
 
-function install_everything {
-    Write-Host "[+] Installing EVERYTHING!..."
-    install_wsl2
-    install_custom_kernel
-    install_custom_prompt
+function install_scoop {
+    Write-Host "[+] Installing Scoop..."
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+    Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+    scoop bucket add main
+    scoop bucket add extras
+    scoop bucket add nerd-fonts
+    scoop bucket add nonportable
+    scoop install aria2
+    scoop install sudo
     Write-Output "[+] Done!"
     Start-Sleep 10
     show_tui
