@@ -96,7 +96,7 @@ function install_apps {
     Write-Host "│    6. Firefox Browser                     │"
     Write-Host "│    7. Mozilla Thunderbird                 │"
     Write-Host "│    8. bat                                 │"
-    Write-Host "│    9. Nano                               │"
+    Write-Host "│    9. Nano                                │"
     Write-Host "│    10. MS Edit                            │"
     Write-Host "│    11. Eza                                │"
     Write-Host "│    12. Helix                              │"
@@ -110,6 +110,8 @@ function install_apps {
     Write-Host "│    20. WinFsp                             │"
     Write-Host "│    21. Zed                                │"
     Write-Host "│-------------------------------------------│"
+    Write-Host "│   s to search for package                 │"
+    Write-Host "│   i to install unlisted app               │"
     Write-Host "│   b to Go Back                            │"
     Write-Host "╰───────────────────────────────────────────╯"
     Write-Host ""
@@ -148,7 +150,8 @@ function install_apps {
             20 { scoop install nonportable/winfsp-np && install_apps }
             21 { scoop install extras/zed && install_apps }
             'o' { install_apps }
-            'i' { show_installed_apps }
+            'i' { $unlisted_app = Read-Host "Enter the name of the app to install"; scoop install $unlisted_app }
+            's' { $search_app = Read-Host "Enter the name of the package you are looking for: "; scoop search $search_app }
             'b' { show_tui }
             default { Write-Host "Pick a number to continue or press 'b' to go back or 'o' to view the options again"
                 continue
