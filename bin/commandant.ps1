@@ -1,20 +1,19 @@
 function show_tui {
     Write-Host ""
     Write-Host ""
-    Write-Host "   Welcome to the Commandant               "
-    Write-Host "   System Setup and Tweaks:                "
-    Write-Host "   1. Install WSL2                         "
-    Write-Host "   2. Install Apps ( i - show installed )  "
-    Write-Host "   3. Install Custom WSL Kernel            "
-    Write-Host "   4. Install Custom Powershell Prompt     "
-    Write-Host "   5. Install Scoop                        "
-    Write-Host "│-------------------------------------------│"
-    Write-Host "   WSL Distros                             "
-    Write-Host "   6.  Fedora                              "
-    Write-Host "   7.  Ubuntu             8.  Kali "
-    Write-Host "   9.  OpenSuse Leap     10. Arch! "
-    Write-Host "|-------------------------------------------│"
-    Write-Host "   q to Quit                               "
+    Write-Host "   Welcome to the Commandant               " -foregroundcolor Magenta
+    Write-Host "   System Setup and Tweaks:                " -foregroundcolor Green
+    Write-Host ""
+    Write-Host ""
+    Write-Host "   1. Install WSL2                    2. Install Apps ( i - show installed )  " -foregroundcolor Green
+    Write-Host "   3. Install Custom WSL Kernel       4. Install Custom Powershell Prompt     " -foregroundcolor Green
+    Write-Host "   5. Install Scoop                        " -foregroundcolor Green
+    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
+    Write-Host "   WSL Distros                             " -foregroundcolor Green
+    Write-Host "   6.  Fedora             7.  Ubuntu             8.  Kali " -foregroundcolor Green
+    Write-Host "   9.  OpenSuse Leap     10. Arch!             " -foregroundcolor Green
+    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
+    Write-Host "   q to Quit                               " -foregroundcolor Green
     Write-Host ""
     Write-Host ""
 
@@ -81,19 +80,19 @@ function install_wsl2 {
 function install_apps {
     Write-Host ""
     Write-Host ""
-    Write-Host "  Welcome to the Commandant               "
-    Write-Host "  Pick an app to install:                 "
-    Write-Host "  1. Powershell 2. VSCode    3. Powertoys "
-    Write-Host "  4. Zen Browser  5. Brave Browser   6. Firefox Browser "
-    Write-Host "  7. Mozilla Thunderbird   8. bat   9. Nano  "
-    Write-Host "  10. MS Edit       11. Eza      12. Helix  "
-    Write-Host "  13. sysinternals  14. 7zip     15. Bitwarden  "
-    Write-Host "  16. Bleachbit     17. Discord  18. Obsidian "
-    Write-Host "  19. Haruna    (winget)  20. WinFsp   21. Zed  "
-    Write-Host "│--------------------------------------------------------│"
-    Write-Host "   s to search for package                 "
-    Write-Host "   i to install unlisted app               "
-    Write-Host "   b to Go Back                            "
+    Write-Host "  Welcome to the Commandant               " -foregroundcolor Magenta
+    Write-Host "  Pick an app to install:                 " -foregroundcolor Green
+    Write-Host "  1. Powershell      2. VSCode      3. Powertoys " -foregroundcolor Green
+    Write-Host "  4. Zen Browser     5. Brave Browser   6. Firefox Browser " -foregroundcolor Green
+    Write-Host "  7. Mozilla Thunderbird   8. bat       9. Nano      " -foregroundcolor Green
+    Write-Host "  10. MS Edit       11. Eza      12. Helix  " -foregroundcolor Green
+    Write-Host "  13. sysinternals  14. 7zip     15. Bitwarden  " -foregroundcolor Green
+    Write-Host "  19. Haruna        20. WinFsp     21. Zed  " -foregroundcolor Green
+    Write-Host "  16. Bleachbit     17. Discord     18. Obsidian " -foregroundcolor Green
+    Write-Host "│--------------------------------------------------------│" ForegroundColor Magenta
+    Write-Host "   s to search for package                 " -foregroundcolor Green
+    Write-Host "   i to install unlisted app               " -foregroundcolor Green
+    Write-Host "   b to Go Back                            " -foregroundcolor Green
     Write-Host ""
     Write-Host ""
 
