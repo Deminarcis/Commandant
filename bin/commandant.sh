@@ -4,6 +4,10 @@ if [ $EUID -eq "0" ]; then
     exit 1
 fi
 
+# Remember where we parked kids
+execdir=$(pwd)
+downloaddir=~/Downloads
+
 #colour codes for the UI
 BLACK=`tput setaf 0`
 RED=`tput setaf 1`
@@ -32,42 +36,57 @@ function ins_macports {
     xcode_utils
     echo -e ""
     echo -e ""
-    echo -e "${YELLOW}╭───────────────────────────────────────────────────────────╮${RESET}"
-    echo -e "${YELLOW}│${RESET}   Which version of MacOS do you have?                     ${YELLOW}│${RESET}"
-    echo -e "${YELLOW}│${RESET}   1. Sequoia  (pick this one if you dont know)            ${YELLOW}│${RESET}"
-    echo -e "${YELLOW}│${RESET}   2. Sonoma                                               ${YELLOW}│${RESET}"
-    echo -e "${YELLOW}│${RESET}   3. Ventura                                              ${YELLOW}│${RESET}"
-    echo -e "${YELLOW}│${RESET}   4. Monterey                                             ${YELLOW}│${RESET}"
-    echo -e "${YELLOW}│${RESET}   5. Something else  (open website)                       ${YELLOW}│${RESET}"
-    echo -e "${YELLOW}│${RESET}                                                           ${YELLOW}│${RESET}"
-    echo -e "${YELLOW}│${RESET}                                                           ${YELLOW}│${RESET}"
-    echo -e "${YELLOW}│${MAGENTA}╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍${YELLOW}│${RESET}"
-    echo -e "${YELLOW}│${RESET}   b to go back                                            ${YELLOW}│${RESET}"
-    echo -e "${YELLOW}│${RESET}   o to View Options                                       ${YELLOW}│${RESET}"
-    echo -e "${YELLOW}╰───────────────────────────────────────────────────────────╯${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
+    echo -e "${YELLOW}   Which version of MacOS do you have?                     ${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
+    echo -e "${YELLOW}   1. Tahoe                                               ${RESET}"
+    echo -e "${YELLOW}   2. Sequoia                                             ${RESET}"
+    echo -e "${YELLOW}   3. Sonoma                                              ${RESET}"
+    echo -e "${YELLOW}   4. Ventura                                              ${RESET}"
+    echo -e "${YELLOW}   5. Monterey                                             ${RESET}"
+    echo -e "${YELLOW}   6. Something else  (open website)                       ${RESET}"
+    echo -e "${YELLOW}                                                           ${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
+    echo -e "${YELLOW}   b to go back                                            ${RESET}"
+    echo -e "${YELLOW}   o to View Options                                       ${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
     echo -e ""
     echo -e ""
     echo -e "Pick a number to continue or press 'b' to go back or 'o' to view the options again: "
     read choice
 
     case $choice in
-        1) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-15-Sequoia.pkg
+        1) cd downloaddir
+           curl -OL https://github.com/macports/macports-base/releases/download/v2.11.6/MacPorts-2.11.6-26-Tahoe.pkg
+           chmod +x MacPorts-2.11.6-26-Tahoe.pkg
+           open MacPorts-2.11.6-26-Tahoe.pkg
+           cd execdir
+           ins_macports ;;
+        2) cd downloaddir
+           curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-15-Sequoia.pkg
            chmod +x MacPorts-2.11.4-15-Sequoia.pkg
            open MacPorts-2.11.4-15-Sequoia.pkg
+           cd execdir
            ins_macports ;;
-        2) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-14-Sonoma.pkg
+        3) cd downloaddir
+           curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-14-Sonoma.pkg
            chmod +x MacPorts-2.11.4-14-Sonoma.pkg
            open MacPorts-2.11.4-14-Sonoma.pkg
+           cd execdir
            ins_macports ;;
-        3) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-13-Ventura.pkg
+        4) cd downloaddir
+           curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-13-Ventura.pkg
            chmod +x MacPorts-2.11.4-13-Ventura.pkg
            open MacPorts-2.11.4-13-Ventura.pkg
+           cd execdir
            ins_macports ;;
-        4) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-12-Monterey.pkg
+        5) cd downloaddir
+           curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-12-Monterey.pkg
            chmod +x MacPorts-2.11.4-12-Monterey.pkg
            open MacPorts-2.11.4-12-Monterey.pkg
+           cd execdir
            ins_macports ;;
-        5) open 'https://www.macports.org/install.php'
+        6) open 'https://www.macports.org/install.php'
            ins_macports ;;
         b) show_tui ;;
         o) ins_macports ;;
@@ -150,19 +169,20 @@ function setup_blackarch {
 function  show_tui_containers {
     echo -e ""
     echo -e ""
-    echo -e "${MAGENTA}╭───────────────────────────────────────────────────────────╮${RESET}"
-    echo -e "${MAGENTA}│${RESET}   Pick your container recipe                              ${MAGENTA}│${RESET}"
-    echo -e "${MAGENTA}│${RESET}   1. Ubuntu                                              ${MAGENTA}│${RESET}"
-    echo -e "${MAGENTA}│${RESET}   2. Fedora                                               ${MAGENTA}│${RESET}"
-    echo -e "${MAGENTA}│${RESET}   3. CentOS                                              ${MAGENTA}│${RESET}"
-    echo -e "${MAGENTA}│${RESET}   4. Red Hat                                             ${MAGENTA}│${RESET}"
-    echo -e "${MAGENTA}│${RESET}   5. Kali                                                ${MAGENTA}│${RESET}"
-    echo -e "${MAGENTA}│${RESET}   6. Blackarch                                           ${MAGENTA}│${RESET}"
-    echo -e "${MAGENTA}│${RESET}   7. OpenSUSE                                            ${MAGENTA}│${RESET}"
-    echo -e "${MAGENTA}│${MAGENTA}╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍${MAGENTA}│${RESET}"
-    echo -e "${MAGENTA}│${RESET}   b to go back                                            ${MAGENTA}│${RESET}"
-    echo -e "${MAGENTA}│${RESET}   o to View Options                                       ${MAGENTA}│${RESET}"
-    echo -e "${MAGENTA}╰───────────────────────────────────────────────────────────╯${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
+    echo -e "${MAGENTA}   Pick your container recipe:                              ${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
+    echo -e "${MAGENTA}   1. Ubuntu                                              ${RESET}"
+    echo -e "${MAGENTA}   2. Fedora                                               ${RESET}"
+    echo -e "${MAGENTA}   3. CentOS                                              ${RESET}"
+    echo -e "${MAGENTA}   4. Red Hat                                             ${RESET}"
+    echo -e "${MAGENTA}   5. Kali                                                ${RESET}"
+    echo -e "${MAGENTA}   6. Blackarch                                           ${RESET}"
+    echo -e "${MAGENTA}   7. OpenSUSE                                            ${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
+    echo -e "${MAGENTA}   b to go back                                            ${RESET}"
+    echo -e "${MAGENTA}   o to View Options                                       ${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
     echo -e ""
     echo -e ""
     echo -e "Pick a number to continue or press 'b' to go back or 'o' to view the options again: "
@@ -193,30 +213,29 @@ function show_tui_apps {
     # Professional TUI for Commandant with rounded corners
     echo -e ""
     echo -e ""
-    echo -e "${RED}╭────────────────────────────────────────────────────────────────────────────╮${RESET}"
-    echo -e "${RED}│${RESET}   Pick an app to install                                                   ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   1. Ghostty             2. iTerm2           3. Kitty                      ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   4. Alacritty           5. Tmux             6. Zellij                     ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   7. VSCode              8. Zed              9. Docker Destkop             ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   10. Podman Desktop     11. Crossover       12. UTM                       ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   13. Veracrypt          14. Orion           15. Google Chrome             ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   16. Brave Browser      17. Zen             18. Discord                   ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   19. Discord            20. xquartz         21. Wine                      ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   22. Wine               23. Intellidock     24. Grid (requires Licence)   ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   25. Jetbrains Toolbox  26. Bitwarden       27. Syncthing                 ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   28. Helix              29. Eza             30. Bat                       ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   31. Powershell                                                           ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}                                                                            ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}                                                                            ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}                                                                            ${RED}│${RESET}"
-    echo -e "${RED}│${MAGENTA}╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   f to install fomulaue not on this list                                   ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   c to install cask not on this list                                       ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   p to install port not on this list                                       ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   i to show apps already installed by homebrew and ports                   ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   b to go back                                                             ${RED}│${RESET}"
-    echo -e "${RED}│${RESET}   o to View Options                                                        ${RED}│${RESET}"
-    echo -e "${RED}╰────────────────────────────────────────────────────────────────────────────╯${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
+    echo -e "${RED}   Pick an app to install                                                   ${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
+    echo -e "${RED}   1. Ghostty             2. iTerm2           3. Kitty                      ${RESET}"
+    echo -e "${RED}   4. Alacritty           5. Tmux             6. Zellij                     ${RESET}"
+    echo -e "${RED}   7. VSCode              8. Zed              9. Docker Destkop             ${RESET}"
+    echo -e "${RED}   10. Podman Desktop     11. Crossover       12. UTM                       ${RESET}"
+    echo -e "${RED}   13. Veracrypt          14. Orion           15. Google Chrome             ${RESET}"
+    echo -e "${RED}   16. Brave Browser      17. Zen             18. Discord                   ${RESET}"
+    echo -e "${RED}   19. xquartz            20. Jetbrains Toolbox  21. Bitwarden              ${RESET}"
+    echo -e "${RED}   22. Syncthing          23. Helix           24. Eza                        ${RESET}"
+    echo -e "${RED}   25. Powershell         26. bat             27. ripgrep                  ${RESET}"
+    echo -e "${RED}                                                                            ${RESET}"
+    echo -e "${RED}                                                                            ${RESET}"
+    echo -e "${RED}                                                                            ${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
+    echo -e "${RED}   f to install formulae not on this list                                   ${RESET}"
+    echo -e "${RED}   c to install cask not on this list                                       ${RESET}"
+    echo -e "${RED}   p to install port not on this list                                       ${RESET}"
+    echo -e "${RED}   i to show apps already installed by homebrew and ports                   ${RESET}"
+    echo -e "${RED}   b to go back                                                             ${RESET}"
+    echo -e "${RED}   o to View Options                                                        ${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
     echo -e ""
     echo -e ""
 
@@ -238,47 +257,45 @@ function show_tui_apps {
            show_tui_apps ;;
         7) brew install visual-studio-code
            show_tui_apps ;;
-        9) brew install zed
+        8) brew install zed
            show_tui_apps ;;
-        10) brew install docker-desktop
+        9) brew install docker-desktop
            show_tui_apps ;;
-        11) brew install podman-desktop
+        10) brew install podman-desktop
            show_tui_apps ;;
-        12) brew install crossover
+        11) brew install crossover
            show_tui_apps ;;
-        13) brew install utm
+        12) brew install utm
            show_tui_apps ;;
-        15) brew install veracrypt
+        13) brew install veracrypt
            show_tui_apps ;;
-        16) brew install orion
+        14) brew install orion
            show_tui_apps ;;
-        17) brew install google-chrome
+        15) brew install google-chrome
            show_tui_apps ;;
-        18) brew install brave-browser
+        16) brew install brave-browser
            show_tui_apps ;;
-        19) brew install zen
+        17) brew install zen
            show_tui_apps ;;
-        20) brew install discord
+        18) brew install discord
            show_tui_apps ;;
-        21) brew install xquartz
+        19) brew install xquartz
            show_tui_apps ;;
-        22) brew install thunderbird
+        20) brew install jetbrains-toolbox
            show_tui_apps ;;
-        23) brew install grid
+        21) brew install bitwarden
            show_tui_apps ;;
-        24) brew install jetbrains-toolbox
+        22) brew install syncthing
            show_tui_apps ;;
-        25) brew install bitwarden
+        23) brew install helix
            show_tui_apps ;;
-        26) brew install syncthing
+        24) brew install eza
            show_tui_apps ;;
-        27) brew install helix
+        25) brew install powershell
            show_tui_apps ;;
-        28) brew install eza
+        26) brew install bat
            show_tui_apps ;;
-        29) brew install bat
-           show_tui_apps ;;
-        30) brew install powershell
+        27) brew install ripgrep
            show_tui_apps ;;
         f) echo "Enter the name of the package you want to install"
            read package_name
@@ -307,21 +324,22 @@ function show_tui {
     # Professional TUI for Commandant with rounded corners
     echo -e ""
     echo -e ""
-    echo -e "${RED}╭──────────────────────────────────────────────────────────────╮${RESET}"
-    echo -e "${BLUE}│${RESET}   Welcome to the Commandant                                  ${BLUE}│${RESET}"
-    echo -e "${YELLOW}│${RESET}   System Setup and Tweaks:                                   ${YELLOW}│${RESET}"
-    echo -e "${CYAN}│${RESET}   1  - Install Containerization  (needs brew installed)      ${CYAN}│${RESET}"
-    echo -e "${YELLOW}│${RESET}   2  - Install Homebrew                                      ${YELLOW}│${RESET}"
-    echo -e "${MAGENTA}│${RESET}   3  - Install MacPorts                                      ${MAGENTA}│${RESET}"
-    echo -e "${WHITE}│   4  - Install Apps    (needs brew or ports installed)       │${RESET}"
-    echo -e "${GREEN}│${RESET}   i  - show installed apps                                   ${GREEN}│${RESET}"
-    echo -e "${RED}│${MAGENTA}╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍${RESET}│${RESET}"
-    echo -e "${CYAN}│${RESET}   Container Recipes                                          ${CYAN}│${RESET}"
-    echo -e "${MAGENTA}│${RESET}   5  - Setup Containers                                      ${MAGENTA}│${RESET}"
-    echo -e "${RED}│${MAGENTA}╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍${RED}│${RESET}"
-    echo -e "${YELLOW}│${RESET}  q to Quit                                                   ${YELLOW}│${RESET}"
-    echo -e "${MAGENTA}│${RESET}  o to View Options                                           ${MAGENTA}│${RESET}"
-    echo -e "${RED}╰──────────────────────────────────────────────────────────────╯${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
+    echo -e "${BLUE}   Welcome to the Commandant                                  ${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
+    echo -e "${YELLOW}   System Setup and Tweaks:                                   ${RESET}"
+    echo -e "${CYAN}   1  - Install Containerization  (needs brew installed)      ${RESET}"
+    echo -e "${YELLOW}   2  - Install Homebrew                                      ${RESET}"
+    echo -e "${MAGENTA}   3  - Install MacPorts                                      ${RESET}"
+    echo -e "${WHITE}   4  - Install Apps    (needs brew or ports installed)       ${RESET}"
+    echo -e "${GREEN}   i  - show installed apps                                   ${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
+    echo -e "${CYAN}   Container Recipes                                          ${RESET}"
+    echo -e "${MAGENTA}   5  - Setup Containers                                      ${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
+    echo -e "${YELLOW}   q to Quit                                                   ${RESET}"
+    echo -e "${MAGENTA}   o to View Options                                           ${RESET}"
+    echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
     echo -e ""
     echo -e ""
     echo -e "Pick a number to continue or press 'q' to quit or 'o' to view the options again: "
