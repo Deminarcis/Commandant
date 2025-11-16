@@ -1,20 +1,25 @@
 function show_tui {
     Write-Host ""
     Write-Host ""
+    Write-Host "│-----------------------------------------------│"
     Write-Host "   Welcome to the Commandant               "
+    Write-Host "│-----------------------------------------------│"
     Write-Host "   System Setup and Tweaks:                "
+    Write-Host ""
     Write-Host "   1. Install WSL2                         "
     Write-Host "   2. Install Apps ( i - show installed )  "
     Write-Host "   3. Install Custom WSL Kernel            "
     Write-Host "   4. Install Custom Powershell Prompt     "
     Write-Host "   5. Install Scoop                        "
-    Write-Host "│-------------------------------------------│"
+    Write-Host "│-----------------------------------------------│"
     Write-Host "   WSL Distros                             "
+    Write-Host ""
     Write-Host "   6.  Fedora                              "
     Write-Host "   7.  Ubuntu             8.  Kali "
     Write-Host "   9.  OpenSuse Leap     10. Arch! "
-    Write-Host "|-------------------------------------------│"
+    Write-Host "|-----------------------------------------------│"
     Write-Host "   q to Quit                               "
+    Write-Host "|-----------------------------------------------│"
     Write-Host ""
     Write-Host ""
 
@@ -81,19 +86,23 @@ function install_wsl2 {
 function install_apps {
     Write-Host ""
     Write-Host ""
+    Write-Host "|-------------------------------------------------------------------│"
     Write-Host "  Welcome to the Commandant               "
+    Write-Host "|-------------------------------------------------------------------│"
     Write-Host "  Pick an app to install:                 "
-    Write-Host "  1. Powershell 2. VSCode    3. Powertoys "
-    Write-Host "  4. Zen Browser  5. Brave Browser   6. Firefox Browser "
-    Write-Host "  7. Mozilla Thunderbird   8. bat   9. Nano  "
-    Write-Host "  10. MS Edit       11. Eza      12. Helix  "
-    Write-Host "  13. sysinternals  14. 7zip     15. Bitwarden  "
-    Write-Host "  16. Bleachbit     17. Discord  18. Obsidian "
-    Write-Host "  19. Haruna    (winget)  20. WinFsp   21. Zed  "
-    Write-Host "│--------------------------------------------------------│"
+    Write-Host ""
+    Write-Host "  1. Powershell            2. VSCode          3. Powertoys "
+    Write-Host "  4. Zen Browser           5. Brave Browser   6. Firefox Browser "
+    Write-Host "  7. Mozilla Thunderbird   8. bat             9. Nano  "
+    Write-Host "  10. MS Edit              11. Eza            12. Helix  "
+    Write-Host "  13. sysinternals         14. 7zip           15. Bitwarden  "
+    Write-Host "  16. Bleachbit            17. Discord        18. Obsidian "
+    Write-Host "  19. Haruna  (winget)     20. WinFsp         21. Zed        "
+    Write-Host "|-------------------------------------------------------------------│"
     Write-Host "   s to search for package                 "
     Write-Host "   i to install unlisted app               "
     Write-Host "   b to Go Back                            "
+    Write-Host "|-------------------------------------------------------------------│"
     Write-Host ""
     Write-Host ""
 
@@ -116,7 +125,7 @@ function install_apps {
             6 { scoop install extras/firefox && install_apps }
             7 { scoop install extras/thunderbird && install_apps }
             8 { scoop install bat && install_apps }
-            9 { scoop install nano -e && install_apps }
+            9 { scoop install nano && install_apps }
             10 { scoop install edit && install_apps }
             11 { scoop install eza && install_apps }
             12 { scoop install helix && install_apps }
@@ -126,7 +135,7 @@ function install_apps {
             16 { scoop install extras/bleachbit && install_apps }
             17 { scoop install extras/discord && install_apps }
             18 { scoop install extras/obsidian && install_apps }
-            19 { winget install --id=Haruna.Haruna -e && install_apps }
+            19 { winget install Kde.Haruna && install_apps }
             20 { scoop install nonportable/winfsp-np && install_apps }
             21 { scoop install extras/zed && install_apps }
             'o' { install_apps }
@@ -168,7 +177,7 @@ function install_custom_prompt {
 }
 
 function fedora_wsl {
-    wsl --install FedoraLinux-42
+    wsl --install FedoraLinux-43
     Write-Output "[+] Done!"
     Start-Sleep 10
     show_tui
@@ -207,7 +216,6 @@ function install_scoop {
     Write-Host "[+] Installing Scoop..."
     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
     Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
-    scoop bucket add main
     scoop bucket add extras
     scoop bucket add nerd-fonts
     scoop bucket add nonportable
