@@ -87,20 +87,20 @@ function install_apps {
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "  Welcome to the Commandant               " -foregroundcolor Magenta
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
-    Write-Host "  Pick an app to install:                 " -foregroundcolor Green
+    Write-Host "  Pick an app to install:                 " -foregroundcolor Red
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
-    Write-Host "  1. Powershell      2. VSCode      3. Powertoys " -foregroundcolor Green
-    Write-Host "  4. Zen Browser     5. Brave Browser   6. Firefox Browser " -foregroundcolor Green
-    Write-Host "  7. Mozilla Thunderbird   8. bat       9. Nano      " -foregroundcolor Green
-    Write-Host "  10. MS Edit       11. Eza      12. Helix  " -foregroundcolor Green
-    Write-Host "  13. sysinternals  14. 7zip     15. Bitwarden  " -foregroundcolor Green
-    Write-Host "  19. Haruna        20. WinFsp     21. Zed  " -foregroundcolor Green
-    Write-Host "  16. Bleachbit     17. Discord     18. Obsidian " -foregroundcolor Green
+    Write-Host "  1. Powershell      2. VSCode      3. Powertoys " -foregroundcolor Red
+    Write-Host "  4. Zen Browser     5. Brave Browser   6. Firefox Browser " -foregroundcolor Red
+    Write-Host "  7. Mozilla Thunderbird   8. bat       9. Nano      " -foregroundcolor Red
+    Write-Host "  10. MS Edit       11. Eza      12. Helix  " -foregroundcolor Red
+    Write-Host "  13. sysinternals  14. 7zip     15. Bitwarden  " -foregroundcolor Red
+    Write-Host "  19. Haruna        20. WinFsp     21. Zed  " -foregroundcolor Red
+    Write-Host "  16. Bleachbit     17. Discord     18. Obsidian " -foregroundcolor Red
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
-    Write-Host "   s to search for package                 " -foregroundcolor Green
-    Write-Host "   i to install unlisted app               " -foregroundcolor Green
-    Write-Host "   u to update installed apps              " -foregroundcolor Green
-    Write-Host "   b to Go Back                            " -foregroundcolor Green
+    Write-Host "   s to search for package                 " -foregroundcolor Red
+    Write-Host "   i to install unlisted app               " -foregroundcolor Red
+    Write-Host "   u to update installed apps              " -foregroundcolor Red
+    Write-Host "   b to Go Back                            " -foregroundcolor Red
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host ""
     Write-Host ""
