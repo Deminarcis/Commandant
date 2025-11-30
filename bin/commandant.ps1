@@ -1,19 +1,22 @@
 function show_tui {
     Write-Host ""
     Write-Host ""
+    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "   Welcome to the Commandant               " -foregroundcolor Magenta
+    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "   System Setup and Tweaks:                " -foregroundcolor Green
-    Write-Host ""
+    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host ""
     Write-Host "   1. Install WSL2                    2. Install Apps ( i - show installed )  " -foregroundcolor Green
     Write-Host "   3. Install Custom WSL Kernel       4. Install Custom Powershell Prompt     " -foregroundcolor Green
-    Write-Host "   5. Install Scoop                        " -foregroundcolor Green
+    Write-Host "   5. Install Scoop                   U. Update Installed Apps                " -foregroundcolor Green
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "   WSL Distros                             " -foregroundcolor Green
     Write-Host "   6.  Fedora             7.  Ubuntu             8.  Kali " -foregroundcolor Green
     Write-Host "   9.  OpenSuse Leap     10. Arch!             " -foregroundcolor Green
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "   q to Quit                               " -foregroundcolor Green
+    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host ""
     Write-Host ""
 
@@ -40,6 +43,7 @@ function show_tui {
             10 { arch_wsl }
             'o' { show_tui }
             'i' { show_installed_apps }
+            'u' { update_installed }
 
             default { Write-Host "Pick a number to continue or press 'q' to quit or 'o' to view the options again"
                 continue
@@ -80,8 +84,11 @@ function install_wsl2 {
 function install_apps {
     Write-Host ""
     Write-Host ""
+    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "  Welcome to the Commandant               " -foregroundcolor Magenta
+    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "  Pick an app to install:                 " -foregroundcolor Green
+    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "  1. Powershell      2. VSCode      3. Powertoys " -foregroundcolor Green
     Write-Host "  4. Zen Browser     5. Brave Browser   6. Firefox Browser " -foregroundcolor Green
     Write-Host "  7. Mozilla Thunderbird   8. bat       9. Nano      " -foregroundcolor Green
@@ -89,10 +96,12 @@ function install_apps {
     Write-Host "  13. sysinternals  14. 7zip     15. Bitwarden  " -foregroundcolor Green
     Write-Host "  19. Haruna        20. WinFsp     21. Zed  " -foregroundcolor Green
     Write-Host "  16. Bleachbit     17. Discord     18. Obsidian " -foregroundcolor Green
-    Write-Host "│--------------------------------------------------------│" ForegroundColor Magenta
+    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "   s to search for package                 " -foregroundcolor Green
     Write-Host "   i to install unlisted app               " -foregroundcolor Green
+    Write-Host "   u to update installed apps              " -foregroundcolor Green
     Write-Host "   b to Go Back                            " -foregroundcolor Green
+    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host ""
     Write-Host ""
 
@@ -131,6 +140,7 @@ function install_apps {
             'o' { install_apps }
             'i' { $unlisted_app = Read-Host "Enter the name of the app to install"; scoop install $unlisted_app }
             's' { $search_app = Read-Host "Enter the name of the package you are looking for: "; scoop search $search_app }
+            'u' { update_installed }
             'b' { show_tui }
             default { Write-Host "Pick a number to continue or press 'b' to go back or 'o' to view the options again"
                 continue
@@ -139,7 +149,15 @@ function install_apps {
     } while ($true)
 }
 
-# Function to show installed apps
+function update_installed {
+    Write-Host "[+] Updating installed apps..."
+    scoop update *
+    winget upgrade --all
+    Write-Output "[+] Done!"
+    Start-Sleep 10
+    show_tui
+}
+
 function show_installed_apps {
     winget list
     scoop list
