@@ -209,7 +209,7 @@ function show_tui_apps {
     echo -e "${RED}   22. Wine               23. Intellidock     24. Grid (requires Licence)   ${RESET}"
     echo -e "${RED}   25. Jetbrains Toolbox  26. Bitwarden       27. Syncthing                 ${RESET}"
     echo -e "${RED}   28. Helix              29. Eza             30. Bat                       ${RESET}"
-    echo -e "${RED}   31. Powershell                                                           ${RESET}"
+    echo -e "${RED}   31. Powershell         32. Mesa 3D         33. Vulkan Tools              ${RESET}"
     echo -e "${RED}                                                                            ${RESET}"
     echo -e "${RED}                                                                            ${RESET}"
     echo -e "${RED}                                                                            ${RESET}"
@@ -283,6 +283,10 @@ function show_tui_apps {
         29) brew install bat
            show_tui_apps ;;
         30) brew install powershell
+           show_tui_apps ;;
+        31) brew install mesa
+           show_tui_apps ;;
+        32) brew install vulkan-tools
            show_tui_apps ;;
         f) echo "Enter the name of the package you want to install"
            read package_name

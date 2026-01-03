@@ -94,8 +94,9 @@ function install_apps {
     Write-Host "  7. Mozilla Thunderbird   8. bat       9. Nano      " -foregroundcolor Red
     Write-Host "  10. MS Edit       11. Eza      12. Helix  " -foregroundcolor Red
     Write-Host "  13. sysinternals  14. 7zip     15. Bitwarden  " -foregroundcolor Red
-    Write-Host "  19. Haruna        20. WinFsp     21. Zed  " -foregroundcolor Red
-    Write-Host "  16. Bleachbit     17. Discord     18. Obsidian " -foregroundcolor Red
+    Write-Host "  16. Haruna        17. WinFsp     18. Zed  " -foregroundcolor Red
+    Write-Host "  19. Bleachbit     20. Discord     21. Obsidian " -foregroundcolor Red
+    Write-Host "  22 Mesa 3D " -foregroundcolor Red
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "   s to search for package                 " -foregroundcolor Red
     Write-Host "   i to install unlisted app               " -foregroundcolor Red
@@ -124,19 +125,20 @@ function install_apps {
             6 { scoop install extras/firefox && install_apps }
             7 { scoop install extras/thunderbird && install_apps }
             8 { scoop install bat && install_apps }
-            9 { scoop install nano -e && install_apps }
+            9 { scoop install nano && install_apps }
             10 { scoop install edit && install_apps }
             11 { scoop install eza && install_apps }
             12 { scoop install helix && install_apps }
             13 { scoop install extras/sysinternals && install_apps }
             14 { scoop install 7zip && install_apps }
             15 { scoop install extras/bitwarden && install_apps }
-            16 { scoop install extras/bleachbit && install_apps }
-            17 { scoop install extras/discord && install_apps }
-            18 { scoop install extras/obsidian && install_apps }
-            19 { winget install --id=Haruna.Haruna -e && install_apps }
-            20 { scoop install nonportable/winfsp-np && install_apps }
-            21 { scoop install extras/zed && install_apps }
+            16 { winget install --id=Haruna.Haruna -e && install_apps }
+            17 { scoop install nonportable/winfsp-np && install_apps  }
+            18 { scoop install extras/zed && install_apps }
+            19 { scoop install extras/bleachbit && install_apps }
+            20 { scoop install extras/discord && install_apps}
+            21 { scoop install extras/obsidian && install_apps }
+            22 { scoop install games/mesa3d && install_apps }
             'o' { install_apps }
             'i' { $unlisted_app = Read-Host "Enter the name of the app to install"; scoop install $unlisted_app }
             's' { $search_app = Read-Host "Enter the name of the package you are looking for: "; scoop search $search_app }
@@ -228,6 +230,7 @@ function install_scoop {
     scoop bucket add extras
     scoop bucket add nerd-fonts
     scoop bucket add nonportable
+    scoop bucket add games
     scoop install aria2
     scoop install sudo
     Write-Output "[+] Done!"
