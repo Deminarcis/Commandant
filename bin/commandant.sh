@@ -78,7 +78,7 @@ function ins_macports {
 
 function list_installed {
     brew list
-    port installe
+    port installed
 }
 
 function ins_container {
