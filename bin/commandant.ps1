@@ -11,7 +11,7 @@ function show_tui {
     Write-Host "   1. Install WSL2                    2. Install Apps ( i - show installed )  " -foregroundcolor Green
     Write-Host "   3. Install Custom WSL Kernel       4. Install Custom Powershell Prompt     " -foregroundcolor Green
     Write-Host "   5. Install Scoop                   U. Update Installed Apps                " -foregroundcolor Green
-    Write-Host "   G. Enable God Mode"
+    Write-Host "   G. Enable God Mode" -foregroundcolor Green
     Write-Host ""
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "   WSL Distros                             " -foregroundcolor Green
