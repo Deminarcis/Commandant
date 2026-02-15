@@ -8,7 +8,7 @@ function show_tui {
     Write-Host "   System Setup and Tweaks:                " -foregroundcolor Green
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host ""
-    Write-Host "   1. Install WSL2                    2. Install Apps ( i - show installed )  " -foregroundcolor Green
+    Write-Host "   1. Install WSL2                    2. Install Apps                         " -foregroundcolor Green
     Write-Host "   3. Install Custom WSL Kernel       4. Install Custom Powershell Prompt     " -foregroundcolor Green
     Write-Host "   5. Install Scoop                   U. Update Installed Apps                " -foregroundcolor Green
     Write-Host "   G. Enable God Mode                 S. Enable sudo (sd to disable)          " -foregroundcolor Green
@@ -46,7 +46,6 @@ function show_tui {
             9 { suse_leap_wsl }
             10 { arch_wsl }
             'o' { show_tui }
-            'i' { show_installed_apps }
             'u' { update_installed }
             'g' { enable_god_mode }
             's' { enable_sudo }
