@@ -3,7 +3,7 @@ function show_tui {
     Write-Host ""
     Write-Host ""
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
-    Write-Host "   Welcome to the Commandant               " -foregroundcolor Magenta
+    Write-Host "   Welcome to the Commandant               " -foregroundcolor Yellow
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "   System Setup and Tweaks:                " -foregroundcolor Green
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
@@ -93,7 +93,7 @@ function install_apps {
     Write-Host ""
     Write-Host ""
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
-    Write-Host "  Welcome to the Commandant               " -foregroundcolor Magenta
+    Write-Host "  Welcome to the Commandant               " -foregroundcolor Yellow
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "  Pick an app to install:                 " -foregroundcolor Red
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
@@ -104,7 +104,7 @@ function install_apps {
     Write-Host "  13. sysinternals  14. 7zip     15. Bitwarden  " -foregroundcolor Red
     Write-Host "  16. Haruna        17. WinFsp     18. Zed  " -foregroundcolor Red
     Write-Host "  19. Bleachbit     20. Discord     21. Obsidian " -foregroundcolor Red
-    Write-Host "  22 Mesa 3D " -foregroundcolor Red
+    Write-Host "  22 Mesa 3D       23. YT-Dlp     24. ffmpeg " -foregroundcolor Red
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "   s to search for package                 " -foregroundcolor Red
     Write-Host "   i to install unlisted app               " -foregroundcolor Red
