@@ -11,7 +11,8 @@ function show_tui {
     Write-Host "   1. Install WSL2                    2. Install Apps ( i - show installed )  " -foregroundcolor Green
     Write-Host "   3. Install Custom WSL Kernel       4. Install Custom Powershell Prompt     " -foregroundcolor Green
     Write-Host "   5. Install Scoop                   U. Update Installed Apps                " -foregroundcolor Green
-    Write-Host "   G. Enable God Mode" -foregroundcolor Green
+    Write-Host "   G. Enable God Mode                 S. Enable sudo (sd to disable)          " -foregroundcolor Green
+    Write-Host "   H. Install Hyper-V                                                         " -foregroundcolor Green
     Write-Host ""
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "   WSL Distros                             " -foregroundcolor Green
@@ -48,6 +49,9 @@ function show_tui {
             'i' { show_installed_apps }
             'u' { update_installed }
             'g' { enable_god_mode }
+            's' { enable_sudo }
+            'sd' { disable_sudo }
+            'h' { install_hyperv }
             'q' { quit }
 
             default { Write-Host "Pick a number to continue or press 'q' to quit or 'o' to view the options again"
@@ -173,16 +177,21 @@ function update_installed {
     show_tui
 }
 
-function show_installed_apps {
+function enable_sudo {
     Clear-Host
-    Write-Host ""
-    Write-Host "[+] Installed Scoop Apps:"
-    scoop list
-    Write-Host "[+] Installed Winget Apps:"
-    winget list
-    Write-Host ""
-    Start-Sleep -Seconds 10
+    Write-Host "[+] Enabling sudo..."
+    Start-Process -FilePath "..\Scripts\sudo-on.ps1" -Verb RunAs
+    Write-Output "[+] Done!"
+    Start-Sleep 10
+    show_tui
+}
+
+function install_hyperv {
     Clear-Host
+    Write-Host "[+] Installing Hyper-V..."
+    Start-Process -FilePath "..\Scripts\hyperv-on.bat" -Verb RunAs
+    Write-Output "[+] Done!"
+    Start-Sleep 10
     show_tui
 }
 
@@ -254,9 +263,9 @@ function install_scoop {
     scoop bucket add nonportable
     scoop bucket add games
     scoop install aria2
-    scoop install sudo
     Write-Output "[+] Done!"
     Start-Sleep 10
+    Clear-Host
     show_tui
 }
 
