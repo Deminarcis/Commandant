@@ -197,7 +197,7 @@ function disable_sudo {
 function install_hyperv {
     Clear-Host
     Write-Host "[+] Installing Hyper-V..."
-    Start-Process cmd.exe -Argument "/c ..\Scripts\hyperv-on.bat" -Verb RunAs
+    Start-Process PowerShell -Argument "cmd.exe /c ..\Scripts\hyperv-on.bat" -Verb RunAs
     Write-Output "[+] Done!"
     Start-Sleep 10
     show_tui
