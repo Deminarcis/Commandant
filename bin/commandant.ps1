@@ -179,7 +179,7 @@ function update_installed {
 function enable_sudo {
     Clear-Host
     Write-Host "[+] Enabling sudo..."
-    Start-Process -FilePath "..\Scripts\sudo-on.ps1" -Verb RunAs
+    Start-Process "powershell.exe ..\Scripts\sudo-on.ps1" -Verb RunAs
     Write-Output "[+] Done!"
     Start-Sleep 10
     show_tui
