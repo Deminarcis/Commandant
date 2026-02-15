@@ -3,7 +3,7 @@ function show_tui {
     Write-Host ""
     Write-Host ""
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
-    Write-Host "   Welcome to the Commandant               " -foregroundcolor Yellow
+    Write-Host "   Welcome to the Commandant               " -foregroundcolor Cyan
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "   System Setup and Tweaks:                " -foregroundcolor Green
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
@@ -93,7 +93,7 @@ function install_apps {
     Write-Host ""
     Write-Host ""
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
-    Write-Host "  Welcome to the Commandant               " -foregroundcolor Yellow
+    Write-Host "  Welcome to the Commandant               " -foregroundcolor Cyan
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "  Pick an app to install:                 " -foregroundcolor Red
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
