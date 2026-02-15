@@ -179,7 +179,16 @@ function update_installed {
 function enable_sudo {
     Clear-Host
     Write-Host "[+] Enabling sudo..."
-    Start-Process "powershell.exe ..\Scripts\sudo-on.ps1" -Verb RunAs
+    Start-Process PowerShell -Argument "..\Scripts\sudo-on.ps1" -Verb RunAs
+    Write-Output "[+] Done!"
+    Start-Sleep 10
+    show_tui
+}
+
+function disable_sudo {
+    Clear-Host
+    Write-Host "[+] Disabling sudo..."
+    Start-Process PowerShell -Argument "..\Scripts\sudo-off.ps1" -Verb RunAs
     Write-Output "[+] Done!"
     Start-Sleep 10
     show_tui
@@ -188,7 +197,7 @@ function enable_sudo {
 function install_hyperv {
     Clear-Host
     Write-Host "[+] Installing Hyper-V..."
-    Start-Process -FilePath "..\Scripts\hyperv-on.bat" -Verb RunAs
+    Start-Process cmd.exe -Argument "/c ..\Scripts\hyperv-on.bat" -Verb RunAs
     Write-Output "[+] Done!"
     Start-Sleep 10
     show_tui
