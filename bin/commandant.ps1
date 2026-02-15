@@ -176,11 +176,11 @@ function update_installed {
 function show_installed_apps {
     Clear-Host
     Write-Host ""
+    Write-Host "[+] Installed Scoop Apps:"
+    scoop list
     Write-Host "[+] Installed Winget Apps:"
     winget list
     Write-Host ""
-    Write-Host "[+] Installed Scoop Apps:"
-    scoop list
     Start-Sleep -Seconds 10
     Clear-Host
     show_tui
