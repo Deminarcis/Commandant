@@ -1,4 +1,5 @@
 function show_tui {
+    Clear-Host
     Write-Host ""
     Write-Host ""
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
@@ -10,6 +11,8 @@ function show_tui {
     Write-Host "   1. Install WSL2                    2. Install Apps ( i - show installed )  " -foregroundcolor Green
     Write-Host "   3. Install Custom WSL Kernel       4. Install Custom Powershell Prompt     " -foregroundcolor Green
     Write-Host "   5. Install Scoop                   U. Update Installed Apps                " -foregroundcolor Green
+    Write-Host "   G. Enable God Mode"
+    Write-Host ""
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
     Write-Host "   WSL Distros                             " -foregroundcolor Green
     Write-Host "   6.  Fedora             7.  Ubuntu             8.  Kali " -foregroundcolor Green
@@ -44,6 +47,8 @@ function show_tui {
             'o' { show_tui }
             'i' { show_installed_apps }
             'u' { update_installed }
+            'g' { enable_god_mode }
+            'q' { exit }
 
             default { Write-Host "Pick a number to continue or press 'q' to quit or 'o' to view the options again"
                 continue
@@ -53,6 +58,7 @@ function show_tui {
 }
 
 function install_wsl2 {
+    Clear-Host
     Write-Host "[+] Installing WSL2..."
     function wsl_branch {
         $options = @(
@@ -75,6 +81,7 @@ function install_wsl2 {
     wsl_branch
     Write-Output "[+] Done!"
     Start-Sleep 10
+    Clear-Host
     show_tui
 }
 
@@ -82,6 +89,7 @@ function install_wsl2 {
 # Main function to install apps via winget
 
 function install_apps {
+    Clear-Host
     Write-Host ""
     Write-Host ""
     Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
@@ -154,6 +162,7 @@ function install_apps {
 }
 
 function update_installed {
+    Clear-Host
     Write-Host "[+] Updating installed apps..."
     scoop update *
     winget upgrade --all
@@ -163,6 +172,7 @@ function update_installed {
 }
 
 function show_installed_apps {
+    Clear-Host
     winget list
     scoop list
     Start-Sleep -Seconds 10
@@ -170,6 +180,7 @@ function show_installed_apps {
 }
 
 function install_custom_kernel {
+    Clear-Host
     Write-Host "[+] Installing custom kernel for WSL 2..."
     Write-Output "[+] Installing custom kernel for WSL"
     Copy-Item '..\WSL Kernel\bzImage' $env:USERPROFILE
@@ -180,8 +191,9 @@ function install_custom_kernel {
 }
 
 function install_custom_prompt {
+    Clear-Host
     Write-Host "[+] Installing custom powershell prompt..."
-    New-Item $env:USERPROFILE\Documents\PowerShell\ -Type Directory -Force
+    New-Item "$env:USERPROFILE\Documents\PowerShell\" -Type Directory -Force
     Copy-Item '..\Scripts\Microsoft.PowerShell_profile.ps1' "$env:USERPROFILE\Documents\PowerShell\"
     Write-Output "[+] Done!"
     Start-Sleep 10
@@ -225,6 +237,7 @@ function suse_leap_wsl {
 
 
 function install_scoop {
+    Clear-Host
     Write-Host "[+] Installing Scoop..."
     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
     Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
@@ -239,5 +252,20 @@ function install_scoop {
     Start-Sleep 10
     show_tui
 }
+
+function enable_god_mode {
+    Clear-Host
+    Write-Host "[+] Enabling God Mode..."
+    New-Item "$env:USERPROFILE\Desktop\GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}" -Type Directory -Force
+    Write-Output "[+] Done!"
+    Start-Sleep 10
+    show_tui
+}
+
+function exit {
+    Write-Host "[+] Exiting..."
+    exit
+}
+
 #End of Functions list
 show_tui
