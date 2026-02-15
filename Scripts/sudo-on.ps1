@@ -1,2 +1,2 @@
 #Requires -RunAsAdministrator
-sudo config --enable enable
+sudo config --enable normal
