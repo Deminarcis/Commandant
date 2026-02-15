@@ -163,8 +163,10 @@ function install_apps {
 
 function update_installed {
     Clear-Host
-    Write-Host "[+] Updating installed apps..."
+    Write-Host "[+] Updating installed Scoop Apps..."
     scoop update *
+    Write-Host ""
+    Write-Host "[+] Updating installed Winget Apps..."
     winget upgrade --all
     Write-Output "[+] Done!"
     Start-Sleep 10
@@ -173,9 +175,14 @@ function update_installed {
 
 function show_installed_apps {
     Clear-Host
+    Write-Host ""
+    Write-Host "[+] Installed Winget Apps:"
     winget list
+    Write-Host ""
+    Write-Host "[+] Installed Scoop Apps:"
     scoop list
     Start-Sleep -Seconds 10
+    Clear-Host
     show_tui
 }
 
@@ -263,7 +270,7 @@ function enable_god_mode {
 }
 
 function quit {
-    Write-Host "[+] Exiting..."
+    Write-Host "[+] Exiting... Buh-bye!"
     exit
 }
 
