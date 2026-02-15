@@ -11,6 +11,7 @@ if ($host.Name -eq 'ConsoleHost')
     Import-Module PSReadLine
 }
 
+Set-PSReadLineKeyHandler -Key Tab -Function Complete
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 $PSReadLineOptions = @{
