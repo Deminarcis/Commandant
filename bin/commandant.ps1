@@ -48,7 +48,7 @@ function show_tui {
             'i' { show_installed_apps }
             'u' { update_installed }
             'g' { enable_god_mode }
-            'q' { exit }
+            'q' { quit }
 
             default { Write-Host "Pick a number to continue or press 'q' to quit or 'o' to view the options again"
                 continue
@@ -262,7 +262,7 @@ function enable_god_mode {
     show_tui
 }
 
-function exit {
+function quit {
     Write-Host "[+] Exiting..."
     exit
 }
