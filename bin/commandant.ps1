@@ -1,3 +1,6 @@
+pwdroot = Get-Location
+cd $pwdroot
+
 function show_tui {
     Clear-Host
     Write-Host ""
