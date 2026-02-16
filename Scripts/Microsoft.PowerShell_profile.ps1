@@ -14,10 +14,13 @@ if ($host.Name -eq 'ConsoleHost')
 Set-PSReadLineKeyHandler -Key Tab -Function Complete
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
-$PSReadLineOptions = @{
-    HistoryNoDuplicates = $true
-    HistorySearchCursorMovesToEnd = $true
-    Colors = @{
+Set-PSReadLineOption -EditMode Windows
+Set-PSReadLineOption -HistoryNoDuplicates
+Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+Set-PSReadLineOption -PredictionSource History
+Set-PSReadLineOption -PredictionViewStyle ListView
+Set-PSReadLineOption -BellStyle None
+Set-PSReadLineOption -Colors @{
         Command = '#87CEEB'  # SkyBlue (pastel)
         Parameter = '#98FB98'  # PaleGreen (pastel)
         Operator = '#FFB6C1'  # LightPink (pastel)
@@ -29,11 +32,6 @@ $PSReadLineOptions = @{
         Keyword = '#8367c7'  # Violet (pastel)
         Error = '#FF6347'  # Tomato (keeping it close to red for visibility)
     }
-    PredictionSource = 'History'
-    PredictionViewStyle = 'ListView'
-    BellStyle = 'None'
-}
-Set-PSReadLineOptionsCompat -Options $PSReadLineOptions
 
 function prompt {
     $Time = (Get-Date).ToString("HH:mm")
