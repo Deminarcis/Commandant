@@ -1,5 +1,4 @@
-pwdroot = Get-Location
-cd $pwdroot
+appRoot = Get-Location
 
 function show_tui {
     Clear-Host
