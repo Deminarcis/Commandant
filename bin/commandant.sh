@@ -35,11 +35,12 @@ function ins_macports {
     echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
     echo -e "${YELLOW}   Which version of MacOS do you have?                     ${RESET}"
     echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
-    echo -e "${YELLOW}   1. Sequoia  (pick this one if you dont know)            ${RESET}"
-    echo -e "${YELLOW}   2. Sonoma                                               ${RESET}"
-    echo -e "${YELLOW}   3. Ventura                                              ${RESET}"
-    echo -e "${YELLOW}   4. Monterey                                             ${RESET}"
-    echo -e "${YELLOW}   5. Something else  (open website)                       ${RESET}"
+    echo -e "${YELLOW}   1. Tahoe                                                ${RESET}"
+    echo -e "${YELLOW}   2. Sequoia                                              ${RESET}"
+    echo -e "${YELLOW}   3. Sonoma                                               ${RESET}"
+    echo -e "${YELLOW}   4. Ventura                                              ${RESET}"
+    echo -e "${YELLOW}   5. Monterey                                             ${RESET}"
+    echo -e "${YELLOW}   6. Something else  (open website)                       ${RESET}"
     echo -e "${YELLOW}                                                           ${RESET}"
     echo -e "${YELLOW}                                                           ${RESET}"
     echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
@@ -52,23 +53,27 @@ function ins_macports {
     read choice
 
     case $choice in
-        1) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-15-Sequoia.pkg
+        1) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-16-Tahoe.pkg
+           chmod +x MacPorts-2.11.4-16-Tahoe.pkg
+           open MacPorts-2.11.4-16-Tahoe.pkg
+           ins_macports ;;
+        2) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-15-Sequoia.pkg
            chmod +x MacPorts-2.11.4-15-Sequoia.pkg
            open MacPorts-2.11.4-15-Sequoia.pkg
            ins_macports ;;
-        2) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-14-Sonoma.pkg
+        3) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-14-Sonoma.pkg
            chmod +x MacPorts-2.11.4-14-Sonoma.pkg
            open MacPorts-2.11.4-14-Sonoma.pkg
            ins_macports ;;
-        3) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-13-Ventura.pkg
+        4) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-13-Ventura.pkg
            chmod +x MacPorts-2.11.4-13-Ventura.pkg
            open MacPorts-2.11.4-13-Ventura.pkg
            ins_macports ;;
-        4) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-12-Monterey.pkg
+        5) curl -OL https://github.com/macports/macports-base/releases/download/v2.11.4/MacPorts-2.11.4-12-Monterey.pkg
            chmod +x MacPorts-2.11.4-12-Monterey.pkg
            open MacPorts-2.11.4-12-Monterey.pkg
            ins_macports ;;
-        5) open 'https://www.macports.org/install.php'
+        6) open 'https://www.macports.org/install.php'
            ins_macports ;;
         b) show_tui ;;
         o) ins_macports ;;
@@ -146,7 +151,6 @@ function setup_blackarch {
 }
 
 ### Put any code not related to the TUI above this
-### App installer gui
 
 function  show_tui_containers {
     echo -e ""
@@ -193,22 +197,21 @@ function  show_tui_containers {
 }
 
 function show_tui_apps {
-    # Professional TUI for Commandant with rounded corners
     echo -e ""
     echo -e ""
     echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
     echo -e "${RED}   Pick an app to install                                                   ${RESET}"
     echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
     echo -e "${RED}   1. Ghostty             2. iTerm2           3. Kitty                      ${RESET}"
-    echo -e "${RED}   4. Alacritty           5. Tmux             6. Zellij                     ${RESET}"
-    echo -e "${RED}   7. VSCode              8. Zed              9. Docker Destkop             ${RESET}"
-    echo -e "${RED}   10. Podman Desktop     11. Crossover       12. UTM                       ${RESET}"
+    echo -e "${RED}   4. Alacritty           5. Zellij           6. VSCode                     ${RESET}"
+    echo -e "${RED}   7. Zed                 8. Podman Desktop   9. Crossover                 ${RESET}"
+    echo -e "${RED}   10. UTM                11. Handbrake       12. Mole                     ${RESET}"
     echo -e "${RED}   13. Veracrypt          14. Orion           15. Google Chrome             ${RESET}"
-    echo -e "${RED}   16. Brave Browser      17. Zen             18. Discord                   ${RESET}"
-    echo -e "${RED}   19. Discord            20. xquartz         21. Wine                      ${RESET}"
-    echo -e "${RED}   22. Wine               23. Intellidock     24. Grid (requires Licence)   ${RESET}"
-    echo -e "${RED}   25. Jetbrains Toolbox  26. Bitwarden       27. Syncthing                 ${RESET}"
-    echo -e "${RED}   28. Helix              29. Eza             30. Bat                       ${RESET}"
+    echo -e "${RED}   16. Helium             17. Zen             18. Discord                   ${RESET}"
+    echo -e "${RED}   19. Thunderbird        20. xquartz         21. Superfile                 ${RESET}"
+    echo -e "${RED}   22. Ghidra             23. Intellidock     24. Grid (requires Licence)   ${RESET}"
+    echo -e "${RED}   25. Jetbrains Toolbox  26. Bitwarden       27. LMStudio                  ${RESET}"
+    echo -e "${RED}   28. Helix              29. lsd             30. Bat                       ${RESET}"
     echo -e "${RED}   31. Powershell         32. Mesa 3D         33. Vulkan Tools              ${RESET}"
     echo -e "${RED}                                                                            ${RESET}"
     echo -e "${RED}                                                                            ${RESET}"
@@ -236,57 +239,63 @@ function show_tui_apps {
            show_tui_apps ;;
         4) brew install alacritty
            show_tui_apps ;;
-        5) brew install tmux
+        5) brew install zellij
            show_tui_apps ;;
-        6) brew install zellij
+        6) brew install visual-studio-code
            show_tui_apps ;;
-        7) brew install visual-studio-code
+        7) brew install zed
            show_tui_apps ;;
-        9) brew install zed
+        8) brew install podman-desktop
            show_tui_apps ;;
-        10) brew install docker-desktop
+        9) brew install crossover
            show_tui_apps ;;
-        11) brew install podman-desktop
+        10) brew install utm
            show_tui_apps ;;
-        12) brew install crossover
+        11) brew install handbrake
            show_tui_apps ;;
-        13) brew install utm
+        12) brew install mole
+           show_tui_apps;;
+        13) brew install veracrypt
            show_tui_apps ;;
-        15) brew install veracrypt
+        14) brew install orion
            show_tui_apps ;;
-        16) brew install orion
+        15) brew install google-chrome
            show_tui_apps ;;
-        17) brew install google-chrome
+        16) brew install --cask helium-browser
            show_tui_apps ;;
-        18) brew install brave-browser
+        17) brew install zen
            show_tui_apps ;;
-        19) brew install zen
+        18) brew install discord
            show_tui_apps ;;
-        20) brew install discord
+        19) brew install thunderbird
            show_tui_apps ;;
-        21) brew install xquartz
+        20) brew install xquartz
            show_tui_apps ;;
-        22) brew install thunderbird
+        21) brew install superfile
            show_tui_apps ;;
-        23) brew install grid
+        22) brew install ghidra
            show_tui_apps ;;
-        24) brew install jetbrains-toolbox
+        23) brew install intellidock
            show_tui_apps ;;
-        25) brew install bitwarden
+        24) brew install grid
            show_tui_apps ;;
-        26) brew install syncthing
+        25) brew install jetbrains-toolbox
            show_tui_apps ;;
-        27) brew install helix
+        26) brew install bitwarden
            show_tui_apps ;;
-        28) brew install eza
+        27) brew install --cask lm-studio
            show_tui_apps ;;
-        29) brew install bat
+        28) brew install helix
            show_tui_apps ;;
-        30) brew install powershell
+        29) brew install lsd
            show_tui_apps ;;
-        31) brew install mesa
+        30) brew install bat
            show_tui_apps ;;
-        32) brew install vulkan-tools
+        31) brew install powershell
+           show_tui_apps ;;
+        32) brew install mesa
+           show_tui_apps ;;
+        33) brew install vulkan-tools
            show_tui_apps ;;
         f) echo "Enter the name of the package you want to install"
            read package_name
