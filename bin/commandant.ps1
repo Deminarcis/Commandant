@@ -4,25 +4,124 @@ function show_tui {
     Clear-Host
     Write-Host ""
     Write-Host ""
-    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host "   Welcome to the Commandant               " -foregroundcolor Cyan
-    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host "   System Setup and Tweaks:                " -foregroundcolor Green
-    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host ""
-    Write-Host "   1. Install WSL2                    2. Install Apps                         " -foregroundcolor Green
-    Write-Host "   3. Install Custom WSL Kernel       4. Install Custom Powershell Prompt     " -foregroundcolor Green
-    Write-Host "   5. Install Scoop                   U. Update Installed Apps                " -foregroundcolor Green
-    Write-Host "   G. Enable God Mode                 S. Enable sudo (sd to disable)          " -foregroundcolor Green
-    Write-Host "   H. Install Hyper-V                                                         " -foregroundcolor Green
+    Write-Host "   1. Install WSL2                                            " -foregroundcolor Green
+    Write-Host "   2. Install Apps                                            " -foregroundcolor Green
+    Write-Host "   3. Install Custom WSL Kernel                               " -foregroundcolor Green
+    Write-Host "   4. Install Custom Powershell Prompt                        " -foregroundcolor Green
+    Write-Host "   5. Install Scoop                                           " -foregroundcolor Green
+    Write-Host "   U. Update Installed Apps                                   " -foregroundcolor Green
+    Write-Host "   G. Enable God Mode                                         " -foregroundcolor Green
+    Write-Host "   S. Enable sudo (sd to disable)                             " -foregroundcolor Green
+    Write-Host "   H. Install Hyper-V                                         " -foregroundcolor Green
     Write-Host ""
-    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
-    Write-Host "   WSL Distros                             " -foregroundcolor Green
-    Write-Host "   6.  Fedora             7.  Ubuntu             8.  Kali " -foregroundcolor Green
-    Write-Host "   9.  OpenSuse Leap     10. Arch!             " -foregroundcolor Green
-    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   WSL Distros                                 " -foregroundcolor Green
+    Write-Host "   6.  Install WSL2 containers                 " -foregroundcolor Green
+    Write-Host ""
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host "   q to Quit                               " -foregroundcolor Green
-    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host ""
+    Write-Host ""
+
+    $choices = @()
+
+    do {
+        Write-Host
+        $choice = Read-Host "Pick a number to continue or press 'q' to quit or 'o' to view the options again"
+
+        if ($choice -eq 'q' -or $choice -eq 'quit') {
+            exit
+        }
+
+        switch ($choice) {
+            1 { install_wsl2 }
+            2 { install_apps }
+            3 { install_custom_kernel }
+            4 { install_custom_prompt }
+            5 { install_scoop }
+            6 { contaners_windows }
+            'o' { show_tui }
+            'u' { update_installed }
+            'g' { enable_god_mode }
+            's' { enable_sudo }
+            'sd' { disable_sudo }
+            'h' { install_hyperv }
+            'q' { abort }
+
+            default { Write-Host "Pick a number to continue or press 'q' to quit or 'o' to view the options again"
+                continue
+            }
+        }
+    } while ($true)
+}
+
+function containers_windows {
+    Clear-Host
+    Write-Host ""
+    Write-Host ""
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   WSL Distro Installer               " -foregroundcolor Cyan
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   Pick your WSL Distro:                "
+    Write-Host "   1. Ubuntu"
+    Write-Host "   2. Fedora"
+    Write-Host "   3. Kali Linux"
+    Write-Host "   4. Arch Linux"
+    Write-Host "   5. OpenSUSE Leap"
+    Write-Host ""
+    Write-Host ""
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   q to Quit                               " -foregroundcolor Green
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host ""
+    Write-Host ""
+
+    do {
+        $choice = Read-Host "Enter your choice or press 'o' to reload the options"
+        if ($choice -eq 'q' -or $choice -eq 'quit') {
+            break
+        }
+        switch ($choice) {
+            '1' { ubuntu_wsl; containers_windows }
+            '2' { fedora_wsl; containers_windows }
+            '3' { kali_linux_wsl; containers_windows }
+            '4' { arch_linux_wsl; containers_windows }
+            '5' { opensuse_leap_wsl; containers_windows }
+            'b' { show_tui }
+            'o' { containers_windows }
+        }
+    } while ($true)
+}
+
+function show_linux_tui {
+    Clear-Host
+    Write-Host ""
+    Write-Host ""
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   Welcome to the Commandant               " -foregroundcolor Cyan
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   System Setup and Tweaks:                " -foregroundcolor Cyan
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host ""
+    Write-Host "   1. Install Flathub                                        " -foregroundcolor Cyan
+    Write-Host "   2. Install Distroshelf                                    " -foregroundcolor Cyan
+    Write-Host "   3. Install Homebrew                                       " -foregroundcolor Cyan
+    Write-Host "   4. Install Nix package manager                            " -foregroundcolor Cyan
+    Write-Host "   5. Install Pods                                         " -foregroundcolor Green
+    Write-Host ""
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   Container Recipes                               " -foregroundcolor Green
+    Write-Host "   5. Setup containers                             " -foregroundcolor Green
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   q to Quit                               " -foregroundcolor Green
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host ""
     Write-Host ""
 
@@ -47,19 +146,323 @@ function show_tui {
             8 { kali_wsl }
             9 { suse_leap_wsl }
             10 { arch_wsl }
-            'o' { show_tui }
-            'u' { update_installed }
-            'g' { enable_god_mode }
-            's' { enable_sudo }
-            'sd' { disable_sudo }
-            'h' { install_hyperv }
-            'q' { quit }
+            'o' { show_linux_tui }
+            'q' { abort }
 
             default { Write-Host "Pick a number to continue or press 'q' to quit or 'o' to view the options again"
                 continue
             }
         }
     } while ($true)
+}
+
+function show_mac_tui {
+    Clear-Host
+    Write-Host ""
+    Write-Host ""
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   Welcome to the Commandant               " -foregroundcolor Cyan
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   System Setup and Tweaks:                " -foregroundcolor Green
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host ""
+    Write-Host "   1. Install Containerization                                " -foregroundcolor Green
+    Write-Host "   2. Install Homebrew                                        " -foregroundcolor Green
+    Write-Host "   3. Install MacPorts                                        " -foregroundcolor Green
+    Write-Host "   4. Install Apps (needs brew)                               " -foregroundcolor Green
+    Write-Host ""
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   Container Recipes                               " -foregroundcolor Green
+    Write-Host "   5. Setup containers                             " -foregroundcolor Green
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   q to Quit                               " -foregroundcolor Green
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host ""
+    Write-Host ""
+
+    $choices = @()
+
+    do {
+        Write-Host
+        $choice = Read-Host "Pick a number to continue or press 'q' to quit or 'o' to view the options again"
+
+        if ($choice -eq 'q' -or $choice -eq 'quit') {
+            exit
+        }
+
+        switch ($choice) {
+            1 { ins_container }
+            2 { ins_brew }
+            3 { ins_macports }
+            4 { show_tui_apps_mac }
+            5 { show_tui_containers_mac }
+            'o' { show_mac_tui }
+            'q' { abort }
+
+            default { Write-Host "Pick a number to continue or press 'q' to quit or 'o' to view the options again"
+                continue
+            }
+        }
+    } while ($true)
+}
+
+function show_tui_apps_mac {
+    Write-Host ""
+    Write-Host ""
+    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   Pick an app to install                                                   " -foregroundcolor Red
+    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   1. Ghostty             2. iTerm2           3. Kitty                      " -foregroundcolor Red
+    Write-Host "   4. Alacritty           5. Zellij           6. VSCode                     " -foregroundcolor Red
+    Write-Host "   7. Zed                 8. Podman Desktop   9. Crossover                 "  -foregroundcolor Red
+    Write-Host "   10. UTM                11. Handbrake       12. Mole                     " -foregroundcolor Red
+    Write-Host "   13. Veracrypt          14. Orion           15. Google Chrome             " -foregroundcolor Red
+    Write-Host "   16. Helium             17. Zen             18. Discord                   " -foregroundcolor Red
+    Write-Host "   19. Thunderbird        20. xquartz         21. Superfile                 " -foregroundcolor Red
+    Write-Host "   22. Ghidra             23. Intellidock     24. Grid (requires Licence)   " -foregroundcolor Red
+    Write-Host "   25. Jetbrains Toolbox  26. Bitwarden       27. LMStudio                  " -foregroundcolor Red
+    Write-Host "   28. Helix              29. lsd             30. Bat                       " -foregroundcolor Red
+    Write-Host "   31. Powershell         32. Mesa 3D         33. Vulkan Tools              " -foregroundcolor Red
+    Write-Host "                                                                            " -foregroundcolor Red
+    Write-Host "                                                                            " -foregroundcolor Red
+    Write-Host "                                                                            " -foregroundcolor Red
+    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   f to install fomulaue not on this list                                   " -foregroundcolor Red
+    Write-Host "   c to install cask not on this list                                       " -foregroundcolor Red
+    Write-Host "   p to install port not on this list                                       " -foregroundcolor Red
+    Write-Host "   b to go back                                                             " -foregroundcolor Red
+    Write-Host "   o to View Options                                                        " -foregroundcolor Red
+    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host ""
+    Write-Host ""
+
+    $choices = @()
+    $cask_choices = Read-Host "Enter the name of the brew cask you want to install"
+    $port_choices = Read-Host "Enter the name of the port you want to install"
+    $brew_choices = Read-Host "Enter the name of the brew formula you want to install"
+
+    do {
+        Write-Host
+        $choice = Read-Host "Pick a number to continue or press 'q' to quit or 'o' to view the options again"
+
+        if ($choice -eq 'q' -or $choice -eq 'quit') {
+            exit
+        }
+
+        switch ($choice) {
+            1 { brew install ghostty; show_tui_apps_mac }
+            2 { brew install iterm2; show_tui_apps_mac }
+            3 { brew install kitty; show_tui_apps_mac }
+            4 { brew install alacritty; show_tui_apps_mac }
+            5 { brew install zellij; show_tui_apps_mac }
+            6 { brew install visual-studio-code; show_tui_apps_mac }
+            7 { brew install zed; show_tui_apps_mac }
+            8 { brew install podman-desktop; show_tui_apps_mac }
+            9 { brew install crossover; show_tui_apps_mac }
+            10 { brew install utm; show_tui_apps_mac }
+            11 { brew install handbrake; show_tui_apps_mac }
+            12 { brew install mole; show_tui_apps_mac }
+            13 { brew install veracrypt; show_tui_apps_mac }
+            14 { brew install orion; show_tui_apps_mac }
+            15 { brew install google-chrome; show_tui_apps_mac }
+            16 { brew install --cask helium-browser; show_tui_apps_mac }
+            17 { brew install zen; show_tui_apps_mac }
+            18 { brew install discord; show_tui_apps_mac }
+            19 { brew install thunderbird; show_tui_apps_mac }
+            20 { brew install xquartz; show_tui_apps_mac }
+            21 { brew install superfile; show_tui_apps_mac }
+            22 { brew install ghidra; show_tui_apps_mac }
+            23 { brew install intellidock; show_tui_apps_mac }
+            24 { brew install grid; show_tui_apps_mac }
+            25 { brew install jetbrains-toolbox; show_tui_apps_mac }
+            26 { brew install bitwarden; show_tui_apps_mac }
+            27 { brew install --cask lm-studio; show_tui_apps_mac }
+            28 { brew install helix; show_tui_apps_mac }
+            29 { brew install lsd; show_tui_apps_mac }
+            30 { brew install bat; show_tui_apps_mac }
+            31 { brew install powershell; show_tui_apps_mac }
+            32 { brew install mesa; show_tui_apps_mac }
+            33 { brew install vulkan-tools; show_tui_apps_mac }
+            'c' { cask_choices }
+            'p' { port_choices }
+            'b' { show_mac_tui }
+            'f' { brew_choices }
+            'o' { show_tui_apps_mac }
+            default { Write-Host "Pick a number to continue or press 'q' to quit or 'o' to view the options again"
+                continue
+            }
+        }
+    } while ($true)
+
+}
+
+function  show_tui_containers {
+    Write-Host ""
+    Write-Host ""
+    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   Pick your container recipe                              "  -foregroundcolor Magenta
+    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   1. Ubuntu                                              " -foregroundcolor Magenta
+    Write-Host "   2. Fedora                                               " -foregroundcolor Magenta
+    Write-Host "   3. CentOS                                              " -foregroundcolor Magenta
+    Write-Host "   4. Red Hat                                             " -foregroundcolor Magenta
+    Write-Host "   5. Kali                                                " -foregroundcolor Magenta
+    Write-Host "   6. Blackarch                                           " -foregroundcolor Magenta
+    Write-Host "   7. OpenSUSE                                            " -foregroundcolor Magenta
+    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   b to go back                                            " -foregroundcolor Magenta
+    Write-Host "   o to View Options                                       " -foregroundcolor Magenta
+    Write-Host "   q to Quit                                               " -foregroundcolor Magenta
+    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host ""
+    Write-Host ""
+
+    do {
+        Write-Host
+        $choice = Read-Host "Enter your choice from the list above: "
+
+        if ($choice -eq 'q' -or $choice -eq 'quit') {
+            break
+        }
+
+        switch ($choice) {
+            1 { setup_ubuntu }
+            2 { setup_fedora }
+            3 { setup_centos }
+            4 { setup_rhel }
+            5 { setup_kali }
+            6 { setup_blackarch }
+            7 { setup_leap }
+            'b' { show_mac_tui }
+            'o' { show_tui_containers}
+            default {
+                Write-Host "Invalid choice. Please select from the list above."
+                continue
+            }
+        }
+   } while ($true)
+}
+
+function ins_macports {
+    # Install MacPorts
+    xcode_utils
+    Write-Host ""
+    Write-Host ""
+    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   Which version of MacOS do you have?                     "
+    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   1. Tahoe                                                " -foregroundcolor Yellow
+    Write-Host "   2. Sequoia                                              " -foregroundcolor Yellow
+    Write-Host "   3. Sonoma                                               " -foregroundcolor Yellow
+    Write-Host "   4. Ventura                                              " -foregroundcolor Yellow
+    Write-Host "   5. Monterey                                             " -foregroundcolor Yellow
+    Write-Host "   6. Something else  (open website)                       " -foregroundcolor Yellow
+    Write-Host "                                                           " -foregroundcolor Yellow
+    Write-Host "                                                           " -foregroundcolor Yellow
+    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   b to go back                                            " -foregroundcolor Yellow
+    Write-Host "   o to View Options                                       " -foregroundcolor Yellow
+    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host ""
+    Write-Host ""
+
+    do {
+        Write-Host
+        $choice =  Read-Host "Which version of MacOS do you have?"
+
+        if ($choice -eq 'q' -or $choice -eq 'quit') {
+            break
+        }
+
+        switch ($choice) {
+            '1' { curl -OL "https://github.com/macports/macports-base/releases/download/v2.12.5/MacPorts-2.12.5-26-Tahoe.pkg"; chmod +x MacPorts-2.12.5-26-Tahoe.pkg; open MacPorts-2.12.5-26-Tahoe.pkg; ins_macports }
+            '2' { curl -OL "https://github.com/macports/macports-base/releases/download/v2.12.5/MacPorts-2.12.5-15-Sequoia.pkg"; chmod +x MacPorts-2.12.5-15-Sequoia.pkg; open MacPorts-2.12.5-15-Sequoia.pkg; ins_macports }
+            '3' { curl -OL "https://github.com/macports/macports-base/releases/download/v2.12.5/MacPorts-2.12.5-14-Sonoma.pkg"; chmod +x MacPorts-2.12.5-14-Sonoma.pkg; open MacPorts-2.12.5-14-Sonoma.pkg; ins_macports }
+            '4' { curl -OL "https://github.com/macports/macports-base/releases/download/v2.12.5/MacPorts-2.12.5-13-Ventura.pkg"; chmod +x MacPorts-2.12.5-13-Ventura.pkg; open MacPorts-2.12.5-13-Ventura.pkg; ins_macports }
+            '5' { curl -OL "https://github.com/macports/macports-base/releases/download/v2.12.5/MacPorts-2.12.5-12-Monterey.pkg"; chmod +x MacPorts-2.12.5-12-Monterey.pkg; open MacPorts-2.12.5-12-Monterey.pkg; ins_macports }
+            '6' { open 'https://www.macports.org/install.php'; ins_macports }
+            'b' { show_mac_tui }
+            'o' { ins_macports }
+            default {
+                Write-Host "Invalid choice. Please select from the list above."
+                continue
+            }
+        }
+    } while ($true)
+}
+
+function setup_kali {
+    setup_container
+    container image pull kalilinux/kali-rolling:latest
+    # container dir to share
+    mkdir -p ~/containers/home/kali
+    container create --name Kali --volume ~/containers/home/kali:/home/kali --volume /tmp/.X11-unix:/tmp/.X11-unix
+}
+
+function setup_rhel {
+    setup_container
+    container image pull redhat:ubi10
+    # container dir to share
+    mkdir -p ~/containers/home/rhel
+    container create --name Kali --volume ~/containers/home/rhel:/home/rhel --volume /tmp/.X11-unix:/tmp/.X11-unix
+}
+
+function setup_centos {
+    setup_container
+    container image pull quay.io/centos/centos:stream10
+    # container dir to share
+    mkdir -p ~/containers/home/centos
+    container create --name Kali --volume ~/containers/home/centos:/home/centos --volume /tmp/.X11-unix:/tmp/.X11-unix
+}
+
+function setup_leap {
+    setup_container
+    container image pull opensuse/leap:latest
+    # container dir to share
+    mkdir -p ~/containers/home/opensuse
+    container create --name Kali --volume ~/containers/home/opensuse:/home/opensuse --volume /tmp/.X11-unix:/tmp/.X11-unix
+}
+
+function setup_fedora {
+    setup_container
+    container image pull fedora:latest
+    # container dir to share
+    mkdir -p ~/containers/home/fedora
+    container create --name Kali --volume ~/containers/home/fedora:/home/fedora --volume /tmp/.X11-unix:/tmp/.X11-unix
+}
+
+function setup_ubuntu {
+    setup_container
+    container image pull ubuntu:latest
+    # container dir to share
+    mkdir -p ~/containers/home/ubuntu
+    container create --name Kali --volume ~/containers/home/ubuntu:/home/ubuntu --volume /tmp/.X11-unix:/tmp/.X11-unix
+}
+
+function setup_blackarch {
+    setup_container
+    container image pull blackarch/blackarch:latest
+    # container dir to share
+    mkdir -p ~/containers/home/blackarch
+    container create --name Kali --volume ~/containers/home/blackarch:/home/blackarch --volume /tmp/.X11-unix:/tmp/.X11-unix
+}
+
+function ins_container {
+    brew install --cask container
+}
+
+function setup_container {
+    container system start
+}
+function xcode_utils {
+    # Install Xcode Command Line Tools
+    xcode-select --install
+}
+
+function ins_brew {
+    # Install Homebrew
+    xcode_utils
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
 function install_wsl2 {
@@ -97,11 +500,11 @@ function install_apps {
     Clear-Host
     Write-Host ""
     Write-Host ""
-    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host "  Welcome to the Commandant               " -foregroundcolor Cyan
-    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host "  Pick an app to install:                 " -foregroundcolor Red
-    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host "  1. Powershell      2. VSCode      3. Powertoys " -foregroundcolor Red
     Write-Host "  4. Zen Browser     5. Google Chrome   6. Firefox Browser " -foregroundcolor Red
     Write-Host "  7. Mozilla Thunderbird   8. bat       9. Nano      " -foregroundcolor Red
@@ -110,12 +513,12 @@ function install_apps {
     Write-Host "  16. Haruna        17. WinFsp     18. Zed  " -foregroundcolor Red
     Write-Host "  19. Bleachbit     20. Discord     21. Obsidian " -foregroundcolor Red
     Write-Host "  22 Mesa 3D       23. YT-Dlp     24. ffmpeg " -foregroundcolor Red
-    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host "   s to search for package                 " -foregroundcolor Red
     Write-Host "   i to install unlisted app               " -foregroundcolor Red
     Write-Host "   u to update installed apps              " -foregroundcolor Red
     Write-Host "   b to Go Back                            " -foregroundcolor Red
-    Write-Host "|--------------------------------------------------------------------------------│" -foregroundcolor Magenta
+    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host ""
     Write-Host ""
 
@@ -288,10 +691,18 @@ function enable_god_mode {
     show_tui
 }
 
-function quit {
+function abort {
     Write-Host "[+] Exiting... Buh-bye!"
     exit
 }
 
 #End of Functions list
-show_tui
+if ($isMac -eq $true) {
+    show_mac_tui
+}
+elseif ($isLinux -eq $true) {
+    show_linux_tui
+}
+else {
+    show_tui
+}
