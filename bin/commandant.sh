@@ -341,7 +341,6 @@ function show_tui {
     echo -e "${YELLOW}  q to Quit                                                   ${RESET}"
     echo -e "${MAGENTA}  o to View Options                                           ${RESET}"
      echo -e "${MAGENTA}│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│${RESET}"
-
     echo -e ""
     echo -e ""
     echo -e "Pick a number to continue or press 'q' to quit or 'o' to view the options again: "
