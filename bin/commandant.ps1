@@ -203,10 +203,10 @@ function show_linux_tui
             { install_scoop
             }
             6
-            { cp -rvf ../Scripts/zshrc ~/.zshrc; echo -e "\n[+] Done!"
+            { cp -rvf ../Scripts/zshrc ~/.zshrc; Write-Output "[+] Done!"
             }
             7
-            { mkdir -p ~/.config/powershell; cp -rvf ../Scripts/Microsoft.PowerShell_profile.ps1 ~/.config/powershell; echo -e "\n[+] Done!"
+            { mkdir -p ~/.config/powershell; cp -rvf ../Scripts/Microsoft.PowerShell_profile.ps1 ~/.config/powershell; Write-Output "[+] Done!"
             }
             'o'
             { show_linux_tui
@@ -690,7 +690,7 @@ function ins_brew
 function ins_brew_linux
 {
     # Install Homebrew on Linux
-    echo -e "\n[!!] Please do this outside powershell by running \n /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+    Write-Output "[!!] Please do this outside powershell by running \n /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
 }
 
 function install_wsl2
