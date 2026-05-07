@@ -161,8 +161,8 @@ function show_linux_tui
     Write-Host "   2. Install Distroshelf                                    " -foregroundcolor Cyan
     Write-Host "   3. Install Homebrew                                       " -foregroundcolor Cyan
     Write-Host "   4. Install Nix package manager                            " -foregroundcolor Cyan
-    Write-Host "   5. Install Pods                                           " -foregroundcolor Green
-    Write-Host "   6. Set up custom zsh profile                              " -foregroundcolor Green
+    Write-Host "   5. Set up custom zsh profile                              " -foregroundcolor Green
+    Write-Host "   6. Set up custom powershell profile                              " -foregroundcolor Green
     Write-Host ""
     Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host "   Container Recipes                               " -foregroundcolor Green
@@ -197,15 +197,12 @@ function show_linux_tui
             { ins_brew_linux
             }
             4
-            { ins
+            { ins_nix
             }
             5
-            { install_scoop
-            }
-            6
             { cp -rvf ../Scripts/zshrc ~/.zshrc; Write-Output "[+] Done!"
             }
-            7
+            6
             { mkdir -p ~/.config/powershell; cp -rvf ../Scripts/Microsoft.PowerShell_profile.ps1 ~/.config/powershell; Write-Output "[+] Done!"
             }
             'o'
@@ -932,7 +929,7 @@ function install_custom_prompt
 
 function fedora_wsl
 {
-    wsl --install FedoraLinux-42
+    wsl --install FedoraLinux-44
     Write-Output "[+] Done!"
     Start-Sleep 10
     show_tui

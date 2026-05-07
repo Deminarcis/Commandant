@@ -109,8 +109,8 @@ configure_prompt() {
 
 #Prompt V3 (halloween --ish) ### for some reason in monokai pro, blue is orange
     export PROMPT="
-%F{blue}┌──[%F{magenta}%n%F{blue}]-[%F{red}@%m%F{blue}]--%F{blue}[%F{white}%T - %D{%d-%m-%y}%F{blue}]
-%F{blue}└─ %F{white}"
+%F{red}┌──[%F{magenta}%n%F{red}]-[%F{blue}@%m%F{red}]--%F{red}[%F{white}%T - %D{%d-%m-%y}%F{red}]
+%F{red}└─ %F{white}"
 
     PS2='%F{red}:%F{magenta}:%F{blue}: %F{white}> '
     unset prompt_symbol
@@ -122,7 +122,7 @@ configure_prompt() {
 NEWLINE_BEFORE_PROMPT=yes
 # STOP KALI CONFIG VARIABLES
 
-if [ "$color_prompt" = yes ] && [ $(uname) = "Darwin" ]; then
+if [ "$color_prompt" = yes ] && [ "$(uname)" = "Darwin" ]; then
     # override default virtualenv indicator in prompt
     VIRTUAL_ENV_DISABLE_PROMPT=1
 
@@ -178,7 +178,7 @@ else
     PROMPT='${debian_chroot:+($debian_chroot)}%n@%m:%~%# '
 fi
 
-if [ "$color_prompt" = yes ] && [ $(uname) = "Linux" ]; then
+if [ "$color_prompt" = yes ] && [ "$(uname)" = "Linux" ]; then
     # override default virtualenv indicator in prompt
     VIRTUAL_ENV_DISABLE_PROMPT=1
 
