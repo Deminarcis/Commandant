@@ -160,7 +160,7 @@ function show_linux_tui
     Write-Host "   1. Install Flathub                                        " -foregroundcolor Cyan
     Write-Host "   2. Install Distroshelf                                    " -foregroundcolor Cyan
     Write-Host "   3. Install Homebrew                                       " -foregroundcolor Cyan
-    Write-Host "   4. Install Nix package manager                            " -foregroundcolor Cyan
+    Write-Host "   4. Install Nix package manager  (single user mode)        " -foregroundcolor Cyan
     Write-Host "   5. Set up custom zsh profile                              " -foregroundcolor Green
     Write-Host "   6. Set up custom powershell profile                              " -foregroundcolor Green
     Write-Host ""
@@ -235,10 +235,11 @@ function show_mac_tui
     Write-Host "   2. Install Homebrew                                        " -foregroundcolor Green
     Write-Host "   3. Install MacPorts                                        " -foregroundcolor Green
     Write-Host "   4. Install Apps (needs brew)                               " -foregroundcolor Green
+    Write-Host "   5. Install Nix                               " -foregroundcolor Green
     Write-Host ""
     Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host "   Container Recipes                               " -foregroundcolor Green
-    Write-Host "   5. Setup containers                             " -foregroundcolor Green
+    Write-Host "   6. Setup containers                             " -foregroundcolor Green
     Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host "   q to Quit                               " -foregroundcolor Green
     Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
@@ -272,6 +273,9 @@ function show_mac_tui
             { show_tui_apps_mac
             }
             5
+            { ins_nix_macos
+            }
+            6
             { show_tui_containers_mac
             }
             'o'
@@ -688,6 +692,18 @@ function ins_brew_linux
 {
     # Install Homebrew on Linux
     Write-Output "[!!] Please do this outside powershell by running \n /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+}
+
+function ins_nix_linux
+{
+    Write-Output "[+]  Installing Nix Package Manager (single user mode)"
+    /bin/bash -c "$(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)" --no-daemon
+}
+
+function ins_nix_macos
+{
+    Write-Output "[+]  Installing Nix Package Manager"
+    /bin/bash -c "$(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)"
 }
 
 function install_wsl2
