@@ -93,20 +93,6 @@ fi
 configure_prompt() {
     prompt_symbol=🎃
     export RPROMPT="%F{yellow}%~%F{white}"
-#Original Prompt
-    #export PROMPT="
-#%F{magenta}┌──[%F{red}%n%F{magenta}]-[%F{cyan}@%m%F{magenta}] $prompt_symbol -%F{magenta}[%F{blue}%T - %D{%d-%m-%y}%F{magenta}]
-#%F{magenta}└─ %F{white}"
-
-#Prompt V2 (no incons)
-#    export PROMPT="
-#%F{red}┌──[%F{magenta}%n%F{red}]-[%F{blue}@%m%F{red}]--%F{red}[%F{white}%T - %D{%d-%m-%y}%F{red}]
-#%F{blue}└─ %F{white}"
-#
-#    PS2='%F{red}:%F{magenta}:%F{blue}: %F{white}> '
-#    unset prompt_symbol
-#}
-
 #Prompt V3 (halloween --ish) ### for some reason in monokai pro, blue is orange
     export PROMPT="
 %F{red}┌──[%F{magenta}%n%F{red}]-[%F{blue}@%m%F{red}]--%F{red}[%F{white}%T - %D{%d-%m-%y}%F{red}]
@@ -125,8 +111,6 @@ NEWLINE_BEFORE_PROMPT=yes
 if [ "$color_prompt" = yes ] && [ "$(uname)" = "Darwin" ]; then
     # override default virtualenv indicator in prompt
     VIRTUAL_ENV_DISABLE_PROMPT=1
-
-    configure_prompt
 
     # enable syntax-highlighting
     if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && [ "$color_prompt" = yes ]; then
@@ -181,8 +165,6 @@ fi
 if [ "$color_prompt" = yes ] && [ "$(uname)" = "Linux" ]; then
     # override default virtualenv indicator in prompt
     VIRTUAL_ENV_DISABLE_PROMPT=1
-
-    configure_prompt
 
     # enable syntax-highlighting
     if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && [ "$color_prompt" = yes ]; then
@@ -322,18 +304,15 @@ if [ -f /etc/zsh_command_not_found ]; then
 fi
 
 # Aliases
-
-alias start-sunshine='systemctl --user start sunshine.service'
-alias stop-sunshine='systemctl --user stop sunshine.service'
 if [ -f /usr/bin/lsd ]; then
     alias ls='lsd -alghZ --color=auto'
-elif [ -f /usr/local/bin/lsd ] || [ -f /home/linuxbrew/.linuxbrew/bin/lsd ]; then
+elif [ -f /opt/homebrew/bin/lsd ] || [ -f /home/linuxbrew/.linuxbrew/bin/lsd ]; then
     alias ls='lsd -algh --color=auto'
 else
     alias ls='ls -alh --color=auto'
 fi
 if [ -f /usr/bin/dnf5 ]; then
-    alias dnf ='dnf5'
+    alias dnf='dnf5'
 fi
 alias df-all='df -Th --total'
 alias external-ip='curl icanhazip.com'
@@ -347,7 +326,7 @@ fi
 
 #add home folder /.local/bin to path if it exists
 if
-    [ -d $HOME/.local/bin ]; then
+    [ -d "$HOME"/.local/bin ]; then
     export PATH=$PATH:$HOME/.local/bin
 fi
 
@@ -361,6 +340,9 @@ fi
 if [ "$TERM" = linux ] && command -v ttyscheme >/dev/null; then
 	ttyscheme "monokai_pro"
 fi
+
+#turn on prompt
+configure_prompt
 
 #set zellij to open on login
 #eval "$(zellij setup --generate-auto-start zsh)"
