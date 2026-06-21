@@ -197,7 +197,7 @@ function show_linux_tui
             { ins_brew_linux
             }
             4
-            { ins_nix
+            { ins_nix_linux
             }
             5
             { cp -rvf ../Scripts/zshrc ~/.zshrc; Write-Output "[+] Done!"
@@ -696,8 +696,8 @@ function ins_brew_linux
 
 function ins_nix_linux
 {
-    Write-Output "[+]  Installing Nix Package Manager (single user mode)"
-    /bin/bash -c "$(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)" --no-daemon
+    Write-Output "[+]  Installing Nix Package Manager (multi user mode)"
+    curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --daemon
 }
 
 function ins_nix_macos
@@ -1029,4 +1029,3 @@ if ($isMac -eq $true)
 {
     show_tui
 }
-#TEST
