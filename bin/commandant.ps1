@@ -16,7 +16,6 @@ function show_tui
     Write-Host "   5. Install Scoop                                           " -foregroundcolor Green
     Write-Host "   U. Update Installed Apps                                   " -foregroundcolor Green
     Write-Host "   G. Enable God Mode                                         " -foregroundcolor Green
-    Write-Host "   S. Enable sudo (sd to disable)                             " -foregroundcolor Green
     Write-Host "   H. Install Hyper-V                                         " -foregroundcolor Green
     Write-Host ""
     Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
@@ -69,12 +68,6 @@ function show_tui
             }
             'g'
             { enable_god_mode
-            }
-            's'
-            { enable_sudo
-            }
-            'sd'
-            { disable_sudo
             }
             'h'
             { install_hyperv
@@ -885,26 +878,6 @@ function update_installed
     Write-Host ""
     Write-Host "[+] Updating installed Winget Apps..."
     winget upgrade --all
-    Write-Output "[+] Done!"
-    Start-Sleep 10
-    show_tui
-}
-
-function enable_sudo
-{
-    Clear-Host
-    Write-Host "[+] Enabling sudo..."
-    Start-Process PowerShell -Argument "..\Scripts\sudo-on.ps1" -Verb RunAs
-    Write-Output "[+] Done!"
-    Start-Sleep 10
-    show_tui
-}
-
-function disable_sudo
-{
-    Clear-Host
-    Write-Host "[+] Disabling sudo..."
-    Start-Process PowerShell -Argument "..\Scripts\sudo-off.ps1" -Verb RunAs
     Write-Output "[+] Done!"
     Start-Sleep 10
     show_tui
