@@ -57,7 +57,7 @@ function prompt
     {
 
         Write-Host "┌──[" -NoNewLine -ForegroundColor Magenta
-        Write-Host "$([environment]::username)" -NoNewLine -ForegroundColor Red
+        Write-Host "$([environment]::username) $(if ($principal.IsInRole($adminRole)) { "[ADMIN]: " })" -NoNewLine -ForegroundColor Red
         Write-Host "]--[" -NoNewLine -ForegroundColor Magenta
         Write-Host "@$([system.environment]::MachineName)${reset}" -NoNewLine -ForegroundColor white
         Write-Host " - $Time " -NoNewLine -ForegroundColor white
@@ -66,16 +66,11 @@ function prompt
         Write-Host "]" -ForegroundColor Magenta
         Write-Host "└─" -NoNewLine -ForegroundColor Magenta
         Write-Host "${reset}" -NoNewLine -ForegroundColor Magenta
-        $(if ($principal.IsInRole($adminRole)) { "[ADMIN]: " }
-            else { '' })
     } Else
     {
-
         Write-Host "PS " -NoNewLine -ForegroundColor Magenta
-        Write-Host "$([environment]::username)@$([system.environment]::MachineName) " -NoNewLine -ForegroundColor Magenta
+        Write-Host "$([environment]::username)@$([system.environment]::MachineName) $(if ($principal.IsInRole($adminRole)) { "[ADMIN]: " })" -NoNewLine -ForegroundColor Magenta
         Write-Host "$(Get-Location)>${reset}" -NoNewLine -ForegroundColor Magenta
-        $(if ($principal.IsInRole($adminRole)) { "[ADMIN]: " }
-            else { '' })
     }
     # Terminal title
     Write-Host "${esc}]0;PS> $([environment]::username)@$([system.environment]::MachineName): $(Get-Location)${bell}" -NoNewLine
