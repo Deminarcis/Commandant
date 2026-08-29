@@ -55,8 +55,7 @@ function prompt
     }
     If ($PROMPT_ALTERNATIVE -eq 'twoline')
     {
-        $(if ($principal.IsInRole($adminRole)) { "[ADMIN]: " }
-            else { '' })
+
         Write-Host "┌──[" -NoNewLine -ForegroundColor Magenta
         Write-Host "$([environment]::username)" -NoNewLine -ForegroundColor Red
         Write-Host "]--[" -NoNewLine -ForegroundColor Magenta
@@ -67,13 +66,16 @@ function prompt
         Write-Host "]" -ForegroundColor Magenta
         Write-Host "└─" -NoNewLine -ForegroundColor Magenta
         Write-Host "${reset}" -NoNewLine -ForegroundColor Magenta
+        $(if ($principal.IsInRole($adminRole)) { "[ADMIN]: " }
+            else { '' })
     } Else
     {
-        $(if ($principal.IsInRole($adminRole)) { "[ADMIN]: " }
-        else { '' })
+
         Write-Host "PS " -NoNewLine -ForegroundColor Magenta
         Write-Host "$([environment]::username)@$([system.environment]::MachineName) " -NoNewLine -ForegroundColor Magenta
         Write-Host "$(Get-Location)>${reset}" -NoNewLine -ForegroundColor Magenta
+        $(if ($principal.IsInRole($adminRole)) { "[ADMIN]: " }
+            else { '' })
     }
     # Terminal title
     Write-Host "${esc}]0;PS> $([environment]::username)@$([system.environment]::MachineName): $(Get-Location)${bell}" -NoNewLine
