@@ -48,7 +48,7 @@ function prompt
     $bold = "$esc[1m"
     $reset = "$esc[0m"
     If ($NEWLINE_BEFORE_PROMPT -eq 'yes')
-    { Write-Host 
+    { Write-Host
     }
     If ($PROMPT_ALTERNATIVE -eq 'twoline')
     {
@@ -83,12 +83,12 @@ if ($isWindows -eq $true)
 }
 
 function touch($file)
-{ "" | Out-File $file -Encoding ASCII 
+{ "" | Out-File $file -Encoding ASCII
 }
 
 # Network Utilities
 function pubip
-{ (Invoke-WebRequest http://ifconfig.me/ip).Content 
+{ (Invoke-WebRequest http://ifconfig.me/ip).Content
 }
 
 # Open WinUtil full-release
@@ -175,7 +175,7 @@ function tail
 
 # Quick Access to System Information
 function sysinfo
-{ Get-ComputerInfo 
+{ Get-ComputerInfo
 }
 
 # Networking Utilities
