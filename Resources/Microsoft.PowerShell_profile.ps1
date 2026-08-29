@@ -37,6 +37,9 @@ Set-PSReadLineOption -Colors @{
 
 function prompt
 {
+    $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $principal = [Security.Principal.WindowsPrincipal] $identity
+    $adminRole = [Security.Principal.WindowsBuiltInRole]::Administrator
     $Time = (Get-Date).ToString("HH:mm")
     $host.ui.rawui.WindowTitle = (Get-Location)
     # START CONFIG VARIABLES
@@ -52,6 +55,8 @@ function prompt
     }
     If ($PROMPT_ALTERNATIVE -eq 'twoline')
     {
+        $(if ($principal.IsInRole($adminRole)) { "[ADMIN]: " }
+            else { '' })
         Write-Host "┌──[" -NoNewLine -ForegroundColor Magenta
         Write-Host "$([environment]::username)" -NoNewLine -ForegroundColor Red
         Write-Host "]--[" -NoNewLine -ForegroundColor Magenta
@@ -64,6 +69,8 @@ function prompt
         Write-Host "${reset}" -NoNewLine -ForegroundColor Magenta
     } Else
     {
+        $(if ($principal.IsInRole($adminRole)) { "[ADMIN]: " }
+        else { '' })
         Write-Host "PS " -NoNewLine -ForegroundColor Magenta
         Write-Host "$([environment]::username)@$([system.environment]::MachineName) " -NoNewLine -ForegroundColor Magenta
         Write-Host "$(Get-Location)>${reset}" -NoNewLine -ForegroundColor Magenta
