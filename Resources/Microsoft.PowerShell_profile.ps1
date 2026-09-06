@@ -34,12 +34,9 @@ Set-PSReadLineOption -Colors @{
     Keyword = '#8367c7'  # Violet (pastel)
     Error = '#FF6347'  # Tomato (keeping it close to red for visibility)
 }
-
+#It's a long boy because powershell doesnt do rprompts
 function prompt
 {
-    $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
-    $principal = [Security.Principal.WindowsPrincipal] $identity
-    $adminRole = [Security.Principal.WindowsBuiltInRole]::Administrator
     $Time = (Get-Date).ToString("HH:mm")
     $host.ui.rawui.WindowTitle = (Get-Location)
     # START CONFIG VARIABLES
@@ -57,7 +54,7 @@ function prompt
     {
 
         Write-Host "┌──[" -NoNewLine -ForegroundColor Magenta
-        Write-Host "$([environment]::username) $(if ($principal.IsInRole($adminRole)) { "[ADMIN]" })" -NoNewLine -ForegroundColor Red
+        Write-Host "$([environment]::username)" -NoNewLine -ForegroundColor Red
         Write-Host "]--[" -NoNewLine -ForegroundColor Magenta
         Write-Host "@$([system.environment]::MachineName)${reset}" -NoNewLine -ForegroundColor white
         Write-Host " - $Time " -NoNewLine -ForegroundColor white
@@ -69,7 +66,7 @@ function prompt
     } Else
     {
         Write-Host "PS " -NoNewLine -ForegroundColor Magenta
-        Write-Host "$([environment]::username)@$([system.environment]::MachineName) $(if ($principal.IsInRole($adminRole)) { "[ADMIN]" })" -NoNewLine -ForegroundColor Magenta
+        Write-Host "$([environment]::username) @$([system.environment]::MachineName)" -NoNewLine -ForegroundColor Magenta
         Write-Host "$(Get-Location)>${reset}" -NoNewLine -ForegroundColor Magenta
     }
     # Terminal title
@@ -119,11 +116,6 @@ Set-Alias -Name su -Value admin
 
 Import-Module -Name Terminal-Icons
 ### Aliases
-
-if ( $isWindows -eq $false)
-{
-    Set-Alias -Name ls -Value Get-ChildItem
-}
 
 function grep($regex, $dir)
 {
