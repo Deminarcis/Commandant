@@ -9,3 +9,5 @@ function ins_flathub {
         Write-Output "[!!] Please install flatpak and run this again"
     }
 }
+Write-Output "[+] Installing flathub..."
+ins_flathub

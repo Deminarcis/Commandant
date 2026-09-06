@@ -1,6 +1,6 @@
-function ins_distroshelf {
+function ins_pods {
     if (get-command flatpak ) {
-        Write-Output "[+] Flatpak is available, Installing Distroshelf"
+        Write-Output "[+] Flatpak is available, Installing Pods"
         Write-Output "You need flathub. if this install fails make sure flathub is set up first"
         flatpak install com.github.marhkb.Pods
         Write-Output "[+] Done!"
@@ -9,3 +9,4 @@ function ins_distroshelf {
         Write-Output "[!!] Please install flatpak and run this again"
     }
 }
+ins_pods
