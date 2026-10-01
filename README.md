@@ -1,10 +1,12 @@
 ## Commandant
 ---
-### System Requirements
+Tested with:
+- Windows 11 25H2 Pro and WSL2
+- MacOS 27
+- Fedora 44
 
-- Windows 11 25H2 Pro or something comparable
-- You may need Administrator access for some features but 99% of the time you won't need it.
-- Also works on MacOS 26 using the included shell script. MacOS script can only use the included Powershell Profile. Everything else is included in the shell script.
+You need Powershell 7+ to run this.
+
 #### Notes:
 
 This is my first powershell project, please open an issue if something doesn't work, and I'll accomodate as best I can.
