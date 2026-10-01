@@ -3,8 +3,9 @@ function containers_windows {
     Write-Host ""
     Write-Host ""
     Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   WSL Distro Installer               " -foregroundcolor Cyan
+    Write-Host "   WSL DISTRO INSTALLER               "
     Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host ""
     Write-Host "   Pick your WSL Distro:                "
     Write-Host "   1. Ubuntu"
     Write-Host "   2. Fedora"
@@ -14,7 +15,7 @@ function containers_windows {
     Write-Host ""
     Write-Host ""
     Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   q to Quit                               " -foregroundcolor Green
+    Write-Host "   q to Quit                               "
     Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host ""
     Write-Host ""
