@@ -2,20 +2,20 @@ function containers_mac {
     Write-Host ""
     Write-Host ""
     Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   Pick your container recipe                              "  -foregroundcolor Magenta
+    Write-Host "   RECIPES                            "
     Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   1. Ubuntu                                              " -foregroundcolor Magenta
-    Write-Host "   2. Fedora                                               " -foregroundcolor Magenta
-    Write-Host "   3. CentOS                                              " -foregroundcolor Magenta
-    Write-Host "   4. Red Hat                                             " -foregroundcolor Magenta
-    Write-Host "   5. Kali                                                " -foregroundcolor Magenta
-    Write-Host "   6. Blackarch                                           " -foregroundcolor Magenta
-    Write-Host "   7. OpenSUSE                                            " -foregroundcolor Magenta
-    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   b to go back                                            " -foregroundcolor Magenta
-    Write-Host "   o to View Options                                       " -foregroundcolor Magenta
-    Write-Host "   q to Quit                                               " -foregroundcolor Magenta
-    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "   1. Ubuntu                                              "
+    Write-Host "   2. Fedora                                               "
+    Write-Host "   3. CentOS                                              "
+    Write-Host "   4. Red Hat                                             "
+    Write-Host "   5. Kali                                                "
+    Write-Host "   6. Blackarch                                           "
+    Write-Host "   7. OpenSUSE                                            "
+    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" foregroundcolor Magenta
+    Write-Host "   b to go back                                            "
+    Write-Host "   o to View Options                                       "
+    Write-Host "   q to Quit                                               "
+    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" foregroundcolor Magenta
     Write-Host ""
     Write-Host ""
 

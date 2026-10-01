@@ -3,9 +3,7 @@ function install_apps {
     Write-Host ""
     Write-Host ""
     Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "  Welcome to the Commandant               " -foregroundcolor Cyan
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "  Pick an app to install:                 " -foregroundcolor Red
+    Write-Host "  APP INSTALLER:                 " -foregroundcolor Red
     Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host "  1. Powershell      2. VSCode      3. Powertoys " -foregroundcolor Red
     Write-Host "  4. Zen Browser     5. Google Chrome   6. Firefox Browser " -foregroundcolor Red

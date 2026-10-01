@@ -10,19 +10,19 @@ unction ins_macports
     Write-Host ""
     Write-Host ""
     Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   Which version of MacOS do you have?                     "
+    Write-Host "   CHOOSE YOUR MACOS VERSION                    "
     Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   1. Tahoe                                                " -foregroundcolor Yellow
-    Write-Host "   2. Sequoia                                              " -foregroundcolor Yellow
-    Write-Host "   3. Sonoma                                               " -foregroundcolor Yellow
-    Write-Host "   4. Ventura                                              " -foregroundcolor Yellow
-    Write-Host "   5. Monterey                                             " -foregroundcolor Yellow
-    Write-Host "   6. Something else  (open website)                       " -foregroundcolor Yellow
-    Write-Host "                                                           " -foregroundcolor Yellow
-    Write-Host "                                                           " -foregroundcolor Yellow
+    Write-Host "   1. Tahoe                                                "
+    Write-Host "   2. Sequoia                                              "
+    Write-Host "   3. Sonoma                                               "
+    Write-Host "   4. Ventura                                              "
+    Write-Host "   5. Monterey                                             "
+    Write-Host "   6. Something else  (open website)                       "
+    Write-Host "                                                           "
+    Write-Host "                                                           "
     Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   b to go back                                            " -foregroundcolor Yellow
-    Write-Host "   o to View Options                                       " -foregroundcolor Yellow
+    Write-Host "   b to go back                                            "
+    Write-Host "   o to View Options                                       "
     Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host ""
     Write-Host ""

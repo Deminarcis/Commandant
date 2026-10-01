@@ -2,28 +2,27 @@ function install_apps_mac {
     Write-Host ""
     Write-Host ""
     Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   Pick an app to install                                                   " -foregroundcolor Red
+    Write-Host "   APP INSTALLER                                        "
     Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   1. Ghostty             2. iTerm2           3. Kitty                      " -foregroundcolor Red
-    Write-Host "   4. Alacritty           5. Zellij           6. VSCode                     " -foregroundcolor Red
-    Write-Host "   7. Zed                 8. Podman Desktop   9. Crossover                 "  -foregroundcolor Red
-    Write-Host "   10. UTM                11. Handbrake       12. Mole                     " -foregroundcolor Red
-    Write-Host "   13. Veracrypt          14. Orion           15. Google Chrome             " -foregroundcolor Red
-    Write-Host "   16. Helium             17. Zen             18. Discord                   " -foregroundcolor Red
-    Write-Host "   19. Thunderbird        20. xquartz         21. Superfile                 " -foregroundcolor Red
-    Write-Host "   22. Ghidra             23. Intellidock     24. Grid (requires Licence)   " -foregroundcolor Red
-    Write-Host "   25. Jetbrains Toolbox  26. Bitwarden       27. LMStudio                  " -foregroundcolor Red
-    Write-Host "   28. Helix              29. lsd             30. Bat                       " -foregroundcolor Red
-    Write-Host "   31. Powershell         32. Mesa 3D         33. Vulkan Tools              " -foregroundcolor Red
-    Write-Host "                                                                            " -foregroundcolor Red
-    Write-Host "                                                                            " -foregroundcolor Red
-    Write-Host "                                                                            " -foregroundcolor Red
+    Write-Host "   1. Ghostty             2. iTerm2           3. Kitty                      "
+    Write-Host "   4. Alacritty           5. Zellij           6. VSCode                     "
+    Write-Host "   7. Zed                 8. Podman Desktop   9. Crossover                 "
+    Write-Host "   10. UTM                11. Handbrake       12. Mole                     "
+    Write-Host "   13. Veracrypt          14. Orion           15. Google Chrome             "
+    Write-Host "   16. Helium             17. Zen             18. Discord                   "
+    Write-Host "   19. Thunderbird        20. xquartz         21. Superfile                 "
+    Write-Host "   22. Ghidra             23. Intellidock     24. Grid (requires Licence)   "
+    Write-Host "   25. Jetbrains Toolbox  26. Bitwarden       27. LMStudio                  "
+    Write-Host "   28. Helix              29. lsd             30. Bat                       "
+    Write-Host "   31. Powershell         32. Mesa 3D         33. Vulkan Tools              "
+    Write-Host "                                                                            "
+    Write-Host "                                                                            "
     Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   f to install fomulaue not on this list                                   " -foregroundcolor Red
-    Write-Host "   c to install cask not on this list                                       " -foregroundcolor Red
-    Write-Host "   p to install port not on this list                                       " -foregroundcolor Red
-    Write-Host "   b to go back                                                             " -foregroundcolor Red
-    Write-Host "   o to View Options                                                        " -foregroundcolor Red
+    Write-Host "   f to install fomulaue not on this list                                   "
+    Write-Host "   c to install cask not on this list                                       "
+    Write-Host "   p to install port not on this list                                       "
+    Write-Host "   b to go back                                                             "
+    Write-Host "   o to View Options                                                        "
     Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
     Write-Host ""
     Write-Host ""
