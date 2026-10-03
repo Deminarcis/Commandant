@@ -29,25 +29,25 @@ function containers_mac {
 
         switch ($choice) {
             1 {
-                Start-Process pwsh -ArgumentList "-File", "container_ubuntu.ps1"
+                Start-Process pwsh -ArgumentList "-File", "container_ubuntu.ps1" && containers_mac
             }
             2 {
-                Start-Process pwsh -ArgumentList "-File", "container_fedora.ps1"
+                Start-Process pwsh -ArgumentList "-File", "container_fedora.ps1" && containers_mac
             }
             3 {
-                Start-Process pwsh -ArgumentList "-File", "container_centos.ps1"
+                Start-Process pwsh -ArgumentList "-File", "container_centos.ps1" && containers_mac
             }
             4 {
-                Start-Process pwsh -ArgumentList "-File", "container_rhel.ps1"
+                Start-Process pwsh -ArgumentList "-File", "container_rhel.ps1" && containers_mac
             }
             5 {
-                Start-Process pwsh -ArgumentList "-File", "container_kali.ps1"
+                Start-Process pwsh -ArgumentList "-File", "container_kali.ps1" && containers_mac
             }
             6 {
-                Start-Process pwsh -ArgumentList "-File", "container_blackarch.ps1"
+                Start-Process pwsh -ArgumentList "-File", "container_blackarch.ps1" && containers_mac
             }
             7 {
-                Start-Process pwsh -ArgumentList "-File", "container_leap.ps1"
+                Start-Process pwsh -ArgumentList "-File", "container_leap.ps1" && containers_mac
             }
             'b' {
                 exit
