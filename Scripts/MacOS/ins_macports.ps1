@@ -9,21 +9,21 @@ unction ins_macports
     xcode_utils
     Write-Host ""
     Write-Host ""
-    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   CHOOSE YOUR MACOS VERSION                    "
-    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   1. Tahoe                                                "
-    Write-Host "   2. Sequoia                                              "
-    Write-Host "   3. Sonoma                                               "
-    Write-Host "   4. Ventura                                              "
-    Write-Host "   5. Monterey                                             "
-    Write-Host "   6. Something else  (open website)                       "
-    Write-Host "                                                           "
-    Write-Host "                                                           "
-    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   b to go back                                            "
-    Write-Host "   o to View Options                                       "
-    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Color "┌────────────────────────────────────────────────────────────┐  " -color Magenta
+    Write-Color "| ", "CHOOSE YOUR MACOS VERSION", "                                   |" -color Magenta, White, Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "| ", "1. Tahoe ", "                                                  |  " -color Magenta, White, Magenta
+    Write-Color "| ", "2. Sequoia ", "                                                |  " -color Magenta, White, Magenta
+    Write-Color "| ", "3. Sonoma ", "                                                 |  " -color Magenta, White, Magenta
+    Write-Color "| ", "4. Ventura ", "                                                |  " -color Magenta, White, Magenta
+    Write-Color "| ", "5. Monterey ", "                                               |  " -color Magenta, White, Magenta
+    Write-Color "| ", "6. Something else  (open website) ", "                         |  " -color Magenta, White, Magenta
+    Write-Color "|                                                            |  " -color Magenta
+    Write-Color "|                                                            |  " -color Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "| ", "b to go back ", "                                              |  " -color Magenta, White, Magenta
+    Write-Color "| ", "o to View Options ", "                                         |  " -color Magenta, White, Magenta
+    Write-Color "└────────────────────────────────────────────────────────────┘  " -color Magenta
     Write-Host ""
     Write-Host ""
 

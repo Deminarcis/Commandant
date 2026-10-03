@@ -1,21 +1,21 @@
 function containers_mac {
     Write-Host ""
     Write-Host ""
-    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   RECIPES                            "
-    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   1. Ubuntu                                              "
-    Write-Host "   2. Fedora                                               "
-    Write-Host "   3. CentOS                                              "
-    Write-Host "   4. Red Hat                                             "
-    Write-Host "   5. Kali                                                "
-    Write-Host "   6. Blackarch                                           "
-    Write-Host "   7. OpenSUSE                                            "
-    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" foregroundcolor Magenta
-    Write-Host "   b to go back                                            "
-    Write-Host "   o to View Options                                       "
-    Write-Host "   q to Quit                                               "
-    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" foregroundcolor Magenta
+    Write-Color "┌────────────────────────────────────────────────────────────┐  " -color Magenta
+    Write-Color "| ", "RECIPES ", "                                                   |  " -color Magenta, White, Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "| ", "1. Ubuntu ", "                                                 |  " -color Magenta, White, Magenta
+    Write-Color "| ", "2. Fedora ", "                                                 |  " -color Magenta, White, Magenta
+    Write-Color "| ", "3. CentOS ", "                                                 |  " -color Magenta, White, Magenta
+    Write-Color "| ", "4. Red Hat ", "                                                |  " -color Magenta, White, Magenta
+    Write-Color "| ", "5. Kali ", "                                                   |  " -color Magenta, White, Magenta
+    Write-Color "| ", "6. Blackarch ", "                                              |  " -color Magenta, White, Magenta
+    Write-Color "| ", "7. OpenSUSE ", "                                               |  " -color Magenta, White, Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "| ", "b to go back ", "                                              |  " -color Magenta, White, Magenta
+    Write-Color "| ", "o to View Options ", "                                         |  " -color Magenta, White, Magenta
+    Write-Color "| ", "q to Quit ", "                                                 |  " -color Magenta, White, Magenta
+    Write-Color "└────────────────────────────────────────────────────────────┘  " -color Magenta
     Write-Host ""
     Write-Host ""
 

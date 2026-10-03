@@ -2,21 +2,21 @@ function containers_windows {
     Clear-Host
     Write-Host ""
     Write-Host ""
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   WSL DISTRO INSTALLER               "
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host ""
-    Write-Host "   Pick your WSL Distro:                "
-    Write-Host "   1. Ubuntu"
-    Write-Host "   2. Fedora"
-    Write-Host "   3. Kali Linux"
-    Write-Host "   4. Arch Linux"
-    Write-Host "   5. OpenSUSE Leap"
-    Write-Host ""
-    Write-Host ""
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   q to Quit                               "
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Color "┌────────────────────────────────────────────────────────────┐  " -color Magenta
+    Write-Color "| ", "WSL DISTRO INSTALLER ", "                                      | " -color Magenta, White, Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "|                                                            |  " -color Magenta
+    Write-Color "| ", "Pick your WSL Distro: ", "                                     | " -color Magenta, White, Magenta
+    Write-Color "| ", "   1. Ubuntu", "                                               | " -color Magenta, White, Magenta
+    Write-Color "| ", "   2. Fedora", "                                               | " -color Magenta, White, Magenta
+    Write-Color "| ", "   3. Kali Linux", "                                           | " -color Magenta, White, Magenta
+    Write-Color "| ", "   4. Arch Linux", "                                           | " -color Magenta, White, Magenta
+    Write-Color "| ", "   5. OpenSUSE Leap", "                                        | " -color Magenta, White, Magenta
+    Write-Color "|                                                            |  " -color Magenta
+    Write-Color "|                                                            |  " -color Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "| ", " q to Quit ", "                                                |  " -color Magenta, White, Magenta
+    Write-Color "└────────────────────────────────────────────────────────────┘  " -color Magenta
     Write-Host ""
     Write-Host ""
 

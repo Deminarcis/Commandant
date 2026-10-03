@@ -88,7 +88,7 @@ function show_tui
             { cmd /c ..\Scripts\Windows\hyperv-on.bat && show_tui
             }
             'c'
-            { pwsh -Verb RunAs -Command "irm https://christitus.com/win | iex" && show_tui
+            { Start-Process Powershell -Verb RunAs -ArgumentList "irm https://christitus.com/win | iex" -Wait && show_tui
             }
             'w'
             { pwsh -Command "& ([scriptblock]::Create((irm 'https://debloat.raphi.re/')))" && show_tui

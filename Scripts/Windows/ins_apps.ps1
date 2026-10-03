@@ -2,22 +2,22 @@ function install_apps {
     Clear-Host
     Write-Host ""
     Write-Host ""
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "  APP INSTALLER:                 " -foregroundcolor Red
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "  1. Powershell      2. VSCode      3. Powertoys " -foregroundcolor Red
-    Write-Host "  4. Zen Browser     5. Google Chrome   6. Firefox Browser " -foregroundcolor Red
-    Write-Host "  7. Mozilla Thunderbird   8. bat       9. Nano      " -foregroundcolor Red
-    Write-Host "  10. MS Edit       11. lsd      12. Helix  " -foregroundcolor Red
-    Write-Host "  13. sysinternals  14. 7zip     15. Bitwarden  " -foregroundcolor Red
-    Write-Host "  16. Haruna        17. WinFsp     18. Zed  " -foregroundcolor Red
-    Write-Host "  19. Bleachbit     20. Discord     21. Obsidian " -foregroundcolor Red
-    Write-Host "  22 Mesa 3D       23. YT-Dlp     24. ffmpeg " -foregroundcolor Red
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   s to search for package                 " -foregroundcolor Red
-    Write-Host "   i to install unlisted app               " -foregroundcolor Red
-    Write-Host "   b to Go Back                            " -foregroundcolor Red
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Color "┌────────────────────────────────────────────────────────────┐  " -color Magenta
+    Write-Color "| ", "APP INSTALLER:", "                                             |  " -color Magenta, White, Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "| ", "1. Powershell      2. VSCode      3. Powertoys ", "            |  " -color Magenta, White, Magenta
+    Write-Color "| ", "4. Zen Browser     5. Google Chrome   6. Firefox Browser ", "  |  " -color Magenta, White, Magenta
+    Write-Color "| ", "7. Mozilla Thunderbird   8. bat       9. Nano      ", "        |  " -color Magenta, White, Magenta
+    Write-Color "| ", "10. MS Edit       11. lsd      12. Helix  ", "                 |  " -color Magenta, White, Magenta
+    Write-Color "| ", "13. sysinternals  14. 7zip     15. Bitwarden  ", "             |  " -color Magenta, White, Magenta
+    Write-Color "| ", "16. Haruna        17. WinFsp     18. Zed  ", "                 |  " -color Magenta, White, Magenta
+    Write-Color "| ", "19. Bleachbit     20. Discord     21. Obsidian ", "            |  " -color Magenta, White, Magenta
+    Write-Color "| ", "22 Mesa 3D       23. YT-Dlp     24. ffmpeg ", "                |  " -color Magenta, White, Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "| ", "s to search for package                 ", "                   |  " -color Magenta, White, Magenta
+    Write-Color "| ", "i to install unlisted app               ", "                   |  " -color Magenta, White, Magenta
+    Write-Color "| ", "b to Go Back                            ", "                   |  " -color Magenta, White, Magenta
+    Write-Color "└────────────────────────────────────────────────────────────┘  " -color Magenta
     Write-Host ""
     Write-Host ""
 

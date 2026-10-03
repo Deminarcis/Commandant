@@ -1,29 +1,29 @@
 function install_apps_mac {
     Write-Host ""
     Write-Host ""
-    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   APP INSTALLER                                        "
-    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   1. Ghostty             2. iTerm2           3. Kitty                      "
-    Write-Host "   4. Alacritty           5. Zellij           6. VSCode                     "
-    Write-Host "   7. Zed                 8. Podman Desktop   9. Crossover                 "
-    Write-Host "   10. UTM                11. Handbrake       12. Mole                     "
-    Write-Host "   13. Veracrypt          14. Orion           15. Google Chrome             "
-    Write-Host "   16. Helium             17. Zen             18. Discord                   "
-    Write-Host "   19. Thunderbird        20. xquartz         21. Superfile                 "
-    Write-Host "   22. Ghidra             23. Intellidock     24. Grid (requires Licence)   "
-    Write-Host "   25. Jetbrains Toolbox  26. Bitwarden       27. LMStudio                  "
-    Write-Host "   28. Helix              29. lsd             30. Bat                       "
-    Write-Host "   31. Powershell         32. Mesa 3D         33. Vulkan Tools              "
-    Write-Host "                                                                            "
-    Write-Host "                                                                            "
-    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   f to install fomulaue not on this list                                   "
-    Write-Host "   c to install cask not on this list                                       "
-    Write-Host "   p to install port not on this list                                       "
-    Write-Host "   b to go back                                                             "
-    Write-Host "   o to View Options                                                        "
-    Write-Host "│╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Color "┌────────────────────────────────────────────────────────────┐  " -color Magenta
+    Write-Color "| ", "APP INSTALLER", "                                              |  " -color Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "| ", "1. Ghostty             2. iTerm2           3. Kitty ", "       |  " -color Magenta, White, Magenta
+    Write-Color "| ", "4. Alacritty           5. Zellij           6. VSCode ", "      |  " -color Magenta, White, Magenta
+    Write-Color "| ", "7. Zed                 8. Podman Desktop   9. Crossover ", "   |  " -color Magenta, White, Magenta
+    Write-Color "| ", "10. UTM                11. Handbrake       12. Mole ", "       |  " -color Magenta, White, Magenta
+    Write-Color "| ", "13. Veracrypt          14. Orion           15. Google Chrome ",|  " -color Magenta, White, Magenta
+    Write-Color "| ", "16. Helium             17. Zen             18. Discord ", "    |  " -color Magenta, White, Magenta
+    Write-Color "| ", "19. Thunderbird        20. xquartz         21. Superfile ", "  |  " -color Magenta, White, Magenta
+    Write-Color "| ", "22. Ghidra             23. Intellidock     24. Grid (requires Licence) ", "  |  " -color Magenta, White, Magenta
+    Write-Color "| ", "25. Jetbrains Toolbox  26. Bitwarden       27. LMStudio ", "  |  " -color Magenta, White, Magenta
+    Write-Color "| ", "28. Helix              29. lsd             30. Bat ", "  |  " -color Magenta, White, Magenta
+    Write-Color "| ", "31. Powershell         32. Mesa 3D         33. Vulkan Tools ", "  |  " -color Magenta, White, Magenta
+    Write-Color "|                                                                    |  " -color Magenta
+    Write-Color "|                                                                    |  " -color Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "|   f to install fomulaue not on this list                           |  " -color Magenta
+    Write-Color "|   c to install cask not on this list                               |  " -color Magenta
+    Write-Color "|   p to install port not on this list                               |  " -color Magenta
+    Write-Color "|   b to go back                                                     |  " -color Magenta
+    Write-Color "| ", "o to View Options", "                                          |  " -color Magenta
+    Write-Color "└────────────────────────────────────────────────────────────┘  " -color Magenta
     Write-Host ""
     Write-Host ""
 
