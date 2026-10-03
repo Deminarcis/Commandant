@@ -9,9 +9,9 @@ function show_tui
     Clear-Host
     Write-Host ""
     Write-Host ""
-    Write-Host "┌────────────────────────────────────────────────────────────┐  " -color Magenta
+    Write-Color "┌────────────────────────────────────────────────────────────┐  " -color Magenta
     Write-Color "| ", "WELCOME TO COMMANDANT", "                                      |  " -color Magenta, Red, Magenta
-    Write-Host "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
     Write-Color "| ", "SYSTEM TWEAKS AND TOOLS:", "                                   |  " -color Magenta, White, Magenta
     Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
     Write-Color "|                                                            |  " -color Magenta
@@ -34,11 +34,11 @@ function show_tui
     Write-Color "| ", "DEBLOAT TOOLS", "                                              |  " -color Magenta, White, Magenta
     Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
     Write-Color "|                                                            |  " -color Magenta
-    Write-Color "| ",  "C. Chris Titus' Tools", "                                     |  " -color Magenta, White, Magenta
-    Write-Color "| ",  "W. Windows11 Debloat ", "                                     |  " -color Magenta, White, Magenta
+    Write-Color "| ",  "C. Chris Titus' Tools ", "                                     |  " -color Magenta, White, Magenta
+    Write-Color "| ",  "W. Windows11 Debloat  ", "                                     |  " -color Magenta, White, Magenta
     Write-Color "|                                                            |  " -color Magenta
     Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "| ",  "q to Quit", "                                                 |  " -color Magenta, White, Magenta
+    Write-Color "| ",  "q to Quit ", "                                                 |  " -color Magenta, White, Magenta
     Write-Color "└────────────────────────────────────────────────────────────┘  " -color Magenta
     Write-Host ""
     Write-Host ""
