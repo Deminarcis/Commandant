@@ -1,39 +1,45 @@
+if (-not (Get-Module -ListAvailable -Name "PSWriteColor"))
+{
+    Install-Module -Name "PSWriteColor" -Scope CurrentUser -Force -SkipPublisherCheck
+}
+Import-Module -Name PSWriteColor
+
 function show_tui
 {
     Clear-Host
     Write-Host ""
     Write-Host ""
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   WELCOME TO COMMANDANT               " -foregroundcolor Yellow
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   SYSTEM TWEAKS AND TOOLS:                "
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host ""
-    Write-Host "   1. Install WSL2                                            "
-    Write-Host "   2. Install Apps                                            "
-    Write-Host "   3. Install Custom WSL Kernel                               "
-    Write-Host "   4. Install Custom Powershell Prompt                        "
-    Write-Host "   5. Install Scoop                                           "
-    Write-Host "   U. Update Installed Apps                                   "
-    Write-Host "   G. Enable God Mode                                         "
-    Write-Host "   H. Install Hyper-V                                         "
-    Write-Host ""
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   WSL CONTAINERS                                "
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host ""
-    Write-Host "   6.  Install WSL2 containers                 "
-    Write-Host ""
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   DEBLOAT TOOLS                                             "
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host ""
-    Write-Host "   C. Chris Titus' Tools"
-    Write-Host "   W. Windows11 Debloat"
-    Write-Host ""
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   q to Quit                               "
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Host "┌────────────────────────────────────────────────────────────┐  " -color Magenta
+    Write-Color "| ", "WELCOME TO COMMANDANT", "                                      |  " -color Magenta, Red, Magenta
+    Write-Host "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "| ", "SYSTEM TWEAKS AND TOOLS:", "                                   |  " -color Magenta, White, Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "|                                                            |  " -color Magenta
+    Write-Color "| ", "1. Install WSL2", "                                            |  " -color Magenta, White, Magenta
+    Write-Color "| ", "2. Install Apps", "                                            |  " -color Magenta, White, Magenta
+    Write-Color "| ", "3. Install Custom WSL Kernel", "                               |  " -color Magenta, White, Magenta
+    Write-Color "| ", "4. Install Custom Powershell Prompt", "                        |  " -color Magenta, White, Magenta
+    Write-Color "| ", "5. Install Scoop", "                                           |  " -color Magenta, White, Magenta
+    Write-Color "| ", "U. Update Installed Apps", "                                   |  " -color Magenta, White, Magenta
+    Write-Color "| ", "G. Enable God Mode", "                                         |  " -color Magenta, White, Magenta
+    Write-Color "| ", "H. Install Hyper-V", "                                         |  " -color Magenta, White, Magenta
+    Write-Color "|                                                            |  " -color Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "| ", "WSL CONTAINERS", "                                             |  " -color Magenta, White, Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "|                                                            |  " -Color Magenta
+    Write-Color "| ", "6.  Install WSL2 containers", "                                |  " -color Magenta, White, Magenta
+    Write-Color "|                                                            |  " -color Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "| ", "DEBLOAT TOOLS", "                                              |  " -color Magenta, White, Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "|                                                            |  " -color Magenta
+    Write-Color "| ",  "C. Chris Titus' Tools", "                                     |  " -color Magenta, White, Magenta
+    Write-Color "| ",  "W. Windows11 Debloat ", "                                     |  " -color Magenta, White, Magenta
+    Write-Color "|                                                            |  " -color Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "| ",  "q to Quit", "                                                 |  " -color Magenta, White, Magenta
+    Write-Color "└────────────────────────────────────────────────────────────┘  " -color Magenta
     Write-Host ""
     Write-Host ""
 
@@ -104,28 +110,28 @@ function show_linux_tui
     Clear-Host
     Write-Host ""
     Write-Host ""
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   WELCOME TO COMMANDANT               " -foregroundcolor Yellow
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   SYSTEM TWEAKS AND TOOLS:                "
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host ""
-    Write-Host "   1. Install Flathub                                        "
-    Write-Host "   2. Install Pods                                           "
-    Write-Host "   3. Install Homebrew                                       "
-    Write-Host "   4. Install Nix package manager  (single user mode)        "
-    Write-Host "   5. Set up custom zsh profile                              "
-    Write-Host "   6. Set up custom powershell profile                       "
-    Write-Host ""
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   CONTAINERS                               "
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host ""
-    Write-Host "   7. Container Recipes                            "
-    Write-Host ""
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   q to Quit                                       "
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Color "┌────────────────────────────────────────────────────────────┐  " -color Magenta
+    Write-Color "| ", "  WELCOME TO COMMANDANT", "                                    |  " -color Magenta, Red, Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "| ", "SYSTEM TWEAKS AND TOOLS: ", "                                  |  " -color Magenta, White, Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "|                                                            |  " -color Magenta
+    Write-Color "| ", "1. Install Flathub ", "                                        |  " -color Magenta, White, Magenta
+    Write-Color "| ", "2. Install Pods ", "                                           |  " -color Magenta, White, Magenta
+    Write-Color "| ", "3. Install Homebrew ", "                                       |  " -color Magenta, White, Magenta
+    Write-Color "| ", "4. Install Nix package manager  (single user mode)", "         |  " -color Magenta, White, Magenta
+    Write-Color "| ", "5. Set up custom zsh profile ", "                              |  " -color Magenta, White, Magenta
+    Write-Color "| ", "6. Set up custom powershell profile ", "                       |  " -color Magenta, White, Magenta
+    Write-Color "|                                                            |  " -color Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "| ", "CONTAINERS ", "                                                |  " -color Magenta, White, Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "|                                                            |  " -color Magenta
+    Write-Color "| ", "7. Container Recipes ", "                                      |  " -color Magenta, White, Magenta
+    Write-Color "|                                                            |  " -color Magenta
+    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
+    Write-Color "| ", "q to Quit ", "                                                 |  " -color Magenta, White, Magenta
+    Write-Color "└────────────────────────────────────────────────────────────┘  " -color Magenta
     Write-Host ""
     Write-Host ""
 
@@ -184,27 +190,27 @@ function show_mac_tui
     Clear-Host
     Write-Host ""
     Write-Host ""
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   WELCOME TO COMMANDANT               " -foregroundcolor Yellow
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   SYSTEM SETUP AND TWEAKS:                "
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host ""
-    Write-Host "   1. Install Containerization                                "
-    Write-Host "   2. Install Homebrew                                        "
-    Write-Host "   3. Install MacPorts                                        "
-    Write-Host "   4. Install Apps (needs brew)                               "
-    Write-Host "   5. Install Nix                                             "
-    Write-Host ""
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   CONTAINERS                               "
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host ""
-    Write-Host "   6. Container Recipes                             "
-    Write-Host ""
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
-    Write-Host "   q to Quit                               "
-    Write-Host "|╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍│" -foregroundcolor Magenta
+    Write-Color "┌────────────────────────────────────────────────────────────┐  " -color Magenta
+    Write-Color "| ", "WELCOME TO COMMANDANT", "                                      | " -color Magenta, Red, Magenta
+    Write-Color "|────────────────────────────────────────────────────────────│" -color Magenta
+    Write-Color "| ", "SYSTEM SETUP AND TWEAKS: ", "                                  | " -color Magenta, White, Magenta
+    Write-Color "|────────────────────────────────────────────────────────────│" -color Magenta
+    Write-Color "|                                                            | " -color Magenta
+    Write-Color "| ", "1. Install Containerization ", "                               | " -color Magenta, White, Magenta
+    Write-Color "| ", "2. Install Homebrew ", "                                       | " -color Magenta, White, Magenta
+    Write-Color "| ", "3. Install MacPorts ", "                                       | " -color Magenta, White, Magenta
+    Write-Color "| ", "4. Install Apps (needs brew) ", "                              | " -color Magenta, White, Magenta
+    Write-Color "| ", "5. Install Nix ", "                                            | " -color Magenta, White, Magenta
+    Write-Color "|                                                            | " -color Magenta
+    Write-Color "|────────────────────────────────────────────────────────────│ " -color Magenta
+    Write-Color "| ", "CONTAINERS", "                                                 | " -color Magenta, White, Magenta
+    Write-Color "|────────────────────────────────────────────────────────────│ " -color Magenta
+    Write-Color "|                                                            | " -color Magenta
+    Write-Color "| ", "6. Container Recipes ", "                                      | " -color Magenta, White, Magenta
+    Write-Color "|                                                            | " -color Magenta
+    Write-Color "|────────────────────────────────────────────────────────────│ " -color Magenta
+    Write-Color "| ", "q to Quit ", "                                                 | " -color Magenta
+    Write-Color "└────────────────────────────────────────────────────────────┘  " -color Magenta
     Write-Host ""
     Write-Host ""
 
